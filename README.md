@@ -57,7 +57,7 @@ $NetworkConfig = '{
    "notes": "Additional description of the network"
 }'
 $NetworkConfig = $NetworkConfig | ConvertTo-JSON -compress
-New-MerakiOrganizationNetwork -AuthToken "your-api-token" -NetworkConfig $NetworkConfig`
+New-MerakiOrganizationNetwork -AuthToken "your-api-token" -NetworkConfig $NetworkConfig
 ```
    * Compress JSON before sending it to a command with `ConvertTo-JSON -compress` 
 ```powershell
