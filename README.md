@@ -2,7 +2,7 @@
 
 The Meraki PowerShell module provides a set of cmdlets for managing and interacting with the Cisco Meraki cloud-based network management platform. This module allows you to automate common tasks and manage your Meraki network using PowerShell.
 
-Current Progress: All Get commands are feature complete. Other Methods have not been added.
+Current Progress: Commands have been written for all endpoints.
 
 **<span style="background-color: #ffff00;">NOTE: This module and its documentation were created and are currently maintained by Alex Heimbuch. This is not an official Cisco product and should be used with caution. This current work in progress and this document is subject to periodic change as the functionality expands.</span>**
 
