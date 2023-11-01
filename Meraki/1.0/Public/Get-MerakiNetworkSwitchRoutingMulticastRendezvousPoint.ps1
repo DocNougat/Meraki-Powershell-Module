@@ -1,0 +1,36 @@
+function Get-MerakiNetworkSwitchRoutingMulticastRendezvousPoint {
+    <#
+    .SYNOPSIS
+        Gets the multicast rendezvous point configuration for a Meraki network switch.
+    .DESCRIPTION
+        This function retrieves the multicast rendezvous point configuration for a Meraki network switch using the Meraki Dashboard API.
+    .PARAMETER AuthToken
+        The API authentication token for the Meraki Dashboard.
+    .PARAMETER networkId
+        The ID of the Meraki network to retrieve the multicast rendezvous point configuration for.
+    .PARAMETER rendezvousPointId
+        The ID of the multicast rendezvous point to retrieve the configuration for.
+    .EXAMPLE
+        PS C:\> Get-MerakiNetworkSwitchRoutingMulticastRendezvousPoint -AuthToken "api_token" -networkId "L_123456789" -rendezvousPointId "2"
+        Returns the multicast rendezvous point configuration for the specified Meraki network switch.
+    #>
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory=$true)]
+        [string]$AuthToken,
+        [Parameter(Mandatory=$true)]
+        [string]$networkId,
+        [Parameter(Mandatory=$true)]
+        [string]$rendezvousPointId
+    )
+
+    try {
+        $header = @{
+            "X-Cisco-Meraki-API-Key" = $AuthToken
+        }
+        $response = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/networks/$networkId/switch/routing/multicast/rendezvousPoints/$rendezvousPointId" -Header $header
+        return $response
+    } catch {
+        Write-Error "Failed to retrieve multicast rendezvous point configuration for network '$networkId' and rendezvous point '$rendezvousPointId'. Error: $_"
+    }
+}
