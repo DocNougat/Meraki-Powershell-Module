@@ -15,6 +15,10 @@ Before you can use the Meraki PowerShell module, you need to meet the following 
 
 ## Installation
 ### PowerShell Gallery
+The easist way to install the module is from the PowerShell Gallery with PSGet using the following command:
+```powershell
+Install-Module -Name Meraki
+```
 ### Manual Installation
 To install the Meraki PowerShell module, follow these steps:
 1.  Copy the Meraki folder into "C:\Windows\System32\WindowsPowerShell\v1.0\Modules"  
