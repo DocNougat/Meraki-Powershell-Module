@@ -33,16 +33,20 @@ function Get-MerakiOrganizationBrandingPolicy {
         [parameter(Mandatory=$true)]
         [string]$BrandingPolicyID,
         [parameter(Mandatory=$false)]
-        [string]$OrganizationID = (Get-MerakiOrganizations -AuthToken $AuthToken).id
+        [string]$OrganizationID = (Get-OrgID -AuthToken $AuthToken)
     )
-    try {
-        $header = @{
-            "X-Cisco-Meraki-API-Key" = $AuthToken
+    If($OrganizationID -eq "Multiple organizations found. Please specify an organization ID.") {
+        Return "Multiple organizations found. Please specify an organization ID."
+    } else {
+        try {
+            $header = @{
+                "X-Cisco-Meraki-API-Key" = $AuthToken
+            }
+            $response = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations/$OrganizationID/brandingPolicies/$BrandingPolicyID" -Header $header
+            return $response
         }
-        $response = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations/$OrganizationID/brandingPolicies/$BrandingPolicyID" -Header $header
-        return $response
-    }
-    catch {
-        Write-Error $_
+        catch {
+            Write-Error $_
+        }
     }
 }

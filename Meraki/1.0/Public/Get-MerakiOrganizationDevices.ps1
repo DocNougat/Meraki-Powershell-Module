@@ -77,7 +77,7 @@ function Get-MerakiOrganizationDevices {
         [parameter(Mandatory=$true)]
         [string]$AuthToken,
         [parameter(Mandatory=$false)]
-        [string]$OrganizationID = (Get-MerakiOrganizations -AuthToken $AuthToken).id,
+        [string]$OrganizationID = (Get-OrgID -AuthToken $AuthToken),
         [parameter(Mandatory=$false)]
         [int]$perPage = $null,
         [parameter(Mandatory=$false)]
@@ -111,67 +111,71 @@ function Get-MerakiOrganizationDevices {
         [parameter(Mandatory=$false)]
         [array]$models = $null
     )
-    try{
-        $header = @{
-            "X-Cisco-Meraki-API-Key" = $AuthToken
-            "Content-Type" = "application/json"
+    If($OrganizationID -eq "Multiple organizations found. Please specify an organization ID.") {
+        Return "Multiple organizations found. Please specify an organization ID."
+    } else {
+        try{
+            $header = @{
+                "X-Cisco-Meraki-API-Key" = $AuthToken
+                "Content-Type" = "application/json"
+            }
+            $queryParams = @{}
+            if ($perPage) {
+                $queryParams['perPage'] = $perPage
+            }
+            if ($startingAfter) {
+                $queryParams['startingAfter'] = $startingAfter
+            }
+            if ($endingBefore) {
+                $queryParams['endingBefore'] = $endingBefore
+            }
+            if ($configurationUpdatedAfter) {
+                $queryParams['configurationUpdatedAfter'] = $configurationUpdatedAfter
+            }
+            if ($networkIds) {
+                $queryParams['networkIds[]'] = $networkIds
+            }
+            if ($productTypes) {
+                $queryParams['productTypes[]'] = $productTypes
+            }
+            if ($tags) {
+                $queryParams['tags[]'] = $tags
+            }
+            if ($tagsFilterType) {
+                $queryParams['tagsFilterType'] = $tagsFilterType
+            }
+            if ($name) {
+                $queryParams['name'] = $name
+            }
+            if ($serial) {
+                $queryParams['serial'] = $serial
+            }
+            if ($model) {
+                $queryParams['model'] = $model
+            }
+            if ($macs) {
+                $queryParams['macs[]'] = $macs
+            }
+            if ($serials) {
+                $queryParams['serials[]'] = $serials
+            }
+            if ($sensorMetrics) {
+                $queryParams['sensorMetrics[]'] = $sensorMetrics
+            }
+            if ($sensorAlertProfileIds) {
+                $queryParams['sensorAlertProfileIds[]'] = $sensorAlertProfileIds
+            }
+            if ($models) {
+                $queryParams['models[]'] = $models
+            }
+        
+            $queryString = New-MerakiQueryString -queryParams $queryParams
+        
+            $URI = "https://api.meraki.com/api/v1/organizations/$OrganizationID/devices?$queryString"
+            $response = Invoke-RestMethod -Method Get -Uri $URI -Header $header
+            return $response
+        } catch {
+            Write-Error $_
         }
-        $queryParams = @{}
-        if ($perPage) {
-            $queryParams['perPage'] = $perPage
-        }
-        if ($startingAfter) {
-            $queryParams['startingAfter'] = $startingAfter
-        }
-        if ($endingBefore) {
-            $queryParams['endingBefore'] = $endingBefore
-        }
-        if ($configurationUpdatedAfter) {
-            $queryParams['configurationUpdatedAfter'] = $configurationUpdatedAfter
-        }
-        if ($networkIds) {
-            $queryParams['networkIds[]'] = $networkIds
-        }
-        if ($productTypes) {
-            $queryParams['productTypes[]'] = $productTypes
-        }
-        if ($tags) {
-            $queryParams['tags[]'] = $tags
-        }
-        if ($tagsFilterType) {
-            $queryParams['tagsFilterType'] = $tagsFilterType
-        }
-        if ($name) {
-            $queryParams['name'] = $name
-        }
-        if ($serial) {
-            $queryParams['serial'] = $serial
-        }
-        if ($model) {
-            $queryParams['model'] = $model
-        }
-        if ($macs) {
-            $queryParams['macs[]'] = $macs
-        }
-        if ($serials) {
-            $queryParams['serials[]'] = $serials
-        }
-        if ($sensorMetrics) {
-            $queryParams['sensorMetrics[]'] = $sensorMetrics
-        }
-        if ($sensorAlertProfileIds) {
-            $queryParams['sensorAlertProfileIds[]'] = $sensorAlertProfileIds
-        }
-        if ($models) {
-            $queryParams['models[]'] = $models
-        }
-    
-        $queryString = New-MerakiQueryString -queryParams $queryParams
-    
-        $URI = "https://api.meraki.com/api/v1/organizations/$OrganizationID/devices?$queryString"
-        $response = Invoke-RestMethod -Method Get -Uri $URI -Header $header
-        return $response
-    } catch {
-        Write-Error $_
     }
 }

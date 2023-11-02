@@ -40,16 +40,18 @@ function Set-MerakiOrganizationApplianceVPNFirewallRules {
     .NOTES
     For more information about the Meraki Dashboard API, see https://developer.cisco.com/meraki/api-v1/.
     #>
-        [CmdletBinding()]
-        param (
-            [parameter(Mandatory=$true)]
-            [string]$AuthToken,
-            [parameter(Mandatory=$false)]
-            [string]$OrganizationId = (Get-MerakiOrganizations -AuthToken $AuthToken).id,
-            [Parameter(Mandatory = $true)]
-            [string]$FirewallRules
-        )
-    
+    [CmdletBinding()]
+    param (
+        [parameter(Mandatory=$true)]
+        [string]$AuthToken,
+        [parameter(Mandatory=$false)]
+        [string]$OrganizationID = (Get-OrgID -AuthToken $AuthToken),
+        [Parameter(Mandatory = $true)]
+        [string]$FirewallRules
+    )
+    If($OrganizationID -eq "Multiple organizations found. Please specify an organization ID.") {
+        Return "Multiple organizations found. Please specify an organization ID."
+    } else {
         try {
             $header = @{
                 "X-Cisco-Meraki-API-Key" = $AuthToken
@@ -67,3 +69,4 @@ function Set-MerakiOrganizationApplianceVPNFirewallRules {
             Write-Host $_
         }
     }
+}

@@ -65,7 +65,7 @@ function Get-MerakiOrganizationSwitchPortsBySwitch {
         [parameter(Mandatory=$true)]
         [string]$AuthToken,
         [parameter(Mandatory=$false)]
-        [string]$OrganizationID = (Get-MerakiOrganizations -AuthToken $AuthToken).id,
+        [string]$OrganizationID = (Get-OrgID -AuthToken $AuthToken),
         [parameter(Mandatory=$false)]
         [int]$perPage,
         [parameter(Mandatory=$false)]
@@ -89,55 +89,59 @@ function Get-MerakiOrganizationSwitchPortsBySwitch {
         [parameter(Mandatory=$false)]
         [string]$configurationUpdatedAfter
     )
-    try { 
-        $header = @{
-            "X-Cisco-Meraki-API-Key" = $AuthToken
-        }
-        $queryParams = @{}
+    If($OrganizationID -eq "Multiple organizations found. Please specify an organization ID.") {
+        Return "Multiple organizations found. Please specify an organization ID."
+    } else {
+        try { 
+            $header = @{
+                "X-Cisco-Meraki-API-Key" = $AuthToken
+            }
+            $queryParams = @{}
+            
+            if ($perPage) {
+                $queryParams['perPage'] = $perPage
+            }
+            if ($startingAfter) {
+                $queryParams['startingAfter'] = $startingAfter
+            }
+            if ($endingBefore) {
+                $queryParams['endingBefore'] = $endingBefore
+            }
+            if ($networkIds) {
+                $queryParams['networkIds[]'] = $networkIds
+            }
+            if ($portProfileIds) {
+                $queryParams['portProfileIds[]'] = $portProfileIds
+            }
+            if ($name) {
+                $queryParams['name'] = $name
+            }
+            if ($mac) {
+                $queryParams['mac'] = $mac
+            }
+            if ($macs) {
+                $queryParams['macs[]'] = $macs
+            }
+            if ($serial) {
+                $queryParams['serial'] = $serial
+            }
+            if ($serials) {
+                $queryParams['serials[]'] = $serials
+            }
+            if ($configurationUpdatedAfter) {
+                $queryParams['configurationUpdatedAfter'] = $configurationUpdatedAfter
+            }
         
-        if ($perPage) {
-            $queryParams['perPage'] = $perPage
+            $queryString = New-MerakiQueryString -queryParams $queryParams
+        
+            $URL = "https://api.meraki.com/api/v1/organizations/$OrganizationID/switch/ports/bySwitch?$queryString"
+        
+            $URI = [uri]::EscapeUriString($URL)
+        
+            $response = Invoke-RestMethod -Method Get -Uri $URI -Header $header
+            return $response
+        } catch {
+            Write-Error $_
         }
-        if ($startingAfter) {
-            $queryParams['startingAfter'] = $startingAfter
-        }
-        if ($endingBefore) {
-            $queryParams['endingBefore'] = $endingBefore
-        }
-        if ($networkIds) {
-            $queryParams['networkIds[]'] = $networkIds
-        }
-        if ($portProfileIds) {
-            $queryParams['portProfileIds[]'] = $portProfileIds
-        }
-        if ($name) {
-            $queryParams['name'] = $name
-        }
-        if ($mac) {
-            $queryParams['mac'] = $mac
-        }
-        if ($macs) {
-            $queryParams['macs[]'] = $macs
-        }
-        if ($serial) {
-            $queryParams['serial'] = $serial
-        }
-        if ($serials) {
-            $queryParams['serials[]'] = $serials
-        }
-        if ($configurationUpdatedAfter) {
-            $queryParams['configurationUpdatedAfter'] = $configurationUpdatedAfter
-        }
-    
-        $queryString = New-MerakiQueryString -queryParams $queryParams
-    
-        $URL = "https://api.meraki.com/api/v1/organizations/$OrganizationID/switch/ports/bySwitch?$queryString"
-    
-        $URI = [uri]::EscapeUriString($URL)
-    
-        $response = Invoke-RestMethod -Method Get -Uri $URI -Header $header
-        return $response
-    } catch {
-        Write-Error $_
     }
 }

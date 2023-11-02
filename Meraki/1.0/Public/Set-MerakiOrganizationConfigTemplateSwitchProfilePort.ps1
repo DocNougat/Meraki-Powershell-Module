@@ -71,22 +71,24 @@ function Set-MerakiOrganizationConfigTemplateSwitchProfilePort {
     The function returns the response from the API if the update is successful, otherwise, it displays an error message.
     #>
     
-        [CmdletBinding()]
-        param (
-            [parameter(Mandatory=$true)]
-            [string]$AuthToken,
-            [parameter(Mandatory=$true)]
-            [string]$OrganizationId,
-            [parameter(Mandatory=$true)]
-            [string]$ConfigTemplateId,
-            [parameter(Mandatory=$true)]
-            [string]$ProfileId,
-            [parameter(Mandatory=$true)]
-            [string]$PortId,
-            [parameter(Mandatory=$true)]
-            [string]$PortConfig
-        )
-    
+    [CmdletBinding()]
+    param (
+        [parameter(Mandatory=$true)]
+        [string]$AuthToken,
+        [parameter(Mandatory=$false)]
+        [string]$OrganizationID = (Get-OrgID -AuthToken $AuthToken),
+        [parameter(Mandatory=$true)]
+        [string]$ConfigTemplateId,
+        [parameter(Mandatory=$true)]
+        [string]$ProfileId,
+        [parameter(Mandatory=$true)]
+        [string]$PortId,
+        [parameter(Mandatory=$true)]
+        [string]$PortConfig
+    )
+    If($OrganizationID -eq "Multiple organizations found. Please specify an organization ID.") {
+        Return "Multiple organizations found. Please specify an organization ID."
+    } else {
         try {
             $header = @{
                 "X-Cisco-Meraki-API-Key" = $AuthToken
@@ -104,3 +106,4 @@ function Set-MerakiOrganizationConfigTemplateSwitchProfilePort {
             Write-Host $_
         }
     }
+}

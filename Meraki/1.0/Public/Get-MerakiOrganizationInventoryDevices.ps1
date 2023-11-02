@@ -58,7 +58,7 @@ function Get-MerakiOrganizationInventoryDevices {
         [parameter(Mandatory=$true)]
         [string]$AuthToken,
         [parameter(Mandatory=$false)]
-        [string]$OrganizationID = (Get-MerakiOrganizations -AuthToken $AuthToken).id,
+        [string]$OrganizationID = (Get-OrgID -AuthToken $AuthToken),
         [parameter(Mandatory=$false)]
         [int]$perPage = $null,
         [parameter(Mandatory=$false)]
@@ -84,54 +84,58 @@ function Get-MerakiOrganizationInventoryDevices {
         [parameter(Mandatory=$false)]
         [array]$productTypes = $null
     )
-    try {
-        $header = @{
-            "X-Cisco-Meraki-API-Key" = $AuthToken
-            "Content-Type" = "application/json"
+    If($OrganizationID -eq "Multiple organizations found. Please specify an organization ID.") {
+        Return "Multiple organizations found. Please specify an organization ID."
+    } else {
+        try {
+            $header = @{
+                "X-Cisco-Meraki-API-Key" = $AuthToken
+                "Content-Type" = "application/json"
+            }
+            $queryParams = @{}
+            if ($perPage) {
+                $queryParams['perPage'] = $perPage
+            }
+            if ($startingAfter) {
+                $queryParams['startingAfter'] = $startingAfter
+            }
+            if ($endingBefore) {
+                $queryParams['endingBefore'] = $endingBefore
+            }
+            if ($usedState) {
+                $queryParams['usedState'] = $usedState
+            }
+            if ($search) {
+                $queryParams['search'] = $search
+            }
+            if ($macs) {
+                $queryParams['macs[]'] = $macs
+            }
+            if ($networkIds) {
+                $queryParams['networkIds[]'] = $networkIds
+            }
+            if ($serials) {
+                $queryParams['serials[]'] = $serials
+            }
+            if ($models) {
+                $queryParams['models[]'] = $models
+            }
+            if ($tags) {
+                $queryParams['tags[]'] = $tags
+            }
+            if ($tagsFilterType) {
+                $queryParams['tagsFilterType'] = $tagsFilterType
+            }
+            if ($productTypes) {
+                $queryParams['productTypes[]'] = $productTypes
+            }
+            $queryString = New-MerakiQueryString -queryParams $queryParams
+        
+            $URI = "https://api.meraki.com/api/v1/organizations/$OrganizationID/inventory/devices?$queryString"
+            $response = Invoke-RestMethod -Method Get -Uri $URI -Header $header
+            return $response
+        } catch {
+            Write-Error $_
         }
-        $queryParams = @{}
-        if ($perPage) {
-            $queryParams['perPage'] = $perPage
-        }
-        if ($startingAfter) {
-            $queryParams['startingAfter'] = $startingAfter
-        }
-        if ($endingBefore) {
-            $queryParams['endingBefore'] = $endingBefore
-        }
-        if ($usedState) {
-            $queryParams['usedState'] = $usedState
-        }
-        if ($search) {
-            $queryParams['search'] = $search
-        }
-        if ($macs) {
-            $queryParams['macs[]'] = $macs
-        }
-        if ($networkIds) {
-            $queryParams['networkIds[]'] = $networkIds
-        }
-        if ($serials) {
-            $queryParams['serials[]'] = $serials
-        }
-        if ($models) {
-            $queryParams['models[]'] = $models
-        }
-        if ($tags) {
-            $queryParams['tags[]'] = $tags
-        }
-        if ($tagsFilterType) {
-            $queryParams['tagsFilterType'] = $tagsFilterType
-        }
-        if ($productTypes) {
-            $queryParams['productTypes[]'] = $productTypes
-        }
-        $queryString = New-MerakiQueryString -queryParams $queryParams
-    
-        $URI = "https://api.meraki.com/api/v1/organizations/$OrganizationID/inventory/devices?$queryString"
-        $response = Invoke-RestMethod -Method Get -Uri $URI -Header $header
-        return $response
-    } catch {
-        Write-Error $_
     }
 }

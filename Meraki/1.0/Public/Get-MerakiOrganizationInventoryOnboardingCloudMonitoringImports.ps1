@@ -31,27 +31,30 @@ function Get-MerakiOrganizationInventoryOnboardingCloudMonitoringImports {
         [parameter(Mandatory=$true, HelpMessage="An array of import IDs for which to retrieve the corresponding cloud monitoring imports.")]
         [array]$importIds,
         [parameter(Mandatory=$false, HelpMessage="The ID of the organization to query. If not provided, the function will use the ID of the first organization associated with the API key.")]
-        [string]$OrganizationID = (Get-MerakiOrganizations -AuthToken $AuthToken).id
+        [string]$OrganizationID = (Get-OrgID -AuthToken $AuthToken)
     )
-
-    try {
-        $header = @{
-            'X-Cisco-Meraki-API-Key' = $AuthToken
+    If($OrganizationID -eq "Multiple organizations found. Please specify an organization ID.") {
+        Return "Multiple organizations found. Please specify an organization ID."
+    } else {
+        try {
+            $header = @{
+                'X-Cisco-Meraki-API-Key' = $AuthToken
+            }
+        
+            $queryParams = @{
+                'importIds[]' = $importIds
+            }
+        
+            $queryString = New-MerakiQueryString -queryParams $queryParams
+        
+            $URL = "https://api.meraki.com/api/v1/organizations/$OrganizationID/inventory/onboarding/cloudMonitoring/imports?$queryString"
+        
+            $URI = [uri]::EscapeUriString($URL)
+        
+            $response = Invoke-RestMethod -Method Get -Uri $URI -Header $header
+            return $response
+        } catch {
+            Write-Error $_
         }
-    
-        $queryParams = @{
-            'importIds[]' = $importIds
-        }
-    
-        $queryString = New-MerakiQueryString -queryParams $queryParams
-    
-        $URL = "https://api.meraki.com/api/v1/organizations/$OrganizationID/inventory/onboarding/cloudMonitoring/imports?$queryString"
-    
-        $URI = [uri]::EscapeUriString($URL)
-    
-        $response = Invoke-RestMethod -Method Get -Uri $URI -Header $header
-        return $response
-    } catch {
-        Write-Error $_
     }
 }

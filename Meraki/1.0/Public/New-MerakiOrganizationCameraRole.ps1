@@ -57,11 +57,13 @@ function New-MerakiOrganizationCameraRole {
             [parameter(Mandatory=$true)]
             [string]$AuthToken,
             [parameter(Mandatory=$false)]
-        [string]$OrganizationId = (Get-MerakiOrganizations -AuthToken $AuthToken).id,
+        [string]$OrganizationID = (Get-OrgID -AuthToken $AuthToken),
             [parameter(Mandatory=$true)]
             [string]$CameraRoleConfig
         )
-    
+    If($OrganizationID -eq "Multiple organizations found. Please specify an organization ID.") {
+        Return "Multiple organizations found. Please specify an organization ID."
+    } else {
         try {
             $header = @{
                 "X-Cisco-Meraki-API-Key" = $AuthToken
@@ -77,3 +79,4 @@ function New-MerakiOrganizationCameraRole {
             Write-Host $_
         }
     }
+}

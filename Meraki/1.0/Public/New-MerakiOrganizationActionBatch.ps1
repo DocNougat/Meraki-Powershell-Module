@@ -46,24 +46,28 @@ function New-MerakiOrganizationActionBatch {
         [parameter(Mandatory=$true)]
         [string]$AuthToken,
         [parameter(Mandatory=$false)]
-        [string]$OrganizationId = (Get-MerakiOrganizations -AuthToken $AuthToken).id,
+        [string]$OrganizationID = (Get-OrgID -AuthToken $AuthToken),
         [parameter(Mandatory=$true)]
         [string]$ActionBatchConfig
     )
-    try {
-        $header = @{
-            "X-Cisco-Meraki-API-Key" = $AuthToken
-            "content-type" = "application/json; charset=utf-8"
-        }
-        
-        $body = $ActionBatchConfig
+    If($OrganizationID -eq "Multiple organizations found. Please specify an organization ID.") {
+        Return "Multiple organizations found. Please specify an organization ID."
+    } else {
+        try {
+            $header = @{
+                "X-Cisco-Meraki-API-Key" = $AuthToken
+                "content-type" = "application/json; charset=utf-8"
+            }
+            
+            $body = $ActionBatchConfig
 
-        $url = "https://api.meraki.com/api/v1/organizations/$OrganizationId/actionBatches"
-        
-        $response = Invoke-RestMethod -Method Post -Uri $url -Header $header -Body $body
-        return $response
-    }
-    catch {
-        Write-Host $_
+            $url = "https://api.meraki.com/api/v1/organizations/$OrganizationId/actionBatches"
+            
+            $response = Invoke-RestMethod -Method Post -Uri $url -Header $header -Body $body
+            return $response
+        }
+        catch {
+            Write-Host $_
+        }
     }
 }

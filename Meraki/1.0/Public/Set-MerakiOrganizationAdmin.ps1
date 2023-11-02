@@ -41,22 +41,26 @@ function Set-MerakiOrganizationAdmin {
         [parameter(Mandatory=$true)]
         [string]$AdminInfo,
         [parameter(Mandatory=$false)]
-        [string]$OrganizationId = (Get-MerakiOrganizations -AuthToken $AuthToken).id
+        [string]$OrganizationID = (Get-OrgID -AuthToken $AuthToken)
     )
-    try {
-        $header = @{
-            "X-Cisco-Meraki-API-Key" = $AuthToken
-            "content-type" = "application/json; charset=utf-8"
-        }
-        
-        $body = $AdminInfo
+    If($OrganizationID -eq "Multiple organizations found. Please specify an organization ID.") {
+        Return "Multiple organizations found. Please specify an organization ID."
+    } else {
+        try {
+            $header = @{
+                "X-Cisco-Meraki-API-Key" = $AuthToken
+                "content-type" = "application/json; charset=utf-8"
+            }
+            
+            $body = $AdminInfo
 
-        $url = "https://api.meraki.com/api/v1/organizations/$OrganizationId/admins/$AdminId"
-        
-        $response = Invoke-RestMethod -Method Put -Uri $url -Header $header -Body $body
-        return $response
-    }
-    catch {
-        Write-Host $_
+            $url = "https://api.meraki.com/api/v1/organizations/$OrganizationId/admins/$AdminId"
+            
+            $response = Invoke-RestMethod -Method Put -Uri $url -Header $header -Body $body
+            return $response
+        }
+        catch {
+            Write-Host $_
+        }
     }
 }

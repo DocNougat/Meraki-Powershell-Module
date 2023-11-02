@@ -44,24 +44,27 @@ function Set-MerakiOrganizationApplianceSecurityIntrusion {
         [parameter(Mandatory=$true)]
         [string]$AuthToken,
         [parameter(Mandatory=$false)]
-        [string]$OrganizationId = (Get-MerakiOrganizations -AuthToken $AuthToken).id,
+        [string]$OrganizationID = (Get-OrgID -AuthToken $AuthToken),
         [parameter(Mandatory=$true)]
         [string]$SecurityIntrusionConfig
     )
+    If($OrganizationID -eq "Multiple organizations found. Please specify an organization ID.") {
+        Return "Multiple organizations found. Please specify an organization ID."
+    } else {
+        try {
+            $header = @{
+                "X-Cisco-Meraki-API-Key" = $AuthToken
+                "content-type" = "application/json; charset=utf-8"
+            }
 
-    try {
-        $header = @{
-            "X-Cisco-Meraki-API-Key" = $AuthToken
-            "content-type" = "application/json; charset=utf-8"
+            $body = $SecurityIntrusionConfig
+
+            $uri = "https://api.meraki.com/api/v1/organizations/$OrganizationId/appliance/security/intrusion"
+            $response = Invoke-RestMethod -Method Put -Uri $uri -Header $header -Body $body
+            return $response
         }
-
-        $body = $SecurityIntrusionConfig
-
-        $uri = "https://api.meraki.com/api/v1/organizations/$OrganizationId/appliance/security/intrusion"
-        $response = Invoke-RestMethod -Method Put -Uri $uri -Header $header -Body $body
-        return $response
-    }
-    catch {
-        Write-Error $_
+        catch {
+            Write-Error $_
+        }
     }
 }

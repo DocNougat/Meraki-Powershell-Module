@@ -45,7 +45,7 @@ function Get-MerakiOrganizationSensorReadingsLatest {
         [parameter(Mandatory=$true)]
         [string]$AuthToken,
         [parameter(Mandatory=$false)]
-        [string]$OrganizationID = (Get-MerakiOrganizations -AuthToken $AuthToken).id,
+        [string]$OrganizationID = (Get-OrgID -AuthToken $AuthToken),
         [parameter(Mandatory=$false)]
         [int]$perPage = $null,
         [parameter(Mandatory=$false)]
@@ -59,41 +59,45 @@ function Get-MerakiOrganizationSensorReadingsLatest {
         [parameter(Mandatory=$false)]
         [array]$metrics = $null
     )
-    try {
-        $header = @{
-            "X-Cisco-Meraki-API-Key" = $AuthToken
-            "Content-Type" = "application/json"
+    If($OrganizationID -eq "Multiple organizations found. Please specify an organization ID.") {
+        Return "Multiple organizations found. Please specify an organization ID."
+    } else {
+        try {
+            $header = @{
+                "X-Cisco-Meraki-API-Key" = $AuthToken
+                "Content-Type" = "application/json"
+            }
+            $queryParams = @{}
+        
+            if ($perPage) {
+                $queryParams['perPage'] = $perPage
+            }
+            if ($startingAfter) {
+                $queryParams['startingAfter'] = $startingAfter
+            }
+            if ($endingBefore) {
+                $queryParams['endingBefore'] = $endingBefore
+            }
+            if ($networkIds) {
+                $queryParams['networkIds[]'] = $networkIds
+            }
+            if ($serials) {
+                $queryParams['serials[]'] = $serials
+            }
+            if ($metrics) {
+                $queryParams['metrics[]'] = $metrics
+            }
+        
+            $queryString = New-MerakiQueryString -queryParams $queryParams
+        
+            $URL = "https://api.meraki.com/api/v1/organizations/$OrganizationID/sensor/readings/latest?$queryString"
+        
+            $URI = [uri]::EscapeUriString($URL)
+        
+            $response = Invoke-RestMethod -Method Get -Uri $URI -Header $header
+            return $response
+        } catch {
+            Write-Error $_
         }
-        $queryParams = @{}
-    
-        if ($perPage) {
-            $queryParams['perPage'] = $perPage
-        }
-        if ($startingAfter) {
-            $queryParams['startingAfter'] = $startingAfter
-        }
-        if ($endingBefore) {
-            $queryParams['endingBefore'] = $endingBefore
-        }
-        if ($networkIds) {
-            $queryParams['networkIds[]'] = $networkIds
-        }
-        if ($serials) {
-            $queryParams['serials[]'] = $serials
-        }
-        if ($metrics) {
-            $queryParams['metrics[]'] = $metrics
-        }
-    
-        $queryString = New-MerakiQueryString -queryParams $queryParams
-    
-        $URL = "https://api.meraki.com/api/v1/organizations/$OrganizationID/sensor/readings/latest?$queryString"
-    
-        $URI = [uri]::EscapeUriString($URL)
-    
-        $response = Invoke-RestMethod -Method Get -Uri $URI -Header $header
-        return $response
-    } catch {
-        Write-Error $_
     }
 }

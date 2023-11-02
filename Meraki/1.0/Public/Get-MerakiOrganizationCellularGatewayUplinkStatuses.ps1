@@ -45,7 +45,7 @@ function Get-MerakiOrganizationCellularGatewayUplinkStatuses {
         [parameter(Mandatory=$true)]
         [string]$AuthToken,
         [parameter(Mandatory=$false)]
-        [string]$OrganizationID = (Get-MerakiOrganizations -AuthToken $AuthToken).id,
+        [string]$OrganizationID = (Get-OrgID -AuthToken $AuthToken),
         [parameter(Mandatory=$false)]
         [int]$perPage = $null,
         [parameter(Mandatory=$false)]
@@ -59,53 +59,57 @@ function Get-MerakiOrganizationCellularGatewayUplinkStatuses {
         [parameter(Mandatory=$false)]
         [array]$iccids = $null
     )
-    try {
-        $header = @{
-            "X-Cisco-Meraki-API-Key" = $AuthToken
-            "Content-Type" = "application/json"
-        }
-        $queryParams = @{}
-        if ($timespan) {
-            $queryParams['timespan'] = $timespan
-        } else {
-            if ($t0) {
-                $queryParams['t0'] = $t0
+    If($OrganizationID -eq "Multiple organizations found. Please specify an organization ID.") {
+        Return "Multiple organizations found. Please specify an organization ID."
+    } else {
+        try {
+            $header = @{
+                "X-Cisco-Meraki-API-Key" = $AuthToken
+                "Content-Type" = "application/json"
             }
-            if ($t1) {
-                $queryParams['t1'] = $t1
+            $queryParams = @{}
+            if ($timespan) {
+                $queryParams['timespan'] = $timespan
+            } else {
+                if ($t0) {
+                    $queryParams['t0'] = $t0
+                }
+                if ($t1) {
+                    $queryParams['t1'] = $t1
+                }
             }
+            if ($perPage) {
+                $queryParams['perPage'] = $perPage
+            }
+            if ($startingAfter) {
+                $queryParams['startingAfter'] = $startingAfter
+            }
+            if ($endingBefore) {
+                $queryParams['endingBefore'] = $endingBefore
+            }
+            if ($sortOrder) {
+                $queryParams['sortOrder'] = $sortOrder
+            }
+            if ($networkIds) {
+                $queryParams['networkIds[]'] = $networkIds
+            }
+            if ($serials) {
+                $queryParams['serials[]'] = $serials
+            }
+            if ($iccids) {
+                $queryParams['iccids[]'] = $iccids
+            }
+        
+            $queryString = New-MerakiQueryString -queryParams $queryParams
+        
+            $URL = "https://api.meraki.com/api/v1/organizations/$OrganizationID/cellularGateway/uplink/statuses?$queryString"
+        
+            $URI = [uri]::EscapeUriString($URL)
+        
+            $response = Invoke-RestMethod -Method Get -Uri $URI -Header $header
+            return $response
+        } catch {
+            Write-Error $_
         }
-        if ($perPage) {
-            $queryParams['perPage'] = $perPage
-        }
-        if ($startingAfter) {
-            $queryParams['startingAfter'] = $startingAfter
-        }
-        if ($endingBefore) {
-            $queryParams['endingBefore'] = $endingBefore
-        }
-        if ($sortOrder) {
-            $queryParams['sortOrder'] = $sortOrder
-        }
-        if ($networkIds) {
-            $queryParams['networkIds[]'] = $networkIds
-        }
-        if ($serials) {
-            $queryParams['serials[]'] = $serials
-        }
-        if ($iccids) {
-            $queryParams['iccids[]'] = $iccids
-        }
-    
-        $queryString = New-MerakiQueryString -queryParams $queryParams
-    
-        $URL = "https://api.meraki.com/api/v1/organizations/$OrganizationID/cellularGateway/uplink/statuses?$queryString"
-    
-        $URI = [uri]::EscapeUriString($URL)
-    
-        $response = Invoke-RestMethod -Method Get -Uri $URI -Header $header
-        return $response
-    } catch {
-        Write-Error $_
     }
 }

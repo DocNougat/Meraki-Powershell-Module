@@ -34,7 +34,7 @@ function Get-MerakiOrganizationPiiSmDevicesForKey {
         [parameter(Mandatory=$true)]
         [string]$AuthToken,
         [parameter(Mandatory=$false)]
-        [string]$OrganizationID = (Get-MerakiOrganizations -AuthToken $AuthToken).id,
+        [string]$OrganizationID = (Get-OrgID -AuthToken $AuthToken),
         [parameter(Mandatory=$false)]
         [string]$username,
         [parameter(Mandatory=$false)]
@@ -48,41 +48,45 @@ function Get-MerakiOrganizationPiiSmDevicesForKey {
         [parameter(Mandatory=$false)]
         [string]$bluetoothMac
     )
-    try {
-        $header = @{
-            'X-Cisco-Meraki-API-Key' = $AuthToken
-        }
+    If($OrganizationID -eq "Multiple organizations found. Please specify an organization ID.") {
+        Return "Multiple organizations found. Please specify an organization ID."
+    } else {
+        try {
+            $header = @{
+                'X-Cisco-Meraki-API-Key' = $AuthToken
+            }
 
-        $queryParams = @{}
+            $queryParams = @{}
 
-        if ($username) {
-            $queryParams['username'] = $username
-        }
-        if ($email) {
-            $queryParams['email'] = $email
-        }
-        if ($mac) {
-            $queryParams['mac'] = $mac
-        }
-        if ($serial) {
-            $queryParams['serial'] = $serial
-        }
-        if ($imei) {
-            $queryParams['imei'] = $imei
-        }
-        if ($bluetoothMac) {
-            $queryParams['bluetoothMac'] = $bluetoothMac
-        }
-        $queryString = New-MerakiQueryString -queryParams $queryParams
+            if ($username) {
+                $queryParams['username'] = $username
+            }
+            if ($email) {
+                $queryParams['email'] = $email
+            }
+            if ($mac) {
+                $queryParams['mac'] = $mac
+            }
+            if ($serial) {
+                $queryParams['serial'] = $serial
+            }
+            if ($imei) {
+                $queryParams['imei'] = $imei
+            }
+            if ($bluetoothMac) {
+                $queryParams['bluetoothMac'] = $bluetoothMac
+            }
+            $queryString = New-MerakiQueryString -queryParams $queryParams
 
-        $URL = "https://api.meraki.com/api/v1/organizations/$OrganizationID/pii/smDevicesForKey?$queryString"
+            $URL = "https://api.meraki.com/api/v1/organizations/$OrganizationID/pii/smDevicesForKey?$queryString"
 
-        $URI = [uri]::EscapeUriString($URL)
+            $URI = [uri]::EscapeUriString($URL)
 
-        $response = Invoke-RestMethod -Method Get -Uri $URI -Header $header
-        return $response
-    }
-    catch {
-        Write-Error $_
+            $response = Invoke-RestMethod -Method Get -Uri $URI -Header $header
+            return $response
+        }
+        catch {
+            Write-Error $_
+        }
     }
 }

@@ -33,16 +33,19 @@ function Get-MerakiOrganizationPolicyObjectsGroup {
         [parameter(Mandatory=$true)]
         [string]$policyObjectGroupId,
         [parameter(Mandatory=$False)]
-        [string]$OrganizationID = (Get-MerakiOrganizations -AuthToken $AuthToken).id
+        [string]$OrganizationID = (Get-OrgID -AuthToken $AuthToken)
     )
-
-    try {
-        $header = @{
-            'X-Cisco-Meraki-API-Key' = $AuthToken
+    If($OrganizationID -eq "Multiple organizations found. Please specify an organization ID.") {
+        Return "Multiple organizations found. Please specify an organization ID."
+    } else {
+        try {
+            $header = @{
+                'X-Cisco-Meraki-API-Key' = $AuthToken
+            }
+            $response = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations/$OrganizationID/policyObjects/groups/$policyObjectGroupId" -Header $header
+            return $response
+        } catch {
+            Write-Error $_
         }
-        $response = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations/$OrganizationID/policyObjects/groups/$policyObjectGroupId" -Header $header
-        return $response
-    } catch {
-        Write-Error $_
     }
 }

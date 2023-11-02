@@ -32,7 +32,7 @@ function Get-MerakiOrganizationDevicesStatusesOverview {
         [string]$AuthToken,
 
         [Parameter(Mandatory=$false)]
-        [string]$OrganizationID = (Get-MerakiOrganizations -AuthToken $AuthToken).id,
+        [string]$OrganizationID = (Get-OrgID -AuthToken $AuthToken),
 
         [Parameter(Mandatory=$false)]
         [array]$networkIds = $null,
@@ -40,28 +40,31 @@ function Get-MerakiOrganizationDevicesStatusesOverview {
         [Parameter(Mandatory=$false)]
         [array]$productTypes = $null
     )
+    If($OrganizationID -eq "Multiple organizations found. Please specify an organization ID.") {
+        Return "Multiple organizations found. Please specify an organization ID."
+    } else {
+        try {
+            $header = @{
+                "X-Cisco-Meraki-API-Key" = $AuthToken
+                "Content-Type" = "application/json"
+            }
 
-    try {
-        $header = @{
-            "X-Cisco-Meraki-API-Key" = $AuthToken
-            "Content-Type" = "application/json"
-        }
+            $queryParams = @{}
+            if ($networkIds) {
+                $queryParams['networkIds[]'] = $networkIds
+            }
+            if ($productTypes) {
+                $queryParams['productTypes[]'] = $productTypes
+            }
+            
+            $queryString = New-MerakiQueryString -queryParams $queryParams
+            $URI = "https://api.meraki.com/api/v1/organizations/$OrganizationID/devices/statuses/overview?$queryString"
+            $response = Invoke-RestMethod -Method Get -Uri $URI -Header $header
 
-        $queryParams = @{}
-        if ($networkIds) {
-            $queryParams['networkIds[]'] = $networkIds
+            return $response
         }
-        if ($productTypes) {
-            $queryParams['productTypes[]'] = $productTypes
+        catch {
+            Write-Error $_
         }
-        
-        $queryString = New-MerakiQueryString -queryParams $queryParams
-        $URI = "https://api.meraki.com/api/v1/organizations/$OrganizationID/devices/statuses/overview?$queryString"
-        $response = Invoke-RestMethod -Method Get -Uri $URI -Header $header
-
-        return $response
-    }
-    catch {
-        Write-Error $_
     }
 }

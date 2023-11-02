@@ -26,16 +26,18 @@ function Remove-MerakiOrganizationCameraRole {
     The function returns the response from the API if the deletion is successful, otherwise, it displays an error message.
     #>
     
-        [CmdletBinding()]
-        param (
-            [parameter(Mandatory=$true)]
-            [string]$AuthToken,
-            [parameter(Mandatory=$false)]
-        [string]$OrganizationId = (Get-MerakiOrganizations -AuthToken $AuthToken).id,
-            [parameter(Mandatory=$true)]
-            [string]$RoleId
-        )
-    
+    [CmdletBinding()]
+    param (
+        [parameter(Mandatory=$true)]
+        [string]$AuthToken,
+        [parameter(Mandatory=$false)]
+    [string]$OrganizationID = (Get-OrgID -AuthToken $AuthToken),
+        [parameter(Mandatory=$true)]
+        [string]$RoleId
+    )
+    If($OrganizationID -eq "Multiple organizations found. Please specify an organization ID.") {
+        Return "Multiple organizations found. Please specify an organization ID."
+    } else {
         try {
             $header = @{
                 "X-Cisco-Meraki-API-Key" = $AuthToken
@@ -51,3 +53,4 @@ function Remove-MerakiOrganizationCameraRole {
             Write-Host $_
         }
     }
+}

@@ -37,7 +37,7 @@ function Get-MerakiOrganizationApplianceTrafficShapingVpnExclusionsByNet {
         [Parameter(Mandatory=$true)]
         [string]$AuthToken,
         [Parameter(Mandatory=$false)]
-        [string]$OrganizationID = (Get-MerakiOrganizations -AuthToken $AuthToken).id,
+        [string]$OrganizationID = (Get-OrgID -AuthToken $AuthToken),
         [Parameter(Mandatory=$false)]
         [int]$perPage = 50,
         [Parameter(Mandatory=$false)]
@@ -47,36 +47,40 @@ function Get-MerakiOrganizationApplianceTrafficShapingVpnExclusionsByNet {
         [Parameter(Mandatory=$false)]
         [string]$networkIds
     )
-    try {
-        $header = @{
-            'X-Cisco-Meraki-API-Key' = $AuthToken
+    If($OrganizationID -eq "Multiple organizations found. Please specify an organization ID.") {
+        Return "Multiple organizations found. Please specify an organization ID."
+    } else {
+        try {
+            $header = @{
+                'X-Cisco-Meraki-API-Key' = $AuthToken
+            }
+
+            $queryParams = @{}
+
+            if ($perPage) {
+                $queryParams['perPage'] = $perPage
+            }
+            if ($perPage) {
+                $queryParams['startingAfter'] = $startingAfter
+            }
+            if ($perPage) {
+                $queryParams['endingBefore'] = $endingBefore
+            }
+            if ($perPage) {
+                $queryParams['networkIds'] = $networkIds
+            }
+
+            $queryString = New-MerakiQueryString -queryParams $queryParams
+
+            $URL = "https://api.meraki.com/api/v1/organizations/$OrganizationID/appliance/trafficShaping/vpnExclusions/byNetwork?$queryString"
+
+            $URI = [uri]::EscapeUriString($URL)
+
+            $response = Invoke-RestMethod -Method Get -Uri $URI -Header $header
+            return $response
         }
-
-        $queryParams = @{}
-
-        if ($perPage) {
-            $queryParams['perPage'] = $perPage
+        catch {
+            Write-Error $_
         }
-        if ($perPage) {
-            $queryParams['startingAfter'] = $startingAfter
-        }
-        if ($perPage) {
-            $queryParams['endingBefore'] = $endingBefore
-        }
-        if ($perPage) {
-            $queryParams['networkIds'] = $networkIds
-        }
-
-        $queryString = New-MerakiQueryString -queryParams $queryParams
-
-        $URL = "https://api.meraki.com/api/v1/organizations/$OrganizationID/appliance/trafficShaping/vpnExclusions/byNetwork?$queryString"
-
-        $URI = [uri]::EscapeUriString($URL)
-
-        $response = Invoke-RestMethod -Method Get -Uri $URI -Header $header
-        return $response
-    }
-    catch {
-        Write-Error $_
     }
 }

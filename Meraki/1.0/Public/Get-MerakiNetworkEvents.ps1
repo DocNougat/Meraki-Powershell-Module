@@ -67,7 +67,7 @@ function Get-MerakiNetworkEvents {
         [parameter(Mandatory=$true)]
         [string]$AuthToken,
         [parameter(Mandatory=$false)]
-        [string]$OrganizationID = (Get-MerakiOrganizations -AuthToken $AuthToken).id,
+        [string]$OrganizationID = (Get-OrgID -AuthToken $AuthToken),
         [parameter(Mandatory=$true)]
         [string]$networkId,
         [parameter(Mandatory=$false)]

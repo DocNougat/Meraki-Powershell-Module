@@ -47,26 +47,30 @@ function Set-MerakiOrganizationAdaptivePolicyGroup {
         [parameter(Mandatory=$true)]
         [string]$AuthToken,
         [parameter(Mandatory=$false)]
-        [string]$OrganizationId = (Get-MerakiOrganizations -AuthToken $AuthToken).id,
+        [string]$OrganizationID = (Get-OrgID -AuthToken $AuthToken),
         [parameter(Mandatory=$true)]
         [string]$GroupId,
         [parameter(Mandatory=$true)]
         [string]$GroupConfig
     )
-    try {
-        $header = @{
-            "X-Cisco-Meraki-API-Key" = $AuthToken
-            "content-type" = "application/json; charset=utf-8"
-        }
-        
-        $body = $GroupConfig
+    If($OrganizationID -eq "Multiple organizations found. Please specify an organization ID.") {
+        Return "Multiple organizations found. Please specify an organization ID."
+    } else {
+        try {
+            $header = @{
+                "X-Cisco-Meraki-API-Key" = $AuthToken
+                "content-type" = "application/json; charset=utf-8"
+            }
+            
+            $body = $GroupConfig
 
-        $url = "https://api.meraki.com/api/v1/organizations/$OrganizationId/adaptivePolicy/groups/$GroupId"
-        
-        $response = Invoke-RestMethod -Method Put -Uri $url -Header $header -Body $body
-        return $response
-    }
-    catch {
-        Write-Host $_
+            $url = "https://api.meraki.com/api/v1/organizations/$OrganizationId/adaptivePolicy/groups/$GroupId"
+            
+            $response = Invoke-RestMethod -Method Put -Uri $url -Header $header -Body $body
+            return $response
+        }
+        catch {
+            Write-Host $_
+        }
     }
 }

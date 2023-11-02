@@ -38,26 +38,30 @@ function Set-MerakiOrganizationEarlyAccessFeaturesOptIn {
         [parameter(Mandatory=$true)]
         [string]$AuthToken,
         [parameter(Mandatory=$false)]
-        [string]$OrganizationId = (Get-MerakiOrganizations -AuthToken $AuthToken).id,
+        [string]$OrganizationID = (Get-OrgID -AuthToken $AuthToken),
         [parameter(Mandatory=$true)]
         [string]$OptInId,
         [parameter(Mandatory=$true)]
         [string]$LimitScope
     )
-    try {
-        $header = @{
-            "X-Cisco-Meraki-API-Key" = $AuthToken
-            "content-type" = "application/json; charset=utf-8"
+    If($OrganizationID -eq "Multiple organizations found. Please specify an organization ID.") {
+        Return "Multiple organizations found. Please specify an organization ID."
+    } else {
+        try {
+            $header = @{
+                "X-Cisco-Meraki-API-Key" = $AuthToken
+                "content-type" = "application/json; charset=utf-8"
+            }
+
+            $body = $LimitScope
+
+            $url = "https://api.meraki.com/api/v1/organizations/$OrganizationId/earlyAccess/features/optIns/$OptInId"
+
+            $response = Invoke-RestMethod -Method Put -Uri $url -Header $header -Body $body
+            return $response
         }
-
-        $body = $LimitScope
-
-        $url = "https://api.meraki.com/api/v1/organizations/$OrganizationId/earlyAccess/features/optIns/$OptInId"
-
-        $response = Invoke-RestMethod -Method Put -Uri $url -Header $header -Body $body
-        return $response
-    }
-    catch {
-        Write-Host $_
+        catch {
+            Write-Host $_
+        }
     }
 }

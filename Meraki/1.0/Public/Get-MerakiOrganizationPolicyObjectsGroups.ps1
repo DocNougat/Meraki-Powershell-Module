@@ -36,7 +36,7 @@ function Get-MerakiOrganizationPolicyObjectsGroups {
         [parameter(Mandatory=$true)]
         [string]$AuthToken,
         [parameter(Mandatory=$False)]
-        [string]$OrganizationID = (Get-MerakiOrganizations -AuthToken $AuthToken).id,
+        [string]$OrganizationID = (Get-OrgID -AuthToken $AuthToken),
         [parameter(Mandatory=$False)]
         [int]$perPage,
         [parameter(Mandatory=$False)]
@@ -44,33 +44,36 @@ function Get-MerakiOrganizationPolicyObjectsGroups {
         [parameter(Mandatory=$False)]
         [string]$endingBefore
     )
-
-    try {
-        $header = @{
-            'X-Cisco-Meraki-API-Key' = $AuthToken
-        }
+    If($OrganizationID -eq "Multiple organizations found. Please specify an organization ID.") {
+        Return "Multiple organizations found. Please specify an organization ID."
+    } else {
+        try {
+            $header = @{
+                'X-Cisco-Meraki-API-Key' = $AuthToken
+            }
+            
+            $queryParams = @{}
         
-        $queryParams = @{}
-    
-        if ($perPage) {
-            $queryParams['perPage'] = $perPage
+            if ($perPage) {
+                $queryParams['perPage'] = $perPage
+            }
+            if ($startingAfter) {
+                $queryParams['startingAfter'] = $startingAfter
+            }
+            if ($endingBefore) {
+                $queryParams['endingBefore'] = $endingBefore
+            }
+        
+            $queryString = New-MerakiQueryString -queryParams $queryParams
+        
+            $URL = "https://api.meraki.com/api/v1/organizations/$OrganizationID/policyObjects/groups?$queryString"
+        
+            $URI = [uri]::EscapeUriString($URL)
+        
+            $response = Invoke-RestMethod -Method Get -Uri $URI -Header $header
+            return $response
+        } catch {
+            Write-Error $_
         }
-        if ($startingAfter) {
-            $queryParams['startingAfter'] = $startingAfter
-        }
-        if ($endingBefore) {
-            $queryParams['endingBefore'] = $endingBefore
-        }
-    
-        $queryString = New-MerakiQueryString -queryParams $queryParams
-    
-        $URL = "https://api.meraki.com/api/v1/organizations/$OrganizationID/policyObjects/groups?$queryString"
-    
-        $URI = [uri]::EscapeUriString($URL)
-    
-        $response = Invoke-RestMethod -Method Get -Uri $URI -Header $header
-        return $response
-    } catch {
-        Write-Error $_
     }
 }

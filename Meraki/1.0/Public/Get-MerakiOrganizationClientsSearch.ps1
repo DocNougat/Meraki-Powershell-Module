@@ -39,7 +39,7 @@ function Get-MerakiOrganizationClientsSearch {
         [Parameter(Mandatory=$true)]
         [string]$mac,
         [Parameter(Mandatory=$false)]
-        [string]$OrganizationID = (Get-MerakiOrganizations -AuthToken $AuthToken).id,
+        [string]$OrganizationID = (Get-OrgID -AuthToken $AuthToken),
         [Parameter(Mandatory=$false)]
         [string]$perPage,
         [Parameter(Mandatory=$false)]
@@ -47,33 +47,37 @@ function Get-MerakiOrganizationClientsSearch {
         [Parameter(Mandatory=$false)]
         [string]$endingBefore
     )
-    try {
-        $header = @{
-            'X-Cisco-Meraki-API-Key' = $AuthToken
+    If($OrganizationID -eq "Multiple organizations found. Please specify an organization ID.") {
+        Return "Multiple organizations found. Please specify an organization ID."
+    } else {
+        try {
+            $header = @{
+                'X-Cisco-Meraki-API-Key' = $AuthToken
+            }
+            $queryParams = @{}
+            $queryParams['mac'] = $mac
+        
+            if ($perPage) {
+                    $queryParams['perPage'] = $perPage
+            }
+            if ($startingAfter) {
+                    $queryParams['startingAfter'] = $startingAfter
+            }
+            if ($endingBefore) {
+                    $queryParams['endingBefore'] = $endingBefore
+            }
+        
+            $queryString = New-MerakiQueryString -queryParams $queryParams
+        
+            $URL = "https://api.meraki.com/api/v1/organizations/$OrganizationID/clients/search?$queryString"
+        
+            $URI = [uri]::EscapeUriString($URL)
+        
+            $response = Invoke-RestMethod -Method Get -Uri $URI -Header $header
+            return $response
         }
-        $queryParams = @{}
-        $queryParams['mac'] = $mac
-    
-        if ($perPage) {
-                $queryParams['perPage'] = $perPage
+        catch {
+            Write-Error $_
         }
-        if ($startingAfter) {
-                $queryParams['startingAfter'] = $startingAfter
-        }
-        if ($endingBefore) {
-                $queryParams['endingBefore'] = $endingBefore
-        }
-    
-        $queryString = New-MerakiQueryString -queryParams $queryParams
-    
-        $URL = "https://api.meraki.com/api/v1/organizations/$OrganizationID/clients/search?$queryString"
-    
-        $URI = [uri]::EscapeUriString($URL)
-    
-        $response = Invoke-RestMethod -Method Get -Uri $URI -Header $header
-        return $response
-    }
-    catch {
-        Write-Error $_
     }
 }

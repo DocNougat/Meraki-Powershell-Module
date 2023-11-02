@@ -55,18 +55,20 @@ function Set-MerakiOrganizationCameraRole {
     The function returns the response from the API if the update is successful, otherwise, it displays an error message.
     #>
     
-        [CmdletBinding()]
-        param (
-            [parameter(Mandatory=$true)]
-            [string]$AuthToken,
-            [parameter(Mandatory=$false)]
-        [string]$OrganizationId = (Get-MerakiOrganizations -AuthToken $AuthToken).id,
-            [parameter(Mandatory=$true)]
-            [string]$RoleId,
-            [parameter(Mandatory=$true)]
-            [string]$CameraRoleConfig
-        )
-    
+    [CmdletBinding()]
+    param (
+        [parameter(Mandatory=$true)]
+        [string]$AuthToken,
+        [parameter(Mandatory=$false)]
+    [string]$OrganizationID = (Get-OrgID -AuthToken $AuthToken),
+        [parameter(Mandatory=$true)]
+        [string]$RoleId,
+        [parameter(Mandatory=$true)]
+        [string]$CameraRoleConfig
+    )
+    If($OrganizationID -eq "Multiple organizations found. Please specify an organization ID.") {
+        Return "Multiple organizations found. Please specify an organization ID."
+    } else {
         try {
             $header = @{
                 "X-Cisco-Meraki-API-Key" = $AuthToken
@@ -82,3 +84,4 @@ function Set-MerakiOrganizationCameraRole {
             Write-Host $_
         }
     }
+}

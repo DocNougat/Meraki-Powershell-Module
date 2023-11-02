@@ -31,26 +31,30 @@ function Set-MerakiOrganizationBrandingPoliciesPriorities {
         [parameter(Mandatory=$true)]
         [string]$AuthToken,
         [parameter(Mandatory=$false)]
-        [string]$OrganizationId = (Get-MerakiOrganizations -AuthToken $AuthToken).id,
+        [string]$OrganizationID = (Get-OrgID -AuthToken $AuthToken),
         [parameter(Mandatory=$true)]
         [array]$PolicyIds
     )
-    try {
-        $header = @{
-            "X-Cisco-Meraki-API-Key" = $AuthToken
-            "content-type" = "application/json; charset=utf-8"
-        }
-        
-        $body = @{
-            "brandingPolicyIds" = $PolicyIds
-        } | ConvertTo-Json -Depth 3
+    If($OrganizationID -eq "Multiple organizations found. Please specify an organization ID.") {
+        Return "Multiple organizations found. Please specify an organization ID."
+    } else {
+        try {
+            $header = @{
+                "X-Cisco-Meraki-API-Key" = $AuthToken
+                "content-type" = "application/json; charset=utf-8"
+            }
+            
+            $body = @{
+                "brandingPolicyIds" = $PolicyIds
+            } | ConvertTo-Json -Depth 3
 
-        $url = "https://api.meraki.com/api/v1/organizations/$OrganizationId/brandingPolicies/priorities"
-        
-        $response = Invoke-RestMethod -Method Put -Uri $url -Header $header -Body $body
-        return $response
-    }
-    catch {
-        Write-Host $_
+            $url = "https://api.meraki.com/api/v1/organizations/$OrganizationId/brandingPolicies/priorities"
+            
+            $response = Invoke-RestMethod -Method Put -Uri $url -Header $header -Body $body
+            return $response
+        }
+        catch {
+            Write-Host $_
+        }
     }
 }

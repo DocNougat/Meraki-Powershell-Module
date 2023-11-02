@@ -34,32 +34,36 @@ function Get-MerakiOrganizationWebhooksAlertTypes {
         [string]$AuthToken,
 
         [parameter(Mandatory=$false)]
-        [string]$OrganizationID = (Get-MerakiOrganizations -AuthToken $AuthToken).id,
+        [string]$OrganizationID = (Get-OrgID -AuthToken $AuthToken),
 
         [parameter(Mandatory=$false)]
         [string]$ProductType = $null
     )
-    try {
-        $header = @{
-            "X-Cisco-Meraki-API-Key" = $AuthToken
-            "Content-Type" = "application/json"
-        }
-        $queryParams = @{}
+    If($OrganizationID -eq "Multiple organizations found. Please specify an organization ID.") {
+        Return "Multiple organizations found. Please specify an organization ID."
+    } else {
+        try {
+            $header = @{
+                "X-Cisco-Meraki-API-Key" = $AuthToken
+                "Content-Type" = "application/json"
+            }
+            $queryParams = @{}
+            
+            if ($ProductType) {
+                $queryParams['productType'] = $ProductType
+            }
         
-        if ($ProductType) {
-            $queryParams['productType'] = $ProductType
+            $queryString = New-MerakiQueryString -queryParams $queryParams
+        
+            $URL = "https://api.meraki.com/api/v1/organizations/$OrganizationID/webhooks/alertTypes?$queryString"
+        
+            $URI = [uri]::EscapeUriString($URL)
+        
+            $response = Invoke-RestMethod -Method Get -Uri $URI -Header $header
+            return $response
         }
-    
-        $queryString = New-MerakiQueryString -queryParams $queryParams
-    
-        $URL = "https://api.meraki.com/api/v1/organizations/$OrganizationID/webhooks/alertTypes?$queryString"
-    
-        $URI = [uri]::EscapeUriString($URL)
-    
-        $response = Invoke-RestMethod -Method Get -Uri $URI -Header $header
-        return $response
-    }
-    catch {
-        Write-Error $_
+        catch {
+            Write-Error $_
+        }
     }
 }

@@ -49,23 +49,26 @@ function Invoke-MerakiOrganizationInventoryClaim {
         [parameter(Mandatory=$true)]
         [string]$AuthToken,
         [parameter(Mandatory=$false)]
-        [string]$OrganizationId = (Get-MerakiOrganizations -AuthToken $AuthToken).id,
+        [string]$OrganizationID = (Get-OrgID -AuthToken $AuthToken),
         [parameter(Mandatory=$true)]
         [string]$Claim
     )
+    If($OrganizationID -eq "Multiple organizations found. Please specify an organization ID.") {
+        Return "Multiple organizations found. Please specify an organization ID."
+    } else {
+        try {
+            $header = @{
+                "X-Cisco-Meraki-API-Key" = $AuthToken
+            }
 
-    try {
-        $header = @{
-            "X-Cisco-Meraki-API-Key" = $AuthToken
+            $body = $Claim
+
+            $uri = "https://api.meraki.com/api/v1/organizations/$OrganizationId/inventory/claim"
+            $response = Invoke-RestMethod -Method Post -Uri $uri -Header $header -Body $body
+            return $response
         }
-
-        $body = $Claim
-
-        $uri = "https://api.meraki.com/api/v1/organizations/$OrganizationId/inventory/claim"
-        $response = Invoke-RestMethod -Method Post -Uri $uri -Header $header -Body $body
-        return $response
-    }
-    catch {
-        Write-Error $_
+        catch {
+            Write-Error $_
+        }
     }
 }
