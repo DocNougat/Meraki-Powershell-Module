@@ -28,7 +28,7 @@ To install the Meraki PowerShell module, follow these steps:
 Import-Module Meraki
 ```
 ## Usage
-* **Use caution if you're in an environment with multiple Organizations.** OrganizationID is an optional parameter in all commands that specify an organization except Remove-MerakiOrganization which will require you to specify the Organization you want to delete. If the OrganizationID is not provided the commandlet will call Get-MerakiOrganization and use the first OrganizationID returned. 
+* OrganizationID is an optional parameter in all commands that specify an organization except Remove-MerakiOrganization which will require you to specify the Organization you want to delete. If the OrganizationID is not provided the commandlet will call Get-MerakiOrganization and use the first OrganizationID returned. If more than one organization is found an error will be returned asking for an organizationID to be specified. 
 * All commands are written using PowerShell approved verbs. Here is a quick conversion guide from Meraki verbs:
    * Get = Get
    * Create = New
