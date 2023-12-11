@@ -59,6 +59,7 @@ function Invoke-MerakiOrganizationInventoryClaim {
         try {
             $header = @{
                 "X-Cisco-Meraki-API-Key" = $AuthToken
+                "content-type" = "application/json; charset=utf-8"
             }
 
             $body = $Claim
