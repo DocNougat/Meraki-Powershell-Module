@@ -16,16 +16,17 @@ function New-MerakiNetworkWebhooksHttpServer {
     The JSON configuration for the HTTP server to be created. Refer to the JSON schema for required parameters and their format.
 
     .EXAMPLE
-    $WebhookServerConfig = '{
-        "name": "Example Webhook Server",
-        "url": "https://example.com",
-        "sharedSecret": "shhh",
-        "payloadTemplate": {
-            "payloadTemplateId": "wpt_00001",
-            "name": "Meraki (included)"
+    $WebhookServerConfig = [PSCustomObject]@{
+        name = "Example Webhook Server"
+        url = "https://example.com"
+        sharedSecret = "shhh"
+        payloadTemplate = [PSCustomObject]@{
+            payloadTemplateId = "wpt_00001"
+            name = "Meraki (included)"
         }
-    }'
-    $WebhookServerConfig = $WebhookServerConfig | ConvertTo-JSON -compress
+    }
+
+    $WebhookServerConfig = $WebhookServerConfig | ConvertTo-JSON -Compress
 
     New-MerakiNetworkWebhooksHttpServer -AuthToken "your-api-token" -NetworkId "L_123456789012345678" -WebhookServerConfig $WebhookServerConfig
 

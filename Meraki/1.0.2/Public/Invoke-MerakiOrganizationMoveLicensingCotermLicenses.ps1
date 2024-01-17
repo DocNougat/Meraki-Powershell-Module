@@ -16,27 +16,28 @@ function Invoke-MerakiOrganizationMoveLicensingCotermLicenses {
     An optional string containing the license move configuration. The string should be in JSON format and should include the properties as defined in the schema.
     
     .EXAMPLE
-    $LicenseMoveConfig = '{
-        "destination": {
-            "organizationId": "123",
-            "mode": "addDevices"
-        },
-        "licenses": [
-            {
-                "key": "Z2AA-BBBB-CCCC",
-                "counts": [
-                    {
-                        "model": "MR Enterprise",
-                        "count": 5
+    $LicenseMoveConfig = [PSCustomObject]@{
+        destination = @{
+            organizationId = "123"
+            mode = "addDevices"
+        }
+        licenses = @(
+            @{
+                key = "Z2AA-BBBB-CCCC"
+                counts = @(
+                    @{
+                        model = "MR Enterprise"
+                        count = 5
                     }
-                ]
+                )
             }
-        ]
-    }'
+        )
+    }
+
     $LicenseMoveConfig = $LicenseMoveConfig | ConvertTo-Json -Compress
-    
+
     Invoke-MerakiOrganizationMoveLicensingCotermLicenses -AuthToken "your-api-token" -OrganizationId "1234" -LicenseMoveConfig $LicenseMoveConfig
-    
+
     This example moves licenses for the Meraki organization with ID "1234".
     
     .NOTES

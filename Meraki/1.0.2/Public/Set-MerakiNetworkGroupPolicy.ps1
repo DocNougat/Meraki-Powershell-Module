@@ -16,165 +16,165 @@ function Set-MerakiNetworkGroupPolicy {
     The JSON-formatted string representing the configuration of the new group policy.
     
     .EXAMPLE
-    $config = '{
-        "name": "No video streaming",
-        "scheduling": {
-            "enabled": true,
-            "monday": {
-                "active": true,
-                "from": "9:00",
-                "to": "17:00"
-            },
-            "tuesday": {
-                "active": true,
-                "from": "9:00",
-                "to": "17:00"
-            },
-            "wednesday": {
-                "active": true,
-                "from": "9:00",
-                "to": "17:00"
-            },
-            "thursday": {
-                "active": true,
-                "from": "9:00",
-                "to": "17:00"
-            },
-            "friday": {
-                "active": true,
-                "from": "9:00",
-                "to": "17:00"
-            },
-            "saturday": {
-                "active": false,
-                "from": "0:00",
-                "to": "24:00"
-            },
-            "sunday": {
-                "active": false,
-                "from": "0:00",
-                "to": "24:00"
+    $config = [PSCustomObject]@{
+        name = "No video streaming"
+        scheduling = @{
+            enabled = $true
+            monday = @{
+                active = $true
+                from = "9:00"
+                to = "17:00"
             }
-        },
-        "bandwidth": {
-            "settings": "custom",
-            "bandwidthLimits": {
-                "limitUp": 1000000,
-                "limitDown": 1000000
+            tuesday = @{
+                active = $true
+                from = "9:00"
+                to = "17:00"
             }
-        },
-        "firewallAndTrafficShaping": {
-            "settings": "custom",
-            "trafficShapingRules": [
-                {
-                    "definitions": [
-                        {
-                            "type": "host",
-                            "value": "google.com"
-                        },
-                        {
-                            "type": "port",
-                            "value": "9090"
-                        },
-                        {
-                            "type": "ipRange",
-                            "value": "192.1.0.0"
-                        },
-                        {
-                            "type": "ipRange",
-                            "value": "192.1.0.0/16"
-                        },
-                        {
-                            "type": "ipRange",
-                            "value": "10.1.0.0/16:80"
-                        },
-                        {
-                            "type": "localNet",
-                            "value": "192.168.0.0/16"
+            wednesday = @{
+                active = $true
+                from = "9:00"
+                to = "17:00"
+            }
+            thursday = @{
+                active = $true
+                from = "9:00"
+                to = "17:00"
+            }
+            friday = @{
+                active = $true
+                from = "9:00"
+                to = "17:00"
+            }
+            saturday = @{
+                active = $false
+                from = "0:00"
+                to = "24:00"
+            }
+            sunday = @{
+                active = $false
+                from = "0:00"
+                to = "24:00"
+            }
+        }
+        bandwidth = @{
+            settings = "custom"
+            bandwidthLimits = @{
+                limitUp = 1000000
+                limitDown = 1000000
+            }
+        }
+        firewallAndTrafficShaping = @{
+            settings = "custom"
+            trafficShapingRules = @(
+                @{
+                    definitions = @(
+                        @{
+                            type = "host"
+                            value = "google.com"
                         }
-                    ],
-                    "perClientBandwidthLimits": {
-                        "settings": "custom",
-                        "bandwidthLimits": {
-                            "limitUp": 1000000,
-                            "limitDown": 1000000
+                        @{
+                            type = "port"
+                            value = "9090"
                         }
-                    },
-                    "dscpTagValue": 0,
-                    "pcpTagValue": 0
+                        @{
+                            type = "ipRange"
+                            value = "192.1.0.0"
+                        }
+                        @{
+                            type = "ipRange"
+                            value = "192.1.0.0/16"
+                        }
+                        @{
+                            type = "ipRange"
+                            value = "10.1.0.0/16:80"
+                        }
+                        @{
+                            type = "localNet"
+                            value = "192.168.0.0/16"
+                        }
+                    )
+                    perClientBandwidthLimits = @{
+                        settings = "custom"
+                        bandwidthLimits = @{
+                            limitUp = 1000000
+                            limitDown = 1000000
+                        }
+                    }
+                    dscpTagValue = 0
+                    pcpTagValue = 0
                 }
-            ],
-            "l3FirewallRules": [
-                {
-                    "comment": "Allow TCP traffic to subnet with HTTP servers.",
-                    "policy": "allow",
-                    "protocol": "tcp",
-                    "destPort": "443",
-                    "destCidr": "192.168.1.0/24"
+            )
+            l3FirewallRules = @(
+                @{
+                    comment = "Allow TCP traffic to subnet with HTTP servers."
+                    policy = "allow"
+                    protocol = "tcp"
+                    destPort = "443"
+                    destCidr = "192.168.1.0/24"
                 }
-            ],
-            "l7FirewallRules": [
-                {
-                    "policy": "deny",
-                    "type": "host",
-                    "value": "google.com"
-                },
-                {
-                    "policy": "deny",
-                    "type": "port",
-                    "value": "23"
-                },
-                {
-                    "policy": "deny",
-                    "type": "ipRange",
-                    "value": "10.11.12.00/24"
-                },
-                {
-                    "policy": "deny",
-                    "type": "ipRange",
-                    "value": "10.11.12.00/24:5555"
+            )
+            l7FirewallRules = @(
+                @{
+                    policy = "deny"
+                    type = "host"
+                    value = "google.com"
                 }
-            ]
-        },
-        "contentFiltering": {
-            "allowedUrlPatterns": {
-                "settings": "network default",
-                "patterns": []
-            },
-            "blockedUrlPatterns": {
-                "settings": "append",
-                "patterns": [
+                @{
+                    policy = "deny"
+                    type = "port"
+                    value = "23"
+                }
+                @{
+                    policy = "deny"
+                    type = "ipRange"
+                    value = "10.11.12.00/24"
+                }
+                @{
+                    policy = "deny"
+                    type = "ipRange"
+                    value = "10.11.12.00/24:5555"
+                }
+            )
+        }
+        contentFiltering = @{
+            allowedUrlPatterns = @{
+                settings = "network default"
+                patterns = @()
+            }
+            blockedUrlPatterns = @{
+                settings = "append"
+                patterns = @(
                     "http://www.example.com",
                     "http://www.betting.com"
-                ]
-            },
-            "blockedUrlCategories": {
-                "settings": "override",
-                "categories": [
+                )
+            }
+            blockedUrlCategories = @{
+                settings = "override"
+                categories = @(
                     "meraki:contentFiltering/category/1",
                     "meraki:contentFiltering/category/7"
-                ]
+                )
             }
-        },
-        "splashAuthSettings": "bypass",
-        "vlanTagging": {
-            "settings": "custom",
-            "vlanId": "1"
-        },
-        "bonjourForwarding": {
-            "settings": "custom",
-            "rules": [
-                {
-                    "description": "A simple bonjour rule",
-                    "vlanId": "1",
-                    "services": [ "All Services" ]
-                }
-            ]
         }
-    }'
-    $config = $config | ConvertTo-Json
+        splashAuthSettings = "bypass"
+        vlanTagging = @{
+            settings = "custom"
+            vlanId = "1"
+        }
+        bonjourForwarding = @{
+            settings = "custom"
+            rules = @(
+                @{
+                    description = "A simple bonjour rule"
+                    vlanId = "1"
+                    services = [ "All Services" ]
+                }
+            )
+        }
+    }
+    $config = $config | ConvertTo-Json -Compress
     Set-MerakiNetworkGroupPolicy -AuthToken "your-api-token" -NetworkId "L_9817349871234" -GroupPolicyConfig $config
-    
+ 
     This example creates a new group policy with the specified configuration.
     
     .NOTES

@@ -16,20 +16,21 @@ function Set-MerakiNetworkApplianceFirewallCellularFirewallRules {
     A string containing the firewall configuration. The string should be in JSON format and should include the "rules" array, which contains objects with the "comment", "policy", "protocol", "destPort", "destCidr", "srcPort", "srcCidr", and "syslogEnabled" properties.
 
     .EXAMPLE
-    $config = '{
-        "rules": [
-            {
-                "comment": "Allow TCP traffic to subnet with HTTP servers.",
-                "policy": "allow",
-                "protocol": "tcp",
-                "destPort": "443",
-                "destCidr": "192.168.1.0/24",
-                "srcPort": "Any",
-                "srcCidr": "Any",
-                "syslogEnabled": false
+    $config = [PSCustomObject]@{
+        rules = @(
+            [PSCustomObject]@{
+                comment = "Allow TCP traffic to subnet with HTTP servers."
+                policy = "allow"
+                protocol = "tcp"
+                destPort = "443"
+                destCidr = "192.168.1.0/24"
+                srcPort = "Any"
+                srcCidr = "Any"
+                syslogEnabled = $false
             }
-        ]
-    }'
+        )
+    }
+
     $config = $config | ConvertTo-Json -Compress
     Set-MerakiNetworkApplianceFirewallCellularFirewallRules -AuthToken "your-api-token" -NetworkId "your-network-id" -FirewallConfig $config
 

@@ -16,18 +16,19 @@ function Set-MerakiNetworkSmDevicesFields {
     A JSON formatted string of device fields configuration.
     
     .EXAMPLE
-    $deviceFieldsConfig = '{
-        "wifiMac": "00:11:22:33:44:55",
-        "id": "1284392014819",
-        "serial": "Q234-ABCD-5678",
-        "deviceFields": {
-            "name": "Miles\'s phone",
-            "notes": "Here\'s some info about my device"
+    $deviceFieldsConfig = [PSCustomObject]@{
+        wifiMac = "00:11:22:33:44:55"
+        id = "1284392014819"
+        serial = "Q234-ABCD-5678"
+        deviceFields = [PSCustomObject]@{
+            name = "Miles's phone"
+            notes = "Here's some info about my device"
         }
-    }'
+    }
+
     $deviceFieldsConfig = $deviceFieldsConfig | ConvertTo-Json
     Set-MerakiNetworkSmDevicesFields -AuthToken "your-api-token" -NetworkId "1234" -DeviceFieldsConfig $deviceFieldsConfig
-    
+
     This example updates the fields of a device in the Meraki network with ID "1234" with the specified device fields configuration.
     
     .NOTES

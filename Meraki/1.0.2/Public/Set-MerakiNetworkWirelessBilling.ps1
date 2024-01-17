@@ -16,23 +16,24 @@ function Set-MerakiNetworkWirelessBilling {
     A JSON formatted string of the billing configuration.
     
     .EXAMPLE
-    $BillingConfig = '{
-        "currency": "USD",
-        "plans": [
-            {
-                "id": "1",
-                "price": 5,
-                "bandwidthLimits": {
-                    "limitUp": 1000,
-                    "limitDown": 1000
-                },
-                "timeLimit": "1 hour"
+    $BillingConfig = [PSCustomObject]@{
+        currency = "USD"
+        plans = @(
+            [PSCustomObject]@{
+                id = "1"
+                price = 5
+                bandwidthLimits = [PSCustomObject]@{
+                    limitUp = 1000
+                    limitDown = 1000
+                }
+                timeLimit = "1 hour"
             }
-        ]
-    }'
+        )
+    }
+
     $BillingConfig = $BillingConfig | ConvertTo-Json -Compress
     Set-MerakiNetworkWirelessBilling -AuthToken "your-api-token" -NetworkId "1234" -BillingConfig $BillingConfig
-    
+
     This example updates a network wireless billing configuration with the specified configuration.
     
     .NOTES

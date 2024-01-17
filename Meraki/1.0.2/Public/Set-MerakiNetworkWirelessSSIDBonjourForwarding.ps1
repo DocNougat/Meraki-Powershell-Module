@@ -12,7 +12,7 @@ function Set-MerakiNetworkWirelessSSIDBonjourForwarding {
     .PARAMETER NetworkId
     The ID of the Meraki network to which the wireless SSID belongs.
 
-    .PARAMETER SsidNumber
+    .PARAMETER SSIDNumber
     The number of the wireless SSID for which you want to update the Bonjour forwarding configuration.
 
     .PARAMETER BonjourConfig
@@ -53,7 +53,7 @@ function Set-MerakiNetworkWirelessSSIDBonjourForwarding {
         [parameter(Mandatory=$true)]
         [string]$NetworkId,
         [parameter(Mandatory=$true)]
-        [int]$SsidNumber,
+        [int]$SSIDNumber,
         [parameter(Mandatory=$true)]
         [string]$BonjourConfig
     )

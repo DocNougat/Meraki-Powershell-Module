@@ -16,14 +16,15 @@ function Set-MerakiNetworkNetflow {
     A JSON string containing the NetFlow configuration. The JSON string should conform to the schema definition provided by the Meraki Dashboard API.
 
     .EXAMPLE
-    $NetflowConfig = '{
-        "collectorPort": 2055,
-        "etaDstPort": 2056,
-        "collectorIp": "192.168.1.1",
-        "etaEnabled": true,
-        "reportingEnabled": true
-    }'
-    $NetflowConfig = $NetflowConfig | ConvertTo-JSON -compress
+    $NetflowConfig = [PSCustomObject]@{
+        collectorPort = 2055
+        etaDstPort = 2056
+        collectorIp = "192.168.1.1"
+        etaEnabled = $true
+        reportingEnabled = $true
+    }
+
+    $NetflowConfig = $NetflowConfig | ConvertTo-Json -Compress
 
     Set-MerakiNetworkNetflow -AuthToken "your-api-token" -NetworkId "L_123456789012345678" -NetflowConfig $NetflowConfig
 

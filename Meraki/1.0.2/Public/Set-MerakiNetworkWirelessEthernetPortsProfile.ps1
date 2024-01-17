@@ -19,27 +19,28 @@ function Set-MerakiNetworkWirelessEthernetPortsProfile {
     A JSON formatted string of the ports profile configuration.
     
     .EXAMPLE
-    $PortsProfileConfig = '{
-        "name": "profile1",
-        "ports": [
-            {
-                "ssid": 1,
-                "name": "portName",
-                "pskGroupId": "123",
-                "enabled": true
+    $PortsProfileConfig = [PSCustomObject]@{
+        name = "profile1"
+        ports = @(
+            [PSCustomObject]@{
+                ssid = 1
+                name = "portName"
+                pskGroupId = "123"
+                enabled = $true
             }
-        ],
-        "usbPorts": [
-            {
-                "enabled": true,
-                "name": "usbport",
-                "ssid": 2
+        )
+        usbPorts = @(
+            [PSCustomObject]@{
+                enabled = $true
+                name = "usbport"
+                ssid = 2
             }
-        ]
-    }'
+        )
+    }
+
     $PortsProfileConfig = $PortsProfileConfig | ConvertTo-Json -Compress
     Set-MerakiNetworkWirelessEthernetPortsProfile -AuthToken "your-api-token" -NetworkId "1234" -ProfileId "1001" -PortsProfileConfig $PortsProfileConfig
-    
+
     This example updates a network wireless Ethernet ports profile with the specified configuration.
     
     .NOTES

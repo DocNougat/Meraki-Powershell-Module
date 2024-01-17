@@ -16,22 +16,23 @@ function Set-MerakiNetworkSwitchAlternateManagementInterface {
     A JSON formatted string of alternate management interface configuration.
     
     .EXAMPLE
-    $AltManagementConfig = '{
-        "enabled": true,
-        "vlanId": 100,
-        "protocols": [ "radius", "snmp", "syslog" ],
-        "switches": [
-            {
-                "serial": "Q234-ABCD-5678",
-                "alternateManagementIp": "1.2.3.4",
-                "subnetMask": "255.255.255.0",
-                "gateway": "1.2.3.5"
+    $AltManagementConfig = [PSCustomObject]@{
+        enabled = $true
+        vlanId = 100
+        protocols = @("radius", "snmp", "syslog")
+        switches = @(
+            [PSCustomObject]@{
+                serial = "Q234-ABCD-5678"
+                alternateManagementIp = "1.2.3.4"
+                subnetMask = "255.255.255.0"
+                gateway = "1.2.3.5"
             }
-        ]
-    }'
+        )
+    }
+
     $AltManagementConfig = $AltManagementConfig | ConvertTo-Json
     Set-MerakiNetworkSwitchAlternateManagementInterface -AuthToken "your-api-token" -NetworkId "1234" -AltManagementConfig $AltManagementConfig
-    
+
     This example updates the alternate management interface for the network switch in the Meraki network with ID "1234" with the specified alternate management interface configuration.
     
     .NOTES

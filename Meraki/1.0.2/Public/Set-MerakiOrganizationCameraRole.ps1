@@ -19,34 +19,35 @@ function Set-MerakiOrganizationCameraRole {
     A string containing the camera role configuration. The string should be in JSON format and should include the properties as defined in the schema.
     
     .EXAMPLE
-    $CameraRoleConfig = '{
-        "name": "Security_Guard",
-        "appliedOnDevices": [
-            {
-                "tag": "reception-desk",
-                "id": "",
-                "permissionScopeId": "1"
+    $CameraRoleConfig = [PSCustomObject]@{
+        name = "Security_Guard"
+        appliedOnDevices = @(
+            [PSCustomObject]@{
+                tag = "reception-desk"
+                id = ""
+                permissionScopeId = "1"
             }
-        ],
-        "appliedOnNetworks": [
-            {
-                "tag": "building-a",
-                "id": "",
-                "permissionScopeId": "2"
+        )
+        appliedOnNetworks = @(
+            [PSCustomObject]@{
+                tag = "building-a"
+                id = ""
+                permissionScopeId = "2"
             }
-        ],
-        "appliedOrgWide": [
-            {
-                "tag": "building-a",
-                "id": "",
-                "permissionScopeId": "2"
+        )
+        appliedOrgWide = @(
+            [PSCustomObject]@{
+                tag = "building-a"
+                id = ""
+                permissionScopeId = "2"
             }
-        ]
-    }'
+        )
+    }
+
     $CameraRoleConfig = $CameraRoleConfig | ConvertTo-Json -Compress
-    
+
     Set-MerakiOrganizationCameraRole -AuthToken "your-api-token" -OrganizationId "1234567890" -RoleId "R_1234567890" -CameraRoleConfig $CameraRoleConfig
-    
+
     This example updates a camera role for the Meraki organization with ID "1234567890".
     
     .NOTES

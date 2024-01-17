@@ -16,21 +16,22 @@ function Set-MerakiNetworkApplianceContentFiltering {
     A string containing the content filtering configuration. The string should be in JSON format and should include the "allowedUrlPatterns", "blockedUrlPatterns", "blockedUrlCategories", and "urlCategoryListSize" properties.
 
     .EXAMPLE
-    $config = '{
-        "allowedUrlPatterns": [
+    $config = [PSCustomObject]@{
+        allowedUrlPatterns = @(
             "http://www.example.org",
             "http://help.com.au"
-        ],
-        "blockedUrlPatterns": [
+        )
+        blockedUrlPatterns = @(
             "http://www.example.com",
             "http://www.betting.com"
-        ],
-        "blockedUrlCategories": [
+        )
+        blockedUrlCategories = @(
             "meraki:contentFiltering/category/1",
             "meraki:contentFiltering/category/7"
-        ],
-        "urlCategoryListSize": "topSites"
-    }'
+        )
+        urlCategoryListSize = "topSites"
+    }
+
     $config = $config | ConvertTo-Json -Compress
     Set-MerakiNetworkApplianceContentFiltering -AuthToken "your-api-token" -NetworkId "your-network-id" -ContentFilterConfig $config
 

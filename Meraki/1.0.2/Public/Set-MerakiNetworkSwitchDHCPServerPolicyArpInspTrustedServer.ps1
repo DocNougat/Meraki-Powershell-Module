@@ -19,14 +19,17 @@ function Set-MerakiNetworkSwitchDHCPServerPolicyArpInspTrustedServer {
     A JSON formatted string of policy configuration.
     
     .EXAMPLE
-    $PolicyConfig = '{
-        "mac": "00:11:22:33:44:55",
-        "vlan": 100,
-        "ipv4": { "address": "1.2.3.4" }
-    }'
+    $PolicyConfig = [PSCustomObject]@{
+        mac = "00:11:22:33:44:55"
+        vlan = 100
+        ipv4 = @{
+            address = "1.2.3.4"
+        }
+    }
+
     $PolicyConfig = $PolicyConfig | ConvertTo-Json -Compress
     Set-MerakiNetworkSwitchDHCPServerPolicyArpInspTrustedServer -AuthToken "your-api-token" -NetworkId "1234" -TrustedServerId "5678" -PolicyConfig $PolicyConfig
-    
+
     This example updates the DHCP server policy ARP inspection trusted server with ID "5678" for the network switch in the Meraki network with ID "1234" with the specified policy configuration.
     
     .NOTES

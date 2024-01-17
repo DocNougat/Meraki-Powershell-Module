@@ -19,13 +19,14 @@ function Set-MerakiNetworkSwitchRoutingMulticastRendezvousPoint {
     A JSON formatted string of rendezvous point configuration.
     
     .EXAMPLE
-    $RendezvousPoint = '{
-        "interfaceIp": "192.168.1.2",
-        "multicastGroup": "192.168.128.0/24"
-    }'
+    $RendezvousPoint = [PSCustomObject]@{
+        interfaceIp = "192.168.1.2"
+        multicastGroup = "192.168.128.0/24"
+    }
+
     $RendezvousPoint = $RendezvousPoint | ConvertTo-Json
     Set-MerakiNetworkSwitchRoutingMulticastRendezvousPoint -AuthToken "your-api-token" -NetworkId "N_1234" -RendezvousPointId "RP_1234" -RendezvousPoint $RendezvousPoint
-    
+
     This example updates a network switch routing multicast rendezvous point with the specified configuration.
     
     .NOTES

@@ -16,26 +16,27 @@ function Set-MerakiNetworkWirelessAlternateManagementInterfaceIPv6 {
     A JSON formatted string of the management interface IPv6 configuration.
     
     .EXAMPLE
-    $ManagementInterfaceIPv6Config = '{
-        "addresses": [
-            {
-                "protocol": "ipv6",
-                "assignmentMode": "static",
-                "address": "2001:db8:3c4d:15::1",
-                "gateway": "fe80:db8:c15:c0:d0c::10ca:1d02",
-                "prefix": "2001:db8:3c4d:15::/64",
-                "nameservers": {
-                    "addresses": [
+    $ManagementInterfaceIPv6Config = [PSCustomObject]@{
+        addresses = @(
+            [PSCustomObject]@{
+                protocol = "ipv6"
+                assignmentMode = "static"
+                address = "2001:db8:3c4d:15::1"
+                gateway = "fe80:db8:c15:c0:d0c::10ca:1d02"
+                prefix = "2001:db8:3c4d:15::/64"
+                nameservers = @{
+                    addresses = @(
                         "2001:db8:3c4d:15::1",
                         "2001:db8:3c4d:15::1"
-                    ]
+                    )
                 }
             }
-        ]
-    }'
+        )
+    }
+
     $ManagementInterfaceIPv6Config = $ManagementInterfaceIPv6Config | ConvertTo-Json -Compress
     Set-MerakiNetworkWirelessAlternateManagementInterfaceIPv6 -AuthToken "your-api-token" -NetworkId "1234" -ManagementInterfaceIPv6Config $ManagementInterfaceIPv6Config
-    
+
     This example updates a network wireless alternate management interface IPv6 configuration with the specified configuration.
     
     .NOTES

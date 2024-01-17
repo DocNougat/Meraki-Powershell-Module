@@ -25,44 +25,39 @@ function Set-MerakiOrganizationConfigTemplateSwitchProfilePort {
     A JSON formatted string of switch profile port configuration.
     
     .EXAMPLE
-    $PortConfig = '{
-        "name": "My switch port",
-        "tags": [ "tag1", "tag2" ],
-        "enabled": true,
-        "poeEnabled": true,
-        "type": "access",
-        "vlan": 10,
-        "voiceVlan": 20,
-        "allowedVlans": "1,3,5-10",
-        "isolationEnabled": false,
-        "rstpEnabled": true,
-        "stpGuard": "disabled",
-        "linkNegotiation": "Auto negotiate",
-        "portScheduleId": "1234",
-        "udld": "Alert only",
-        "accessPolicyType": "Sticky MAC allow list",
-        "accessPolicyNumber": 2,
-        "macAllowList": [
-            "34:56:fe:ce:8e:b0",
-            "34:56:fe:ce:8e:b1"
-        ],
-        "stickyMacAllowList": [
-            "34:56:fe:ce:8e:b0",
-            "34:56:fe:ce:8e:b1"
-        ],
-        "stickyMacAllowListLimit": 5,
-        "stormControlEnabled": true,
-        "flexibleStackingEnabled": true,
-        "daiTrusted": false,
-        "profile": {
-            "enabled": false,
-            "id": "1284392014819",
-            "iname": "iname"
+    $PortConfig = [PSCustomObject]@{
+        name = "My switch port"
+        tags = @("tag1", "tag2")
+        enabled = $true
+        poeEnabled = $true
+        type = "access"
+        vlan = 10
+        voiceVlan = 20
+        allowedVlans = "1,3,5-10"
+        isolationEnabled = $false
+        rstpEnabled = $true
+        stpGuard = "disabled"
+        linkNegotiation = "Auto negotiate"
+        portScheduleId = "1234"
+        udld = "Alert only"
+        accessPolicyType = "Sticky MAC allow list"
+        accessPolicyNumber = 2
+        macAllowList = @("34:56:fe:ce:8e:b0", "34:56:fe:ce:8e:b1")
+        stickyMacAllowList = @("34:56:fe:ce:8e:b0", "34:56:fe:ce:8e:b1")
+        stickyMacAllowListLimit = 5
+        stormControlEnabled = $true
+        flexibleStackingEnabled = $true
+        daiTrusted = $false
+        profile = @{
+            enabled = $false
+            id = "1284392014819"
+            iname = "iname"
         }
-    }'
-    $PortConfig = $PortConfig | ConvertTo-Json
+    }
+
+    $PortConfig = $PortConfig | ConvertTo-Json -Compress
     Set-MerakiOrganizationConfigTemplateSwitchProfilePort -AuthToken "your-api-token" -OrganizationId "1234" -ConfigTemplateId "5678" -ProfileId "91011" -PortId "121314" -PortConfig $PortConfig
-    
+
     This example updates the switch profile port for the network switch in the Meraki organization with ID "1234", configuration template ID "5678", profile ID "91011", and port ID "121314" with the specified switch profile port configuration.
     
     .NOTES

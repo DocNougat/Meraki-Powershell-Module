@@ -16,17 +16,18 @@ function Invoke-MerakiNetworkWirelessAssignEthernetPortsProfile {
     A JSON formatted string of the profile assignment configuration.
     
     .EXAMPLE
-    $ProfileAssignment = '{
-        "serials": [
+    $ProfileAssignment = [PSCustomObject]@{
+        serials = @(
             "Q234-ABCD-0001",
             "Q234-ABCD-0002",
             "Q234-ABCD-0003"
-        ],
-        "profileId": "1001"
-    }'
+        )
+        profileId = "1001"
+    }
+
     $ProfileAssignment = $ProfileAssignment | ConvertTo-Json
     Invoke-MerakiNetworkWirelessAssignEthernetPortsProfile -AuthToken "your-api-token" -NetworkId "1234" -ProfileAssignment $ProfileAssignment
-    
+
     This example assigns a network wireless Ethernet ports profile with the specified configuration.
     
     .NOTES

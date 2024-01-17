@@ -16,16 +16,16 @@ function New-MerakiDeviceSwitchRoutingStaticRoute {
     A JSON formatted string of static route configuration.
     
     .EXAMPLE
-    $StaticRoute = '{
-        "name": "My route",
-        "subnet": "192.168.1.0/24",
-        "nextHopIp": "1.2.3.4",
-        "advertiseViaOspfEnabled": false,
-        "preferOverOspfRoutesEnabled": false
-    }'
+    $StaticRoute = [PSCustomObject]@{
+        name = "My route"
+        subnet = "192.168.1.0/24"
+        nextHopIp = "1.2.3.4"
+        advertiseViaOspfEnabled = $false
+        preferOverOspfRoutesEnabled = $false
+    }
     $StaticRoute = $StaticRoute | ConvertTo-Json
     New-MerakiDeviceSwitchRoutingStaticRoute -AuthToken "your-api-token" -DeviceSerial "1234-5678-9101" -StaticRoute $StaticRoute
-    
+
     This example creates a device switch routing static route with the specified configuration.
     
     .NOTES

@@ -16,14 +16,15 @@ function New-MerakiNetworkWebhooksWebhookTest {
     The JSON configuration for the webhook test to be created. Refer to the JSON schema for required parameters and their format.
 
     .EXAMPLE
-    $WebhookTestConfig = '{
-        "url": "https://www.example.com/path",
-        "sharedSecret": "shhh",
-        "payloadTemplateId": "wpt_00001",
-        "payloadTemplateName": "Payload Template",
-        "alertTypeId": "power_supply_down"
-    }'
-    $WebhookTestConfig = $WebhookTestConfig | ConvertTo-JSON -compress
+    $WebhookTestConfig = [PSCustomObject]@{
+        url = "https://www.example.com/path"
+        sharedSecret = "shhh"
+        payloadTemplateId = "wpt_00001"
+        payloadTemplateName = "Payload Template"
+        alertTypeId = "power_supply_down"
+    }
+
+    $WebhookTestConfig = $WebhookTestConfig | ConvertTo-JSON -Compress
 
     New-MerakiNetworkWebhooksWebhookTest -AuthToken "your-api-token" -NetworkId "L_123456789012345678" -WebhookTestConfig $WebhookTestConfig
 

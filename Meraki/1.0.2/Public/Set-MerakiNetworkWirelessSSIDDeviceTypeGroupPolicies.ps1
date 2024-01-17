@@ -12,7 +12,7 @@ function Set-MerakiNetworkWirelessSSIDDeviceTypeGroupPolicies {
     .PARAMETER NetworkId
     The ID of the network.
     
-    .PARAMETER Number
+    .PARAMETER SSIDNumber
     The number of the SSID.
     
     .PARAMETER GroupPolicies
@@ -51,7 +51,7 @@ function Set-MerakiNetworkWirelessSSIDDeviceTypeGroupPolicies {
             [parameter(Mandatory=$true)]
             [string]$NetworkId,
             [parameter(Mandatory=$true)]
-            [int]$Number,
+            [int]$SSIDNumber,
             [parameter(Mandatory=$true)]
             [string]$GroupPolicies
         )
@@ -62,7 +62,7 @@ function Set-MerakiNetworkWirelessSSIDDeviceTypeGroupPolicies {
                 "content-type" = "application/json; charset=utf-8"
             }
     
-            $url = "https://api.meraki.com/api/v1/networks/$NetworkId/wireless/ssids/$Number/deviceTypeGroupPolicies"
+            $url = "https://api.meraki.com/api/v1/networks/$NetworkId/wireless/ssids/$SSIDNumber/deviceTypeGroupPolicies"
     
             $body = $GroupPolicies
     

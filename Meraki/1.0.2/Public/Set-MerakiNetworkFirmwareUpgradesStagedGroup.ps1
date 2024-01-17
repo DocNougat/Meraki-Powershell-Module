@@ -19,27 +19,26 @@ function Set-MerakiNetworkFirmwareUpgradesStagedGroup {
     A string containing the firmware upgrade staged group configuration. The string should be in JSON format and should include the "name", "isDefault", and "assignedDevices" properties.
 
     .EXAMPLE
-    $config = '{
-        "name": "My Updated Staged Upgrade Group",
-        "isDefault": false,
-        "assignedDevices": {
-            "devices": [
-                {
-                    "name": "My Device",
-                    "serial": "Q2XX-XXXX-XXXX"
+    $config = [PSCustomObject]@{
+        name = "My Updated Staged Upgrade Group"
+        isDefault = $false
+        assignedDevices = [PSCustomObject]@{
+            devices = @(
+                [PSCustomObject]@{
+                    name = "My Device"
+                    serial = "Q2XX-XXXX-XXXX"
                 }
-            ],
-            "switchStacks": [
-                {
-                    "id": "123456789012345",
-                    "name": "My Switch Stack"
+            )
+            switchStacks = @(
+                [PSCustomObject]@{
+                    id = "123456789012345"
+                    name = "My Switch Stack"
                 }
-            ]
+            )
         }
-    }'
+    }
     $config = $config | ConvertTo-Json -Compress
     Set-MerakiNetworkFirmwareUpgradesStagedGroup -AuthToken "your-api-token" -NetworkId "L_123456789012345678" -GroupId "1234" -FirmwareUpgradeStagedGroupConfig $config
-
     This example updates the firmware upgrade staged group with ID "1234" for the Meraki network with ID "L_123456789012345678", changing the name to "My Updated Staged Upgrade Group", setting the group as non-default, and assigning the device with serial number "Q2XX-XXXX-XXXX" and the switch stack with ID "123456789012345" to the group.
 
     .NOTES

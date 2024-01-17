@@ -19,15 +19,14 @@ function Invoke-MerakiNetworkUninstallSmDeviceApps {
     A JSON formatted string of app IDs to be uninstalled.
     
     .EXAMPLE
-    $appIds = '{
-        "appIds": [
+    $appIds = @{
+        appIds = @(
             "1284392014819",
             "2983092129865"
-        ]
-    }'
-    $config = $config | ConvertTo-Json
+        )
+    } | ConvertTo-Json
+
     Invoke-MerakiNetworkUninstallSmDeviceApps -AuthToken "your-api-token" -NetworkId "1234" -DeviceId "5678" -AppIDs $appIds
-    
     This example uninstalls apps from the device with ID "5678" in the Meraki network with ID "1234" with the specified app IDs.
     
     .NOTES

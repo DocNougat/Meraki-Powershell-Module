@@ -16,16 +16,17 @@ function Set-MerakiNetworkCellularGatewayUplink {
     A string containing the uplink configuration. The string should be in JSON format and should include the properties as defined in the schema.
     
     .EXAMPLE
-    $UplinkConfig = '{
-        "bandwidthLimits": {
-            "limitUp": 1000,
-            "limitDown": 1000
+    $UplinkConfig = [PSCustomObject]@{
+        bandwidthLimits = @{
+            limitUp = 1000
+            limitDown = 1000
         }
-    }'
+    }
+
     $UplinkConfig = $UplinkConfig | ConvertTo-Json -Compress
-    
+
     Set-MerakiNetworkCellularGatewayUplink -AuthToken "your-api-token" -NetworkId "N_1234" -UplinkConfig $UplinkConfig
-    
+
     This example updates the uplink configuration for the Meraki network with ID "N_1234".
     
     .NOTES

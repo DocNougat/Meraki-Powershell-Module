@@ -16,17 +16,17 @@ function Invoke-MerakiDeviceCycleSwitchPorts {
     A JSON formatted string of the ports.
     
     .EXAMPLE
-    $Ports = '{
-        "ports": [
+    $Ports = [PSCustomObject]@{
+        ports = @(
             "1",
             "2-5",
             "1_MA-MOD-8X10G_1",
             "1_MA-MOD-8X10G_2-1_MA-MOD-8X10G_8"
-        ]
-    }'
+        )
+    }
     $Ports = $Ports | ConvertTo-Json -Compress
     Invoke-MerakiDeviceCycleSwitchPorts -AuthToken "your-api-token" -Serial "Q234-ABCD-0001" -Ports $Ports
-    
+
     This example cycles a device switch ports with the specified ports.
     
     .NOTES

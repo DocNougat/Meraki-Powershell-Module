@@ -19,29 +19,30 @@ function Set-MerakiNetworkWirelessSSIDTrafficShapingRules {
     A string containing the SSID traffic shaping rules configuration. The string should be in JSON format and should include the properties as defined in the schema.
 
     .EXAMPLE
-    $trafficShapingRules = '{
-        "trafficShapingEnabled": true,
-        "defaultRulesEnabled": true,
-        "rules": [
-            {
-                "definitions": [
-                    {
-                        "type": "host",
-                        "value": "google.com"
+    $trafficShapingRules = [PSCustomObject]@{
+        trafficShapingEnabled = $true
+        defaultRulesEnabled = $true
+        rules = @(
+            [PSCustomObject]@{
+                definitions = @(
+                    [PSCustomObject]@{
+                        type = "host"
+                        value = "google.com"
                     }
-                ],
-                "perClientBandwidthLimits": {
-                    "settings": "custom",
-                    "bandwidthLimits": {
-                        "limitUp": 1000,
-                        "limitDown": 1000
+                )
+                perClientBandwidthLimits = [PSCustomObject]@{
+                    settings = "custom"
+                    bandwidthLimits = [PSCustomObject]@{
+                        limitUp = 1000
+                        limitDown = 1000
                     }
-                },
-                "dscpTagValue": 0,
-                "pcpTagValue": 0
+                }
+                dscpTagValue = 0
+                pcpTagValue = 0
             }
-        ]
-    }'
+        )
+    }
+
     $trafficShapingRules = $trafficShapingRules | ConvertTo-Json -Compress
     Set-MerakiNetworkWirelessSSIDTrafficShapingRules -AuthToken "your-api-token" -NetworkId "your-network-id" -SSIDNumber "1" -TrafficShapingRules $trafficShapingRules
 

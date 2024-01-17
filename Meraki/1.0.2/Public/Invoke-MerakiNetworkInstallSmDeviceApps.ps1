@@ -19,16 +19,16 @@ function Invoke-MerakiNetworkInstallSmDeviceApps {
     A JSON formatted string of app configuration.
     
     .EXAMPLE
-    $config = '{
-        "appIds": [
+    $config = [PSCustomObject]@{
+        appIds = @(
             "1284392014819",
             "2983092129865"
-        ],
-        "force": false
-    }'
+        )
+        force = $false
+    }
+
     $config = $config | ConvertTo-Json
     Invoke-MerakiNetworkInstallSmDeviceApps -AuthToken "your-api-token" -NetworkId "1234" -DeviceId "5678" -AppConfig $config
-    
     This example installs apps on the device with ID "5678" in the Meraki network with ID "1234" with the specified app configuration.
     
     .NOTES

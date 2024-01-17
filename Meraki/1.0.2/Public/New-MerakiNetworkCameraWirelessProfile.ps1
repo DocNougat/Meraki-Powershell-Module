@@ -16,18 +16,19 @@ function New-MerakiNetworkCameraWirelessProfile {
     A string containing the wireless profile configuration. The string should be in JSON format and should include the properties as defined in the schema.
     
     .EXAMPLE
-    $WirelessProfileConfig = '{
-        "name": "wireless profile A",
-        "ssid": {
-            "name": "ssid test",
-            "authMode": "8021x-radius",
-            "encryptionMode": "wpa-eap"
+    $WirelessProfileConfig = [PSCustomObject]@{
+        name = "wireless profile A"
+        ssid = [PSCustomObject]@{
+            name = "ssid test"
+            authMode = "8021x-radius"
+            encryptionMode = "wpa-eap"
         }
-    }'
+    }
+
     $WirelessProfileConfig = $WirelessProfileConfig | ConvertTo-Json -Compress
-    
+
     New-MerakiNetworkCameraWirelessProfile -AuthToken "your-api-token" -NetworkId "N_1234" -WirelessProfileConfig $WirelessProfileConfig
-    
+
     This example creates a new camera wireless profile for the Meraki network with ID "N_1234".
     
     .NOTES

@@ -16,27 +16,28 @@ function Set-MerakiDeviceManagementInterface {
     A JSON string containing the management interface configuration. The JSON string should conform to the schema definition provided by the Meraki Dashboard API.
 
     .EXAMPLE
-    $InterfaceConfig = '{
-        "wan1": {
-            "usingStaticIp": true,
-            "staticIp": "192.168.1.100",
-            "staticSubnetMask": "255.255.255.0",
-            "staticGatewayIp": "192.168.1.1",
-            "vlan": 1,
-            "staticDns": ["8.8.8.8", "8.8.4.4"],
-            "wanEnabled": "enabled"
-        },
-        "wan2": {
-            "usingStaticIp": true,
-            "staticIp": "192.168.2.100",
-            "staticSubnetMask": "255.255.255.0",
-            "staticGatewayIp": "192.168.2.1",
-            "vlan": 2,
-            "staticDns": ["8.8.8.8", "8.8.4.4"],
-            "wanEnabled": "enabled"
+    $InterfaceConfig = [PSCustomObject]@{
+        wan1 = [PSCustomObject]@{
+            usingStaticIp = $true
+            staticIp = "192.168.1.100"
+            staticSubnetMask = "255.255.255.0"
+            staticGatewayIp = "192.168.1.1"
+            vlan = 1
+            staticDns = @("8.8.8.8", "8.8.4.4")
+            wanEnabled = "enabled"
         }
-    }'
-    $InterfaceConfig = $InterfaceConfig | ConvertTo-JSON -compress
+        wan2 = [PSCustomObject]@{
+            usingStaticIp = $true
+            staticIp = "192.168.2.100"
+            staticSubnetMask = "255.255.255.0"
+            staticGatewayIp = "192.168.2.1"
+            vlan = 2
+            staticDns = @("8.8.8.8", "8.8.4.4")
+            wanEnabled = "enabled"
+        }
+    }
+
+    $InterfaceConfig = $InterfaceConfig | ConvertTo-Json -Compress
 
     Set-MerakiDeviceManagementInterface -AuthToken "your-api-token" -SerialNumber "Q2XX-XXXX-XXXX" -InterfaceConfig $InterfaceConfig
 

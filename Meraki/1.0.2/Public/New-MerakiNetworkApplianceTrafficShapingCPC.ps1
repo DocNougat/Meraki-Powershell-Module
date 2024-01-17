@@ -16,15 +16,14 @@ function New-MerakiNetworkApplianceTrafficShapingCPC {
     A string containing the custom performance class configuration. The string should be in JSON format and should include the "name", "maxLatency", "maxJitter", and "maxLossPercentage" properties.
 
     .EXAMPLE
-    $config = '{
-        "name": "myCustomPerformanceClass",
-        "maxLatency": 100,
-        "maxJitter": 100,
-        "maxLossPercentage": 5
-    }'
+    $config = [PSCustomObject]@{
+        name = "myCustomPerformanceClass"
+        maxLatency = 100
+        maxJitter = 100
+        maxLossPercentage = 5
+    }
     $config = $config | ConvertTo-Json -Compress
     New-MerakiNetworkApplianceTrafficShapingCPC -AuthToken "your-api-token" -NetworkId "your-network-id" -PerformanceClassConfig $config
-
     This example creates a new custom performance class for traffic shaping in the Meraki network with ID "your-network-id" using the specified custom performance class configuration.
 
     .NOTES

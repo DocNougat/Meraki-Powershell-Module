@@ -19,32 +19,20 @@ function Set-MerakiNetworkApplianceSSID {
     A string containing the SSID configuration. The string should be in JSON format and should include the "defaultVlanId", "authMode", "encryptionMode", "name", "psk", "wpaEncryptionMode", "enabled", "visible", "dhcpEnforcedDeauthentication", "dot11w", and "radiusServers" properties.
 
     .EXAMPLE
-    $config = '{
-        "name": "My SSID",
-        "enabled": true,
-        "defaultVlanId": 1,
-        "authMode": "8021x-radius",
-        "psk": "psk",
-        "radiusServers": [
-            {
-                "host": "0.0.0.0",
-                "port": 1000,
-                "secret": "secret"
-            }
-        ],
-        "encryptionMode": "wpa",
-        "wpaEncryptionMode": "WPA2 only",
-        "visible": true,
-        "dhcpEnforcedDeauthentication": { "enabled": true },
-        "dot11w": {
-            "enabled": true,
-            "required": true
-        }
-    }'
-    $config = $config | ConvertTo-Json -Compress
-    Set-MerakiNetworkApplianceSSID -AuthToken "your-api-token" -NetworkId "your-network-id" -SSIDNumber 1 -SSIDConfig $config
+    $config = [PSCustomObject]@{
+        name = "My Test SSID"
+        enabled = $true
+        authMode = "psk"
+        psk = "pskpasswordforwirelessnetwork"
+        encryptionMode = "wpa"
+        wpaEncryptionMode = "WPA2 only"
+        visible = $true
+    }
 
-    This example updates the SSID configuration for the Meraki network with ID "your-network-id" and SSID number 1, using the specified SSID configuration.
+    $config = $config | ConvertTo-Json -Compress
+    Set-MerakiNetworkApplianceSSID -AuthToken "your-auth-token" -NetworkId "your-network-id" -SSIDNumber 3 -SSIDConfig $config
+
+    This example updates the SSID configuration for the Meraki network with ID "your-network-id" and SSID number 3, using the specified SSID configuration.
 
     .NOTES
     The function requires the "Invoke-RestMethod" cmdlet to be available.

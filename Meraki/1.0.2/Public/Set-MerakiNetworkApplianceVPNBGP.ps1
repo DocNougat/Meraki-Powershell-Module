@@ -16,25 +16,26 @@ function Set-MerakiNetworkApplianceVPNBGP {
     The JSON configuration for the VPN BGP settings to be updated. Refer to the JSON schema for required parameters and their format.
     
     .EXAMPLE
-    $BGPConfig = '{
-        "enabled": true,
-        "asNumber": 64515,
-        "ibgpHoldTimer": 120,
-        "neighbors": [
-            {
-                "ip": "10.10.10.22",
-                "remoteAsNumber": 64343,
-                "receiveLimit": 120,
-                "allowTransit": true,
-                "ebgpHoldTimer": 180,
-                "ebgpMultihop": 2
+    $BGPConfig = [PSCustomObject]@{
+        enabled = $true
+        asNumber = 64515
+        ibgpHoldTimer = 120
+        neighbors = @(
+            [PSCustomObject]@{
+                ip = "10.10.10.22"
+                remoteAsNumber = 64343
+                receiveLimit = 120
+                allowTransit = $true
+                ebgpHoldTimer = 180
+                ebgpMultihop = 2
             }
-        ]
-    }'
-    $BGPConfig = $BGPConfig | ConvertTo-JSON -compress
-    
+        )
+    }
+
+    $BGPConfig = $BGPConfig | ConvertTo-Json -Compress
+
     Set-MerakiNetworkApplianceVPNBGP -AuthToken "your-api-token" -NetworkId "L_9817349871234" -BGPConfig $BGPConfig
-    
+
     This example updates the VPN BGP settings for the specified network.
     
     .NOTES

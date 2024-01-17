@@ -19,11 +19,12 @@ function Set-MerakiOrganizationSAMLIdp {
     The JSON configuration for the SAML IdP to be updated. Refer to the JSON schema for required parameters and their format.
 
     .EXAMPLE
-    $SAMLIdpConfig = '{
-        "x509certSha1Fingerprint": "00:11:22:33:44:55:66:77:88:99:00:11:22:33:44:55:66:77:88:99",
-        "sloLogoutUrl": "https://somewhere.com"
-    }'
-    $SAMLIdpConfig = $SAMLIdpConfig | ConvertTo-JSON -compress
+    $SAMLIdpConfig = [PSCustomObject]@{
+        x509certSha1Fingerprint = "00:11:22:33:44:55:66:77:88:99:00:11:22:33:44:55:66:77:88:99"
+        sloLogoutUrl = "https://somewhere.com"
+    }
+
+    $SAMLIdpConfig = $SAMLIdpConfig | ConvertTo-Json -Compress
 
     Set-MerakiOrganizationSAMLIdp -AuthToken "your-api-token" -OrganizationId "1234567890" -IdpId "5678" -SAMLIdpConfig $SAMLIdpConfig
 

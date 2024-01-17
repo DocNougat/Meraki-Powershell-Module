@@ -16,21 +16,20 @@ function New-MerakiNetworkFirmwareUpgradesRollback {
     A string containing the firmware rollback configuration. The string should be in JSON format and should include the "product", "time", "toVersion", "reasons", "category", and "comment" properties.
 
     .EXAMPLE
-    $config = '{
-        "product": "wireless",
-        "time": "2022-01-01T01:00:00Z",
-        "toVersion": {
-            "MR": "4.0",
-            "MS": "11.0",
-            "MX": "15.0",
-            "MV": "4.0"
-        },
-        "reasons": [
-            "testing"
-        ],
-        "category": "testing",
-        "comment": "Rolling back to test new firmware"
-    }'
+    $config = [PSCustomObject]@{
+        "product" = "wireless"
+        "time" = "2022-01-01T01:00:00Z"
+        "toVersion" = @{
+            "MR" = "4.0"
+            "MS" = "11.0"
+            "MX" = "15.0"
+            "MV" = "4.0"
+        }
+        "reasons" = @("testing")
+        "category" = "testing"
+        "comment" = "Rolling back to test new firmware"
+    }
+
     $config = $config | ConvertTo-Json -Compress
     New-MerakiNetworkFirmwareUpgradesRollback -AuthToken "your-api-token" -NetworkId "L_123456789012345678" -FirmwareRollbackConfig $config
 

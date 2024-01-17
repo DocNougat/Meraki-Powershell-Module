@@ -16,15 +16,14 @@ function Invoke-MerakiNetworkClaimDevices {
     A string containing a JSON array of device serial numbers to claim.
 
     .EXAMPLE
-    $serials = @{
-        "serials" = '[
-            "Q2HP-XXXX-XXXX", 
+    $serials = [PSCustomObject]@{
+        serials = @(
+            "Q2HP-XXXX-XXXX",
             "Q2HP-YYYY-YYYY"
-        ]'
-    } 
-    $serials = $serials | ConvertTo-Json -Depth 3 -Compress
-    Invoke-MerakiNetworkClaimDevices -AuthToken "your-api-token" -NetworkId "L_123456789012345678" -DeviceSerials $serials
+        )
+    } | ConvertTo-Json -Compress
 
+    Invoke-MerakiNetworkClaimDevices -AuthToken "your-api-token" -NetworkId "L_123456789012345678" -DeviceSerials $serials
     This example claims two devices with serial numbers "Q2HP-XXXX-XXXX" and "Q2HP-YYYY-YYYY" for the Meraki network with ID "L_123456789012345678".
 
     .NOTES

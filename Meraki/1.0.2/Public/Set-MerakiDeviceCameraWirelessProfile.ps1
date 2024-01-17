@@ -16,17 +16,18 @@ function Set-MerakiDeviceCameraWirelessProfile {
     A string containing the wireless profile configuration. The string should be in JSON format and should include the properties as defined in the schema.
     
     .EXAMPLE
-    $WirelessProfileConfig = '{
-        "ids": {
-            "primary": "3",
-            "secondary": "2",
-            "backup": "1"
+    $WirelessProfileConfig = [PSCustomObject]@{
+        ids = @{
+            primary = "3"
+            secondary = "2"
+            backup = "1"
         }
-    }'
+    }
+
     $WirelessProfileConfig = $WirelessProfileConfig | ConvertTo-Json -Compress
-    
+
     Set-MerakiDeviceCameraWirelessProfile -AuthToken "your-api-token" -Serial "Q2GV-ABCD-1234" -WirelessProfileConfig $WirelessProfileConfig
-    
+
     This example updates the camera wireless profile for the Meraki device with serial number "Q2GV-ABCD-1234".
     
     .NOTES

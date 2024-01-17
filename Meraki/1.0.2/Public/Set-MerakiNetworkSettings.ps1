@@ -16,23 +16,23 @@ function Set-MerakiNetworkSettings {
     The JSON configuration for the network settings to be updated. Refer to the JSON schema for required parameters and their format.
 
     .EXAMPLE
-    $NetworkConfig = '{
-        "localStatusPageEnabled": true,
-        "remoteStatusPageEnabled": true,
-        "localStatusPage": {
-            "authentication": {
-                "password": "mypassword",
-                "enabled": true
+    $NetworkConfig = [PSCustomObject]@{
+        localStatusPageEnabled = $true
+        remoteStatusPageEnabled = $true
+        localStatusPage = @{
+            authentication = @{
+                password = "mypassword"
+                enabled = $true
             }
-        },
-        "namedVlans": {
-            "enabled": true
-        },
-        "securePort": {
-            "enabled": true
         }
-    }'
-    $NetworkConfig = $NetworkConfig | ConvertTo-JSON -compress
+        namedVlans = @{
+            enabled = $true
+        }
+        securePort = @{
+            enabled = $true
+        }
+    }
+    $NetworkConfig = $NetworkConfig | ConvertTo-JSON -Compress
 
     Set-MerakiNetworkSettings -AuthToken "your-api-token" -NetworkId "L_123456789012345678" -NetworkConfig $NetworkConfig
 

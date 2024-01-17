@@ -16,11 +16,12 @@ function Set-MerakiOrganizationAdmin {
     The JSON configuration for the administrator to be updated. Refer to the JSON schema for required parameters and their format.
 
     .EXAMPLE
-    $adminInfo = '{
-        "name": "Updated Admin User",
-        "orgAccess": "full"
-    }'
-    $adminInfo = $adminInfo | ConvertTo-JSON -compress
+    $adminInfo = [PSCustomObject]@{
+        name = "Updated Admin User"
+        orgAccess = "full"
+    }
+
+    $adminInfo = $adminInfo | ConvertTo-JSON -Compress
 
     Set-MerakiOrganizationAdmin -AuthToken "your-api-token" -AdminId "1234567890" -AdminInfo $adminInfo
 

@@ -16,15 +16,14 @@ function New-MerakiNetworkPiiRequest {
     The JSON configuration for the PII request to be created. Refer to the JSON schema for required parameters and their format.
 
     .EXAMPLE
-    $PIIRequest = '{
-        "type": "delete",
-        "datasets": [ "usage", "events" ],
-        "mac": "00:77:00:77:00:77"
-    }'
-    $PIIRequest = $PIIRequest | ConvertTo-JSON -compress
+    $PIIRequest = [PSCustomObject]@{
+        type = "delete"
+        datasets = @("usage", "events")
+        mac = "00:77:00:77:00:77"
+    }
+    $PIIRequest = ConvertTo-Json -Compress
 
     New-MerakiNetworkPiiRequest -AuthToken "your-api-token" -NetworkId "L_1234567890" -PIIRequest $PIIRequest
-
     This example creates a new Meraki network PII request for the network with ID "L_1234567890" to delete the datasets "usage" and "events" related to the MAC address "00:77:00:77:00:77".
 
     .NOTES

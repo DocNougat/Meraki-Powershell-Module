@@ -16,24 +16,25 @@ function Set-MerakiNetworkSwitchACLs {
     A JSON formatted string of ACL rules.
     
     .EXAMPLE
-    $ACLRules = '{
-        "rules": [
-            {
-                "comment": "Deny SSH",
-                "policy": "deny",
-                "ipVersion": "ipv4",
-                "protocol": "tcp",
-                "srcCidr": "10.1.10.0/24",
-                "srcPort": "any",
-                "dstCidr": "172.16.30/24",
-                "dstPort": "22",
-                "vlan": "10"
+    $ACLRules = [PSCustomObject]@{
+        rules = @(
+            [PSCustomObject]@{
+                comment = "Deny SSH"
+                policy = "deny"
+                ipVersion = "ipv4"
+                protocol = "tcp"
+                srcCidr = "10.1.10.0/24"
+                srcPort = "any"
+                dstCidr = "172.16.30/24"
+                dstPort = "22"
+                vlan = "10"
             }
-        ]
-    }'
+        )
+    }
+
     $ACLRules = $ACLRules | ConvertTo-Json
     Set-MerakiNetworkSwitchACLs -AuthToken "your-api-token" -NetworkId "1234" -ACLRules $ACLRules
-    
+
     This example updates the access control lists for the network switch in the Meraki network with ID "1234" with the specified ACL rules.
     
     .NOTES

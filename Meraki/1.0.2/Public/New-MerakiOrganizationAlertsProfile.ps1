@@ -16,24 +16,24 @@ function New-MerakiOrganizationAlertsProfile {
     The ID of the Meraki organization for which you want to create a new alerts profile.
 
     .EXAMPLE
-    $AlertProfileConfig = '{
-        "description": "Example alert profile",
-        "type": "wanUtilization",
-        "networkTags": ["tag1", "tag2"],
-        "alertCondition": {
-            "bit_rate_bps": 1000000,
-            "duration": 60,
-            "window": 3600
-        },
-        "recipients": {
-            "emails": ["alerts@example.com"],
-            "httpServerIds": []
+    $AlertProfileConfig = [PSCustomObject]@{
+        description = "Example alert profile"
+        type = "wanUtilization"
+        networkTags = @("tag1", "tag2")
+        alertCondition = @{
+            bit_rate_bps = 1000000
+            duration = 60
+            window = 3600
         }
-    }'
-    $AlertProfileConfig = $AlertProfileConfig | ConvertTo-JSON -compress
+        recipients = @{
+            emails = @("alerts@example.com")
+            httpServerIds = @()
+        }
+    }
 
-    New-MerakiOrganizationAlertsProfile -AuthToken "your-api-token" -ProfileName "New Alerts Profile" -AlertConfig $alertConfig -OrganizationId "1234567890"
+    $AlertProfileConfig = $AlertProfileConfig | ConvertTo-Json -Compress
 
+    New-MerakiOrganizationAlertsProfile -AuthToken "your-api-token" -AlertProfileConfig $AlertProfileConfig -OrganizationId "1234567890"
     This example creates a new alerts profile with name "New Alerts Profile" for the Meraki organization with ID "1234567890". The alerts profile is configured to monitor networks with tags "tag1" and "tag2" for WAN utilization exceeding 1 Mbps for 60 seconds within a 1-hour window. Alerts will be sent to "alerts@example.com".
 
     .NOTES

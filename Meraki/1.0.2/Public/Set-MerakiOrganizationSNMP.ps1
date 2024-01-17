@@ -16,14 +16,15 @@ function Set-MerakiOrganizationSNMP {
     The JSON configuration for the SNMP settings to be updated. Refer to the JSON schema for required parameters and their format.
 
     .EXAMPLE
-    $SNMPConfig = '{
-        "v2cEnabled": false,
-        "v3Enabled": true,
-        "v3AuthMode": "SHA",
-        "v3PrivMode": "AES128",
-        "peerIps": [ "123.123.123.1" ]
-    }'
-    $SNMPConfig = $SNMPConfig | ConvertTo-JSON -compress
+    $SNMPConfig = [PSCustomObject]@{
+        v2cEnabled = $false
+        v3Enabled = $true
+        v3AuthMode = "SHA"
+        v3PrivMode = "AES128"
+        peerIps = @("123.123.123.1")
+    }
+
+    $SNMPConfig = $SNMPConfig | ConvertTo-JSON -Compress
 
     Set-MerakiOrganizationSnmp -AuthToken "your-api-token" -OrganizationId "234567" -SNMPConfig $SNMPConfig
 

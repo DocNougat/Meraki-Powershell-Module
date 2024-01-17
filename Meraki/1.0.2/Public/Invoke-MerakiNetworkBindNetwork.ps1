@@ -16,11 +16,12 @@ function Invoke-MerakiNetworkBindNetwork {
     A JSON string containing the bind configuration. The JSON string should conform to the schema definition provided by the Meraki Dashboard API.
 
     .EXAMPLE
-    $BindConfig = '{
-        "configTemplateId": "N_123456789012345678",
-        "autoBind": true
-    }'
-    $BindConfig = $BindConfig | ConvertTo-JSON -compress
+    $BindConfig = [PSCustomObject]@{
+        configTemplateId = "N_123456789012345678"
+        autoBind = $true
+    }
+
+    $BindConfig = $BindConfig | ConvertTo-Json -Compress
 
     Invoke-MerakiNetworkBindNetwork -AuthToken "your-api-token" -NetworkId "L_123456789012345678" -BindConfig $BindConfig
 

@@ -19,36 +19,37 @@ function Set-MerakiNetworkWirelessSSIDVPN {
     A string containing the SSID VPN configuration. The string should be in JSON format and should include the properties as defined in the schema.
 
     .EXAMPLE
-    $vpnConfig = '{
-        "concentrator": {
-            "networkId": "N_123",
-            "vlanId": 44,
-            "name": "some concentrator name"
-        },
-        "failover": {
-            "requestIp": "1.1.1.1",
-            "heartbeatInterval": 10,
-            "idleTimeout": 30
-        },
-        "splitTunnel": {
-            "enabled": true,
-            "rules": [
-                {
-                    "protocol": "Any",
-                    "destCidr": "1.1.1.1/32",
-                    "destPort": "any",
-                    "policy": "allow",
-                    "comment": "split tunnel rule 1"
-                },
-                {
-                    "destCidr": "foo.com",
-                    "destPort": "any",
-                    "policy": "deny",
-                    "comment": "split tunnel rule 2"
-                }
-            ]
+    $vpnConfig = [PSCustomObject]@{
+        concentrator = @{
+            networkId = "N_123"
+            vlanId = 44
+            name = "some concentrator name"
         }
-    }'
+        failover = @{
+            requestIp = "1.1.1.1"
+            heartbeatInterval = 10
+            idleTimeout = 30
+        }
+        splitTunnel = @{
+            enabled = $true
+            rules = @(
+                @{
+                    protocol = "Any"
+                    destCidr = "1.1.1.1/32"
+                    destPort = "any"
+                    policy = "allow"
+                    comment = "split tunnel rule 1"
+                },
+                @{
+                    destCidr = "foo.com"
+                    destPort = "any"
+                    policy = "deny"
+                    comment = "split tunnel rule 2"
+                }
+            )
+        }
+    }
+
     $vpnConfig = $vpnConfig | ConvertTo-Json -Compress
     Set-MerakiNetworkWirelessSSIDVPN -AuthToken "your-api-token" -NetworkId "your-network-id" -SSIDNumber "1" -VPNConfig $vpnConfig
 

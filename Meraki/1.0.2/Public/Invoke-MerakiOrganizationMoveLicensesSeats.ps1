@@ -16,14 +16,14 @@ function Invoke-MerakiOrganizationMoveLicensesSeats {
     A string containing the license move configuration. The string should be in JSON format and should include the following properties: "destOrganizationId", "licenseIds", and "seatCount".
 
     .EXAMPLE
-    $licenseMove = '{
-        "destOrganizationId": "2930418",
-        "licenseIds": [ "123", "456" ],
-        "seatCount": 10
-    }'
-    $licenseMove = $licenseMove | ConvertTo-Json -Compress
-    Invoke-MerakiOrganizationMoveLicensesSeats -AuthToken "your-api-token" -OrganizationId "234567" -LicenseMove $licenseMove
+    $licenseMove = [PSCustomObject]@{
+        destOrganizationId = "2930418"
+        licenseIds = @("123", "456")
+        seatCount = 10
+    }
+    $licenseMove = ConvertTo-Json -Compress
 
+    Invoke-MerakiOrganizationMoveLicensesSeats -AuthToken "your-api-token" -OrganizationId "234567" -LicenseMove $licenseMove
     This example moves 10 license seats from the licenses with IDs "123" and "456" from the Meraki organization with ID "234567" to the Meraki organization with ID "2930418".
 
     .NOTES

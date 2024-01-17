@@ -16,14 +16,15 @@ function Invoke-MerakiDeviceGenerateCameraSnapshot {
     An optional string containing the snapshot configuration. The string should be in JSON format and should include the properties as defined in the schema.
     
     .EXAMPLE
-    $SnapshotConfig = '{
-        "timestamp": "2021-04-30T15:18:08Z",
-        "fullframe": false
-    }'
+    $SnapshotConfig = [PSCustomObject]@{
+        timestamp = "2021-04-30T15:18:08Z"
+        fullframe = $false
+    }
+
     $SnapshotConfig = $SnapshotConfig | ConvertTo-Json -Compress
-    
+
     Invoke-MerakiDeviceGenerateCameraSnapshot -AuthToken "your-api-token" -Serial "Q2GV-ABCD-1234" -SnapshotConfig $SnapshotConfig
-    
+
     This example generates a camera snapshot for the Meraki device with serial number "Q2GV-ABCD-1234".
     
     .NOTES

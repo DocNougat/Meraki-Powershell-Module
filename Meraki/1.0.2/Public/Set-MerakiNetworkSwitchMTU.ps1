@@ -16,29 +16,30 @@ function Set-MerakiNetworkSwitchMTU {
     A JSON formatted string of MTU configuration.
     
     .EXAMPLE
-    $MTUConfig = '{
-        "defaultMtuSize": 9578,
-        "overrides": [
-            {
-                "switches": [
+    $MTUConfig = [PSCustomObject]@{
+        defaultMtuSize = 9578
+        overrides = @(
+            @{
+                switches = @(
                     "Q234-ABCD-0001",
                     "Q234-ABCD-0002",
                     "Q234-ABCD-0003"
-                ],
-                "mtuSize": 1500
+                )
+                mtuSize = 1500
             },
-            {
-                "switchProfiles": [
+            @{
+                switchProfiles = @(
                     "1284392014819",
                     "2983092129865"
-                ],
-                "mtuSize": 1600
+                )
+                mtuSize = 1600
             }
-        ]
-    }'
+        )
+    }
+
     $MTUConfig = $MTUConfig | ConvertTo-Json -Compress
     Set-MerakiNetworkSwitchMTU -AuthToken "your-api-token" -NetworkId "1234" -MTUConfig $MTUConfig
-    
+
     This example updates the MTU for the network switch in the Meraki network with ID "1234" with the specified MTU configuration.
     
     .NOTES

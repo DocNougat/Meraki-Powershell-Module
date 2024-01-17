@@ -16,17 +16,17 @@ function Invoke-MerakiOrganizationCloneSwitchDevices {
     A JSON formatted string of clone configuration.
     
     .EXAMPLE
-    $CloneConfig = '{
-        "sourceSerial": "Q234-ABCD-5678",
-        "targetSerials": [
+    $CloneConfig = [PSCustomObject]@{
+        sourceSerial = "Q234-ABCD-5678"
+        targetSerials = @(
             "Q234-ABCD-0001",
             "Q234-ABCD-0002",
             "Q234-ABCD-0003"
-        ]
-    }'
+        )
+    }
     $CloneConfig = $CloneConfig | ConvertTo-Json -Compress
     Invoke-MerakiOrganizationCloneSwitchDevices -AuthToken "your-api-token" -OrganizationId "1234" -CloneConfig $CloneConfig
-    
+
     This example clones the configuration of the source switch with serial number "Q234-ABCD-5678" to the target switches with serial numbers "Q234-ABCD-0001", "Q234-ABCD-0002", and "Q234-ABCD-0003" in the Meraki organization with ID "1234".
     
     .NOTES

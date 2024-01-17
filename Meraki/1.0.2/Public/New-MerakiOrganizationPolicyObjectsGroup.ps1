@@ -16,11 +16,12 @@ function New-MerakiOrganizationPolicyObjectsGroup {
     The JSON configuration for the new policy object group to be created. Refer to the JSON schema for required parameters and their format.
 
     .EXAMPLE
-    $PolicyObjectsGroupConfig = '{
-        "name": "Web Servers - Datacenter 10",
-        "objectIds": []
-    }'
-    $PolicyObjectsGroupConfig = $PolicyObjectsGroupConfig | ConvertTo-JSON -compress
+    $PolicyObjectsGroupConfig = [PSCustomObject]@{
+        name = "Web Servers - Datacenter 10"
+        objectIds = @()
+    }
+
+    $PolicyObjectsGroupConfig = $PolicyObjectsGroupConfig | ConvertTo-JSON -Compress
 
     New-MerakiOrganizationPolicyObjectsGroup -AuthToken "your-api-token" -OrganizationId "1234567890" -PolicyObjectsGroupConfig $PolicyObjectsGroupConfig
 

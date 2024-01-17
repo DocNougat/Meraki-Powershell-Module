@@ -16,19 +16,18 @@ function New-MerakiNetworkWebhooksPayloadTemplate {
     The JSON configuration for the payload template to be created. Refer to the JSON schema for required parameters and their format.
 
     .EXAMPLE
-    $PayloadTemplateConfig = '{
-        "name": "Custom Template",
-        "body": "{\"event_type\":\"{{alertTypeId}}\",\"client_payload\":{\"text\":\"{{alertData}}\"}}",
-        "headers": [
-            {
-                "name": "Authorization",
-                "template": "Bearer {{sharedSecret}}"
+    $PayloadTemplateConfig = [PSCustomObject]@{
+        name = "Custom Template"
+        body = "{\"event_type\":\"{{alertTypeId}}\",\"client_payload\":{\"text\":\"{{alertData}}\"}}"
+        headers = @(
+            @{
+                name = "Authorization"
+                template = "Bearer {{sharedSecret}}"
             }
-        ],
-        "bodyFile": "Qm9keSBGaWxl",
-        "headersFile": "SGVhZGVycyBGaWxl"
-    }'
-    $PayloadTemplateConfig = $PayloadTemplateConfig | ConvertTo-JSON -compress
+        )
+        bodyFile = "Qm9keSBGaWxl"
+        headersFile = "SGVhZGVycyBGaWxl"
+    } | ConvertTo-Json -Compress
 
     New-MerakiNetworkWebhooksPayloadTemplate -AuthToken "your-api-token" -NetworkId "L_123456789012345678" -PayloadTemplateConfig $PayloadTemplateConfig
 

@@ -16,22 +16,22 @@ function Set-MerakiNetworkApplianceTrafficShapingUplinkBandwidth {
     A string containing the uplink bandwidth configuration. The string should be in JSON format and should include the "bandwidthLimits" property with "wan1", "wan2", and "cellular" sub-properties.
 
     .EXAMPLE
-    $config = '{
-        "bandwidthLimits": {
-            "wan1": {
-                "limitUp": 1000,
-                "limitDown": 1000
-            },
-            "wan2": {
-                "limitUp": 1000,
-                "limitDown": 1000
-            },
-            "cellular": {
-                "limitUp": 1000,
-                "limitDown": 1000
+    $config = [PSCustomObject]@{
+        bandwidthLimits = [PSCustomObject]@{
+            wan1 = [PSCustomObject]@{
+                limitUp = 1000
+                limitDown = 1000
+            }
+            wan2 = [PSCustomObject]@{
+                limitUp = 1000
+                limitDown = 1000
+            }
+            cellular = [PSCustomObject]@{
+                limitUp = 1000
+                limitDown = 1000
             }
         }
-    }'
+    }
     $config = $config | ConvertTo-Json -Compress
     Set-MerakiNetworkApplianceTrafficShapingUplinkBandwidth -AuthToken "your-api-token" -NetworkId "your-network-id" -UplinkBandwidthConfig $config
 

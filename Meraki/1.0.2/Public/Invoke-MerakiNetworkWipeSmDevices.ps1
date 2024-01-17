@@ -16,15 +16,14 @@ function Invoke-MerakiNetworkWipeSmDevices {
     A JSON formatted string of wipe configuration.
     
     .EXAMPLE
-    $config = '{
-        "wifiMac": "00:11:22:33:44:55",
-        "id": "1284392014819",
-        "serial": "Q234-ABCD-5678",
-        "pin": 123456
-    }'
+    $config = [PSCustomObject]@{
+        wifiMac = "00:11:22:33:44:55"
+        id = "1284392014819"
+        serial = "Q234-ABCD-5678"
+        pin = 123456
+    }
     $config = $config | ConvertTo-Json
     Invoke-MerakiNetworkWipeSmDevices -AuthToken "your-api-token" -NetworkId "1234" -WipeConfig $config
-    
     This example wipes devices from the Meraki network with ID "1234" with the specified wipe configuration.
     
     .NOTES

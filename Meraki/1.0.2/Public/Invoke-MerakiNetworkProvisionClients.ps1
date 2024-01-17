@@ -16,37 +16,38 @@ function Invoke-MerakiNetworkProvisionClients {
     A string containing the client configuration. The string should be in JSON format and should include the "clients" property, as well as the configuration for each client.
 
     .EXAMPLE
-    $config = '{
-        "clients": [
-            {
-                "mac": "00:11:22:33:44:55",
-                "name": "Client1",
-                "devicePolicy": "Allowed",
-                "policiesBySsid": {
-                    "0": {
-                        "devicePolicy": "Group policy",
-                        "groupPolicyId": "123456"
-                    },
-                    "1": {
-                        "devicePolicy": "Blocked"
+    $config = [PSCustomObject]@{
+        clients = @(
+            [PSCustomObject]@{
+                mac = "00:11:22:33:44:55"
+                name = "Client1"
+                devicePolicy = "Allowed"
+                policiesBySsid = @{
+                    "0" = [PSCustomObject]@{
+                        devicePolicy = "Group policy"
+                        groupPolicyId = "123456"
                     }
-                }
-            },
-            {
-                "mac": "66:77:88:99:AA:BB",
-                "name": "Client2",
-                "devicePolicy": "Per connection",
-                "policiesBySsid": {
-                    "0": {
-                        "devicePolicy": "Normal"
-                    },
-                    "1": {
-                        "devicePolicy": "Allowed"
+                    "1" = [PSCustomObject]@{
+                        devicePolicy = "Blocked"
                     }
                 }
             }
-        ]
-    }'
+            [PSCustomObject]@{
+                mac = "66:77:88:99:AA:BB"
+                name = "Client2"
+                devicePolicy = "Per connection"
+                policiesBySsid = @{
+                    "0" = [PSCustomObject]@{
+                        devicePolicy = "Normal"
+                    }
+                    "1" = [PSCustomObject]@{
+                        devicePolicy = "Allowed"
+                    }
+                }
+            }
+        )
+    }
+
     $config = $config | ConvertTo-Json -Compress
     Invoke-MerakiNetworkProvisionClients -AuthToken "your-api-token" -NetworkId "L_123456789012345678" -ClientConfig $config
 

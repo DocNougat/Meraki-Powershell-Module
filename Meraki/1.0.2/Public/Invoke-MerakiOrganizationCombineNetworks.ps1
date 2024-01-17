@@ -16,12 +16,13 @@ function Invoke-MerakiOrganizationCombineNetworks {
     The ID of the Meraki organization for which you want to create a new combined network.
 
     .EXAMPLE
-    $ComboConfig = '{
-        "name": "Long Island Office",
-        "networkIds": [ "N_1234", "N_5678" ],
-        "enrollmentString": "my-enrollment-string"
-    }'
-    $ComboConfig = $ComboConfig | ConvertTo-JSON -compress
+    $ComboConfig = [PSCustomObject]@{
+        name = "Long Island Office"
+        networkIds = @("N_1234", "N_5678")
+        enrollmentString = "my-enrollment-string"
+    }
+
+    $ComboConfig = $ComboConfig | ConvertTo-JSON -Compress
 
     Invoke-MerakiOrganizationCombineNetworks -AuthToken "your-api-token" -ComboConfig $ComboConfig -OrganizationId "1234567890"
 

@@ -16,34 +16,35 @@ function Set-MerakiNetworkApplianceFirewallOneToOneNatRules {
     A string containing the firewall configuration. The string should be in JSON format and should include the "rules" array, which contains objects with the "name", "lanIp", "publicIp", "uplink", "allowedInbound", "protocol", "allowedIps", and "destinationPorts" properties.
 
     .EXAMPLE
-    $config = '{
-        "rules": [
-            {
-                "name": "Service behind NAT",
-                "lanIp": "192.168.128.22",
-                "publicIp": "146.12.3.33",
-                "uplink": "internet1",
-                "allowedInbound": [
-                    {
-                        "protocol": "tcp",
-                        "destinationPorts": [ "80" ],
-                        "allowedIps": [
+    $config = [PSCustomObject]@{
+        rules = @(
+            [PSCustomObject]@{
+                name = "Service behind NAT"
+                lanIp = "192.168.128.22"
+                publicIp = "146.12.3.33"
+                uplink = "internet1"
+                allowedInbound = @(
+                    [PSCustomObject]@{
+                        protocol = "tcp"
+                        destinationPorts = @("80")
+                        allowedIps = @(
                             "10.82.112.0/24",
                             "10.82.0.0/16"
-                        ]
+                        )
                     },
-                    {
-                        "protocol": "udp",
-                        "destinationPorts": [ "8080" ],
-                        "allowedIps": [
+                    [PSCustomObject]@{
+                        protocol = "udp"
+                        destinationPorts = @("8080")
+                        allowedIps = @(
                             "10.81.110.5",
                             "10.81.0.0/16"
-                        ]
+                        )
                     }
-                ]
+                )
             }
-        ]
-    }'
+        )
+    }
+
     $config = $config | ConvertTo-Json -Compress
     Set-MerakiNetworkApplianceFirewallOneToOneNatRules -AuthToken "your-api-token" -NetworkId "your-network-id" -FirewallConfig $config
 

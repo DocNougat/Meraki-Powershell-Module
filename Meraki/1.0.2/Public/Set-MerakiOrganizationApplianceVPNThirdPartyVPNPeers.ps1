@@ -16,39 +16,40 @@ function Set-MerakiOrganizationApplianceVPNThirdPartyVPNPeers {
     The JSON configuration for the Third Party VPN Peers settings to be updated. Refer to the JSON schema for required parameters and their format.
     
     .EXAMPLE
-    $VPNConfig = '{
-        "peers": [
-            {
-                "name": "Peer Name",
-                "publicIp": "123.123.123.1",
-                "privateSubnets": [
+    $VPNConfig = [PSCustomObject]@{
+        peers = @(
+            [PSCustomObject]@{
+                name = "Peer Name"
+                publicIp = "123.123.123.1"
+                privateSubnets = @(
                     "192.168.1.0/24",
                     "192.168.128.0/24"
-                ],
-                "localId": "myMXId@meraki.com",
-                "remoteId": "miles@meraki.com",
-                "ipsecPolicies": {
-                    "ikeCipherAlgo": [ "tripledes" ],
-                    "ikeAuthAlgo": [ "sha1" ],
-                    "ikePrfAlgo": [ "prfsha1" ],
-                    "ikeDiffieHellmanGroup": [ "group2" ],
-                    "ikeLifetime": 28800,
-                    "childCipherAlgo": [ "aes128" ],
-                    "childAuthAlgo": [ "sha1" ],
-                    "childPfsGroup": [ "disabled" ],
-                    "childLifetime": 28800
-                },
-                "ipsecPoliciesPreset": "default",
-                "secret": "Sample Password",
-                "ikeVersion": "2",
-                "networkTags": [ "none" ]
+                )
+                localId = "myMXId@meraki.com"
+                remoteId = "miles@meraki.com"
+                ipsecPolicies = [PSCustomObject]@{
+                    ikeCipherAlgo = @("tripledes")
+                    ikeAuthAlgo = @("sha1")
+                    ikePrfAlgo = @("prfsha1")
+                    ikeDiffieHellmanGroup = @("group2")
+                    ikeLifetime = 28800
+                    childCipherAlgo = @("aes128")
+                    childAuthAlgo = @("sha1")
+                    childPfsGroup = @("disabled")
+                    childLifetime = 28800
+                }
+                ipsecPoliciesPreset = "default"
+                secret = "Sample Password"
+                ikeVersion = "2"
+                networkTags = @("none")
             }
-        ]
-    }'
-    $VPNConfig = $VPNConfig | ConvertTo-JSON -compress
-    
+        )
+    }
+
+    $VPNConfig = $VPNConfig | ConvertTo-Json -Compress
+
     Set-MerakiOrganizationApplianceVPNThirdPartyVPNPeers -AuthToken "your-api-token" -OrganizationId "L_9817349871234" -VPNConfig $VPNConfig
-    
+
     This example updates the Third Party VPN Peers settings for the specified organization.
     
     .NOTES

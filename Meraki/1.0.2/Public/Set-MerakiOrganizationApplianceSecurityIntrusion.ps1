@@ -16,21 +16,21 @@ function Set-MerakiOrganizationApplianceSecurityIntrusion {
     A string containing the security intrusion configuration. The string should be in JSON format and should include the "allowedRules" property.
 
     .EXAMPLE
-    $config = '{
-        "allowedRules": [
-            {
-                "ruleId": "meraki:intrusion/snort/GID/01/SID/688",
-                "message": "SQL sa login failed"
+    $config = [PSCustomObject]@{
+        allowedRules = @(
+            @{
+                ruleId = "meraki:intrusion/snort/GID/01/SID/688"
+                message = "SQL sa login failed"
             },
-            {
-                "ruleId": "meraki:intrusion/snort/GID/01/SID/5805",
-                "message": "MALWARE-OTHER Trackware myway speedbar runtime detection - switch engines"
+            @{
+                ruleId = "meraki:intrusion/snort/GID/01/SID/5805"
+                message = "MALWARE-OTHER Trackware myway speedbar runtime detection - switch engines"
             }
-        ]
-    }'
+        )
+    }
+
     $config = $config | ConvertTo-Json -Compress
     Set-MerakiOrganizationApplianceSecurityIntrusion -AuthToken "your-api-token" -OrganizationId "your-organization-id" -SecurityIntrusionConfig $config
-
     This example updates the security intrusion settings for the Meraki organization with ID "your-organization-id", using the specified security intrusion configuration.
 
     .NOTES

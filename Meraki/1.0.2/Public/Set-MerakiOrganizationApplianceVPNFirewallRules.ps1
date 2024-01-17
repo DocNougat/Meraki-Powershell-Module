@@ -16,25 +16,26 @@ function Set-MerakiOrganizationApplianceVPNFirewallRules {
     The JSON configuration for the VPN Firewall Rules settings to be updated. Refer to the JSON schema for required parameters and their format.
     
     .EXAMPLE
-    $FirewallRules = '{
-        "rules": [
-            {
-                "comment": "Allow TCP traffic to subnet with HTTP servers.",
-                "policy": "allow",
-                "protocol": "tcp",
-                "srcPort": "Any",
-                "srcCidr": "Any",
-                "destPort": "443",
-                "destCidr": "192.168.1.0/24",
-                "syslogEnabled": false
+    $FirewallRules = [PSCustomObject]@{
+        rules = @(
+            [PSCustomObject]@{
+                comment = "Allow TCP traffic to subnet with HTTP servers."
+                policy = "allow"
+                protocol = "tcp"
+                srcPort = "Any"
+                srcCidr = "Any"
+                destPort = "443"
+                destCidr = "192.168.1.0/24"
+                syslogEnabled = $false
             }
-        ],
-        "syslogDefaultRule": false
-    }'
-    $FirewallRules = $FirewallRules | ConvertTo-JSON -compress
-    
+        )
+        syslogDefaultRule = $false
+    }
+
+    $FirewallRules = $FirewallRules | ConvertTo-Json -Compress
+
     Set-MerakiOrganizationApplianceVPNFirewallRules -AuthToken "your-api-token" -OrganizationId "L_9817349871234" -FirewallRules $FirewallRules
-    
+
     This example updates the VPN Firewall Rules settings for the specified organization.
     
     .NOTES

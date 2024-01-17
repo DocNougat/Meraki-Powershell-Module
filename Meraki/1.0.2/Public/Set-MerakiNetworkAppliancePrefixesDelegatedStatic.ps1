@@ -19,14 +19,15 @@ function Set-MerakiNetworkAppliancePrefixesDelegatedStatic {
     A string containing the static delegated prefix configuration. The string should be in JSON format and should include the "prefix", "origin", "type", "interfaces", and "description" properties.
 
     .EXAMPLE
-    $config = '{
-        "prefix": "2001:db8:3c4d:15::/64",
-        "origin": {
-            "type": "internet",
-            "interfaces": [ "wan1" ]
-        },
-        "description": "Prefix on WAN 1 of Long Island Office network"
-    }'
+    $config = [PSCustomObject]@{
+        prefix = "2001:db8:3c4d:15::/64"
+        origin = [PSCustomObject]@{
+            type = "internet"
+            interfaces = @("wan1")
+        }
+        description = "Prefix on WAN 1 of Long Island Office network"
+    }
+
     $config = $config | ConvertTo-Json -Compress
     Set-MerakiNetworkAppliancePrefixesDelegatedStatic -AuthToken "your-api-token" -NetworkId "your-network-id" -StaticDelegatedPrefixId "your-static-prefix-id" -StaticConfig $config
 

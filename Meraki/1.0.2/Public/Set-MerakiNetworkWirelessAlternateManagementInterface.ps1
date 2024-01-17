@@ -16,29 +16,25 @@ function Set-MerakiNetworkWirelessAlternateManagementInterface {
     A JSON formatted string of the management interface configuration.
     
     .EXAMPLE
-    $ManagementInterfaceConfig = '{
-        "enabled": true,
-        "vlanId": 100,
-        "protocols": [
-            "radius",
-            "snmp",
-            "syslog",
-            "ldap"
-        ],
-        "accessPoints": [
-            {
-                "serial": "Q234-ABCD-5678",
-                "alternateManagementIp": "1.2.3.4",
-                "subnetMask": "255.255.255.0",
-                "gateway": "1.2.3.5",
-                "dns1": "8.8.8.8",
-                "dns2": "8.8.4.4"
+    $ManagementInterfaceConfig = [PSCustomObject]@{
+        enabled = $true
+        vlanId = 100
+        protocols = @("radius", "snmp", "syslog", "ldap")
+        accessPoints = @(
+            [PSCustomObject]@{
+                serial = "Q234-ABCD-5678"
+                alternateManagementIp = "1.2.3.4"
+                subnetMask = "255.255.255.0"
+                gateway = "1.2.3.5"
+                dns1 = "8.8.8.8"
+                dns2 = "8.8.4.4"
             }
-        ]
-    }'
+        )
+    }
+
     $ManagementInterfaceConfig = $ManagementInterfaceConfig | ConvertTo-Json -Compress
     Set-MerakiNetworkWirelessAlternateManagementInterface -AuthToken "your-api-token" -NetworkId "1234" -ManagementInterfaceConfig $ManagementInterfaceConfig
-    
+
     This example updates a network wireless alternate management interface with the specified configuration.
     
     .NOTES

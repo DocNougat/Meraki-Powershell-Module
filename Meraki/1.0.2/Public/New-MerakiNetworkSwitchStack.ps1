@@ -16,16 +16,17 @@ function New-MerakiNetworkSwitchStack {
     A JSON formatted string of stack configuration.
     
     .EXAMPLE
-    $StackConfig = '{
-        "name": "A cool stack",
-        "serials": [
+    $StackConfig = [PSCustomObject]@{
+        name = "A cool stack"
+        serials = @(
             "QBZY-XWVU-TSRQ",
             "QBAB-CDEF-GHIJ"
-        ]
-    }'
+        )
+    }
+
     $StackConfig = $StackConfig | ConvertTo-Json
     New-MerakiNetworkSwitchStack -AuthToken "your-api-token" -NetworkId "1234" -StackConfig $StackConfig
-    
+
     This example creates a new network switch stack with the specified configuration.
     
     .NOTES

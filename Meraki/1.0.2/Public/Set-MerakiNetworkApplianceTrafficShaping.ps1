@@ -16,12 +16,13 @@ function Set-MerakiNetworkApplianceTrafficShaping {
     A string containing the traffic shaping configuration. The string should be in JSON format and should include the "globalBandwidthLimits" property, which should be an object containing the "limitUp" and "limitDown" properties.
 
     .EXAMPLE
-    $config = '{
-        "globalBandwidthLimits": {
-            "limitUp": 2048,
-            "limitDown": 5120
+    $config = [PSCustomObject]@{
+        globalBandwidthLimits = @{
+            limitUp = 2048
+            limitDown = 5120
         }
-    }'
+    }
+
     $config = $config | ConvertTo-Json -Compress
     Set-MerakiNetworkApplianceTrafficShaping -AuthToken "your-api-token" -NetworkId "your-network-id" -TrafficShapingConfig $config
 

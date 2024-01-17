@@ -16,19 +16,19 @@ function Set-MerakiNetworkFirmwareUpgrades {
     A string containing the firmware upgrade configuration. The string should be in JSON format and should include the "timezone", "products", and "upgradeWindow" properties.
 
     .EXAMPLE
-    $config = '{
-        "timezone": "America/Los_Angeles",
-        "products": {
-            "MR": "wireless",
-            "MS": "switch",
-            "MX": "appliance",
-            "MV": "camera"
-        },
-        "upgradeWindow": {
-            "dayOfWeek": "monday",
-            "hourOfDay": "1:00"
+    $config = [PSCustomObject]@{
+        timezone = "America/Los_Angeles"
+        products = @{
+            MR = "wireless"
+            MS = "switch"
+            MX = "appliance"
+            MV = "camera"
         }
-    }'
+        upgradeWindow = @{
+            dayOfWeek = "monday"
+            hourOfDay = "1:00"
+        }
+    }
     $config = $config | ConvertTo-Json -Compress
     Set-MerakiNetworkFirmwareUpgrades -AuthToken "your-api-token" -NetworkId "L_123456789012345678" -FirmwareUpgradeConfig $config
 

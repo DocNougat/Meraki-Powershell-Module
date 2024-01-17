@@ -16,14 +16,14 @@ function Set-MerakiNetworkWirelessBluetoothSettings {
     A JSON formatted string of the Bluetooth configuration.
     
     .EXAMPLE
-    $BluetoothConfig = '{
-        "scanningEnabled": true,
-        "advertisingEnabled": true,
-        "uuid": "00000000-0000-0000-000-000000000000",
-        "majorMinorAssignmentMode": "Non-unique",
-        "major": 1,
-        "minor": 1
-    }'
+    $BluetoothConfig = [PSCustomObject]@{
+        scanningEnabled = $true
+        advertisingEnabled = $true
+        uuid = "00000000-0000-0000-000-000000000000"
+        majorMinorAssignmentMode = "Non-unique"
+        major = 1
+        minor = 1
+    }
     $BluetoothConfig = $BluetoothConfig | ConvertTo-Json -Compress
     Set-MerakiNetworkWirelessBluetoothSettings -AuthToken "your-api-token" -NetworkId "1234" -BluetoothConfig $BluetoothConfig
     

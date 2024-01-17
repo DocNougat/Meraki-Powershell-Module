@@ -19,10 +19,11 @@ function Set-MerakiNetworkApplianceFirewallFirewalledService {
     A string containing the firewall configuration. The string should be in JSON format and should include the "access" and "allowedIps" properties.
 
     .EXAMPLE
-    $config = '{
-        "access": "restricted",
-        "allowedIps": [ "123.123.123.1" ]
-    }'
+    $config = [PSCustomObject]@{
+        access = "restricted"
+        allowedIps = @("123.123.123.1","123.123.123.2")
+    }
+
     $config = $config | ConvertTo-Json -Compress
     Set-MerakiNetworkApplianceFirewallFirewalledService -AuthToken "your-api-token" -NetworkId "your-network-id" -ServiceName "your-service-name" -FirewallConfig $config
 

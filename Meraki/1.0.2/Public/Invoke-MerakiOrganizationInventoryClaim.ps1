@@ -21,22 +21,23 @@ function Invoke-MerakiOrganizationInventoryClaim {
             mode: string - Co-term licensing only: either 'renew' or 'addDevices'. 'addDevices' will increase the license limit, while 'renew' will extend the amount of time until expiration. Defaults to 'addDevices'. All licenses must be claimed with the same mode, and at most one renewal can be claimed at a time. Does not apply to organizations using per-device licensing model.
 
     .EXAMPLE
-    $claim = '{
-        "orders": ["o1234", "o5678"],
-        "serials": ["s1234", "s5678"],
-        "licenses": [
-            {
-                "key": "abc123",
-                "mode": "addDevices"
+    $claim = [PSCustomObject]@{
+        orders = @("o1234", "o5678")
+        serials = @("s1234", "s5678")
+        licenses = @(
+            [PSCustomObject]@{
+                key = "abc123"
+                mode = "addDevices"
             },
-            {
-                "key": "def456",
-                "mode": "renew"
+            [PSCustomObject]@{
+                key = "def456"
+                mode = "renew"
             }
-        ]
-    }'
-    $claim = $claim | ConvertTo-Json -Compress
-    Invoke-MerakiOrganizationInventoryClaim -AuthToken "1234" -Claim $claim
+        )
+    }
+
+    $claimJson = $claim | ConvertTo-Json -Compress
+    Invoke-MerakiOrganizationInventoryClaim -AuthToken "1234" -Claim $claimJson
 
     This example claims the orders 'o1234' and 'o5678', the devices 's1234' and 's5678', and the licenses 'abc123' and 'def456' with their respective modes. The function adds the licenses to the first organization associated with the authentication token '1234'.
 

@@ -16,16 +16,16 @@ function Set-MerakiNetworkSNMP {
     The JSON configuration for the SNMP settings to be updated. Refer to the JSON schema for required parameters and their format.
 
     .EXAMPLE
-    $SNMPConfig = '{
-        "access": "users",
-        "users": [
-            {
-                "username": "AzureDiamond",
-                "passphrase": "hunter2"
+    $SNMPConfig = [PSCustomObject]@{
+        access = "users"
+        users = @(
+            [PSCustomObject]@{
+                username = "AzureDiamond"
+                passphrase = "hunter2"
             }
-        ]
-    }'
-    $SNMPConfig = $SNMPConfig | ConvertTo-JSON -compress
+        )
+    }
+    $SNMPConfig = $SNMPConfig | ConvertTo-JSON -Compress
 
     Set-MerakiNetworkSnmp -AuthToken "your-api-token" -NetworkId "L_123456789012345678" -SNMPConfig $SNMPConfig
 

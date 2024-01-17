@@ -16,30 +16,23 @@ function Set-MerakiNetworkSwitchSTP {
     A JSON formatted string of the STP configuration.
     
     .EXAMPLE
-    $STPConfig = '{
-        "rstpEnabled": true,
-        "stpBridgePriority": [
-            {
-                "switches": [
-                    "Q234-ABCD-0001",
-                    "Q234-ABCD-0002",
-                    "Q234-ABCD-0003"
-                ],
-                "stpPriority": 4096
+    $STPConfig = [PSCustomObject]@{
+        rstpEnabled = $true
+        stpBridgePriority = @(
+            @{
+                switches = @("Q234-ABCD-0001", "Q234-ABCD-0002", "Q234-ABCD-0003")
+                stpPriority = 4096
             },
-            {
-                "stacks": [
-                    "789102",
-                    "123456",
-                    "129102"
-                ],
-                "stpPriority": 28672
+            @{
+                stacks = @("789102", "123456", "129102")
+                stpPriority = 28672
             }
-        ]
-    }'
+        )
+    }
+
     $STPConfig = $STPConfig | ConvertTo-Json -Compress
     Set-MerakiNetworkSwitchSTP -AuthToken "your-api-token" -NetworkId "1234" -STPConfig $STPConfig
-    
+
     This example updates a network switch STP with the specified configuration.
     
     .NOTES

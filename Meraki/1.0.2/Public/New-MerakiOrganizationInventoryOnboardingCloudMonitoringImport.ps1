@@ -16,15 +16,16 @@ function New-MerakiOrganizationInventoryOnboardingCloudMonitoringImport {
     A string containing the import configuration. The string should be in JSON format and should include the following properties: "devices", "deviceId", "networkId", and "udi".
 
     .EXAMPLE
-    $importConfig = '{
-        "devices": [
-            {
-                "deviceId": "1234",
-                "networkId": "5678",
-                "udi": "ABCD1234"
+    $importConfig = [PSCustomObject]@{
+        devices = @(
+            [PSCustomObject]@{
+                deviceId = "1234"
+                networkId = "5678"
+                udi = "ABCD1234"
             }
-        ]
-    }'
+        )
+    }
+
     $importConfig = $importConfig | ConvertTo-Json -Compress
     New-MerakiOrganizationInventoryOnboardingCloudMonitoringImport -AuthToken "your-api-token" -OrganizationId "123456" -ImportConfig $importConfig
 

@@ -16,13 +16,14 @@ function Set-MerakiDeviceSwitchWarmSpare {
     A JSON formatted string of the warm spare configuration.
     
     .EXAMPLE
-    $SpareConfig = '{
-        "enabled": true,
-        "spareSerial": "Q234-ABCD-0002"
-    }'
+    $SpareConfig = [PSCustomObject]@{
+        enabled = $true
+        spareSerial = "Q234-ABCD-0002"
+    }
+
     $SpareConfig = $SpareConfig | ConvertTo-Json -Compress
     Set-MerakiDeviceSwitchWarmSpare -AuthToken "your-api-token" -Serial "Q234-ABCD-0001" -SpareConfig $SpareConfig
-    
+
     This example updates a device switch warm spare with the specified configuration.
     
     .NOTES

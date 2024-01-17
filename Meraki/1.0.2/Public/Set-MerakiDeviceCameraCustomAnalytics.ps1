@@ -16,20 +16,21 @@ function Set-MerakiDeviceCameraCustomAnalytics {
     The JSON configuration for the custom analytics settings to be updated. Refer to the JSON schema for required parameters and their format.
     
     .EXAMPLE
-    $AnalyticsConfig = '{
-        "enabled": true,
-        "artifactId": "1",
-        "parameters": [
-            {
-                "name": "detection_threshold",
-                "value": "0.5"
+    $AnalyticsConfig = [PSCustomObject]@{
+        enabled = $true
+        artifactId = "1"
+        parameters = @(
+            @{
+                name = "detection_threshold"
+                value = "0.5"
             }
-        ]
-    }'
-    $AnalyticsConfig = $AnalyticsConfig | ConvertTo-JSON -compress
-    
+        )
+    }
+
+    $AnalyticsConfig = $AnalyticsConfig | ConvertTo-JSON -Compress
+
     Set-MerakiDeviceCameraCustomAnalytics -AuthToken "your-api-token" -Serial "Q2GV-ABCD-1234" -AnalyticsConfig $AnalyticsConfig
-    
+
     This example updates the custom analytics settings of the Meraki device camera with serial "Q2GV-ABCD-1234".
     
     .NOTES

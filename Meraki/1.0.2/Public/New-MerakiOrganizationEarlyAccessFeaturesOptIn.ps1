@@ -16,10 +16,10 @@ function New-MerakiOrganizationEarlyAccessFeaturesOptIn {
     A string containing the opt-in information. The string should be in JSON format and should include the following properties: "shortName" and "limitScopeToNetworks".
 
     .EXAMPLE
-    $optin = '{
-        "shortName": "my_early_access_feature",
-        "limitScopeToNetworks": ["N_123456789012345678", "N_234567890123456789"]
-    }'
+    $optin = [PSCustomObject]@{
+        shortName = "my_early_access_feature"
+        limitScopeToNetworks = @("N_123456789012345678", "N_234567890123456789")
+    }
     $optin = $optin | ConvertTo-Json -Compress
     New-MerakiOrganizationEarlyAccessFeaturesOptIn -AuthToken "your-api-token" -OrganizationId "123456" -OptIn $optin
 

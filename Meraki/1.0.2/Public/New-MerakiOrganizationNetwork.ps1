@@ -16,19 +16,16 @@ function New-MerakiOrganizationNetwork {
     The ID of the Meraki organization for which you want to create a new network.
 
     .EXAMPLE
-    $NetworkConfig = '{
-        "name": "Main Office",
-        "productTypes": [
-            "appliance",
-            "switch",
-            "wireless"
-        ],
-        "tags": [ "tag1", "tag2" ],
-        "timeZone": "America/Los_Angeles",
-        "copyFromNetworkId": "N_24329156",
-        "notes": "Additional description of the network"
-    }'
-    $NetworkConfig = $NetworkConfig | ConvertTo-JSON -compress
+    $NetworkConfig = [PSCustomObject]@{
+        name = "Main Office"
+        productTypes = @("appliance", "switch", "wireless")
+        tags = @("tag1", "tag2")
+        timeZone = "America/Los_Angeles"
+        copyFromNetworkId = "N_24329156"
+        notes = "Additional description of the network"
+    }
+
+    $NetworkConfig = $NetworkConfig | ConvertTo-Json -Compress
 
     New-MerakiOrganizationNetwork -AuthToken "your-api-token" -NetworkConfig $NetworkConfig -OrganizationId "1234567890"
 

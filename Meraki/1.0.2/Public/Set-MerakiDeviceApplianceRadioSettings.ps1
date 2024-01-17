@@ -16,21 +16,20 @@ function Set-MerakiDeviceApplianceRadioSettings {
     A string containing the radio configuration. The string should be in JSON format and should include the "rfProfileId", "twoFourGhzSettings", and "fiveGhzSettings" properties.
 
     .EXAMPLE
-    $config = '{
-        "rfProfileId": "1234",
-        "twoFourGhzSettings": {
-            "channel": 11,
-            "targetPower": 21
-        },
-        "fiveGhzSettings": {
-            "channel": 149,
-            "channelWidth": 20,
-            "targetPower": 15
+    $config = [PSCustomObject]@{
+        rfProfileId = "1234"
+        twoFourGhzSettings = @{
+            channel = 11
+            targetPower = 21
         }
-    }'
+        fiveGhzSettings = @{
+            channel = 149
+            channelWidth = 20
+            targetPower = 15
+        }
+    }
     $config = $config | ConvertTo-Json -Compress
     Set-MerakiDeviceApplianceRadioSettings -AuthToken "your-api-token" -DeviceSerial "your-device-serial" -RadioConfig $config
-
     This example updates the radio settings of the Meraki device with serial number "your-device-serial", using the specified radio configuration.
 
     .NOTES

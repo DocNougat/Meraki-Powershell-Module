@@ -16,39 +16,40 @@ function Set-MerakiOrganizationBrandingPolicy {
     The JSON configuration for the branding policy to be updated. Refer to the JSON schema for required parameters and their format.
 
     .EXAMPLE
-    $PolicyConfig = '{
-        "name": "Updated branding policy",
-        "enabled": true,
-        "adminSettings": {
-            "appliesTo": "All organization admins",
-            "values": []
-        },
-        "customLogo": {
-            "enabled": true,
-            "image": {
-                "contents": "base64-encoded-image-contents",
-                "format": "png"
-            }
-        },
-        "helpSettings": {
-            "apiDocsSubtab": "default or inherit",
-            "casesSubtab": "default or inherit",
-            "ciscoMerakiProductDocumentation": "default or inherit",
-            "communitySubtab": "default or inherit",
-            "dataProtectionRequestsSubtab": "default or inherit",
-            "firewallInfoSubtab": "default or inherit",
-            "getHelpSubtab": "default or inherit",
-            "getHelpSubtabKnowledgeBaseSearch": "default or inherit",
-            "hardwareReplacementsSubtab": "default or inherit",
-            "helpTab": "default or inherit",
-            "helpWidget": "default or inherit",
-            "newFeaturesSubtab": "default or inherit",
-            "smForums": "default or inherit",
-            "supportContactInfo": "default or inherit",
-            "universalSearchKnowledgeBaseSearch": "default or inherit"
+    $PolicyConfig = [PSCustomObject]@{
+        name = "Updated branding policy"
+        enabled = $true
+        adminSettings = @{
+            appliesTo = "All organization admins"
+            values = @()
         }
-    }'
-    $PolicyConfig = $PolicyConfig | ConvertTo-JSON -compress
+        customLogo = @{
+            enabled = $true
+            image = @{
+                contents = "base64-encoded-image-contents"
+                format = "png"
+            }
+        }
+        helpSettings = @{
+            apiDocsSubtab = "default or inherit"
+            casesSubtab = "default or inherit"
+            ciscoMerakiProductDocumentation = "default or inherit"
+            communitySubtab = "default or inherit"
+            dataProtectionRequestsSubtab = "default or inherit"
+            firewallInfoSubtab = "default or inherit"
+            getHelpSubtab = "default or inherit"
+            getHelpSubtabKnowledgeBaseSearch = "default or inherit"
+            hardwareReplacementsSubtab = "default or inherit"
+            helpTab = "default or inherit"
+            helpWidget = "default or inherit"
+            newFeaturesSubtab = "default or inherit"
+            smForums = "default or inherit"
+            supportContactInfo = "default or inherit"
+            universalSearchKnowledgeBaseSearch = "default or inherit"
+        }
+    }
+
+    $PolicyConfig = $PolicyConfig | ConvertTo-Json -Compress
 
     Set-MerakiOrganizationBrandingPolicy -AuthToken "your-api-token" -PolicyId "1234567890" -PolicyConfig $PolicyConfig
 

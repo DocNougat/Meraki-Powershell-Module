@@ -16,13 +16,14 @@ function New-MerakiOrganizationPolicyObject {
     The JSON configuration for the new policy object to be created. Refer to the JSON schema for required parameters and their format.
 
     .EXAMPLE
-    $PolicyObject = '{
-        "name": "Web Servers - Datacenter 10",
-        "category": "network",
-        "type": "cidr",
-        "groupIds": []
-    }'
-    $PolicyObject = $PolicyObject | ConvertTo-JSON -compress
+    $PolicyObject = [PSCustomObject]@{
+        name = "Web Servers - Datacenter 10"
+        category = "network"
+        type = "cidr"
+        groupIds = @()
+    }
+
+    $PolicyObject = $PolicyObject | ConvertTo-JSON -Compress
 
     New-MerakiOrganizationPolicyObject -AuthToken "your-api-token" -OrganizationId "1234567890" -PolicyObject $PolicyObject
 

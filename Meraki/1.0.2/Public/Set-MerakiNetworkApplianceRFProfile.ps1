@@ -19,35 +19,36 @@ function Set-MerakiNetworkApplianceRFProfile {
     A string containing the RF profile configuration. The string should be in JSON format and should include the "name", "twoFourGhzSettings", "fiveGhzSettings", and "perSsidSettings" properties.
 
     .EXAMPLE
-    $config = '{
-        "name": "MX RF Profile",
-        "twoFourGhzSettings": {
-            "minBitrate": 12,
-            "axEnabled": true
-        },
-        "fiveGhzSettings": {
-            "minBitrate": 48,
-            "axEnabled": true
-        },
-        "perSsidSettings": {
-            "1": {
-                "bandOperationMode": "dual",
-                "bandSteeringEnabled": true
-            },
-            "2": {
-                "bandOperationMode": "dual",
-                "bandSteeringEnabled": true
-            },
-            "3": {
-                "bandOperationMode": "dual",
-                "bandSteeringEnabled": true
-            },
-            "4": {
-                "bandOperationMode": "dual",
-                "bandSteeringEnabled": true
+    $config = [PSCustomObject]@{
+        name = "MX RF Profile"
+        twoFourGhzSettings = @{
+            minBitrate = 12
+            axEnabled = $true
+        }
+        fiveGhzSettings = @{
+            minBitrate = 48
+            axEnabled = $true
+        }
+        perSsidSettings = @{
+            1 = @{
+                bandOperationMode = "dual"
+                bandSteeringEnabled = $true
+            }
+            2 = @{
+                bandOperationMode = "dual"
+                bandSteeringEnabled = $true
+            }
+            3 = @{
+                bandOperationMode = "dual"
+                bandSteeringEnabled = $true
+            }
+            4 = @{
+                bandOperationMode = "dual"
+                bandSteeringEnabled = $true
             }
         }
-    }'
+    }
+
     $config = $config | ConvertTo-Json -Compress
     Set-MerakiNetworkApplianceRFProfile -AuthToken "your-api-token" -NetworkId "your-network-id" -RFProfileId "your-rf-profile-id" -RFProfileConfig $config
 

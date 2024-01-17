@@ -16,15 +16,16 @@ function Set-MerakiNetworkCellularGatewaySubnetPool {
     A string containing the subnet pool configuration. The string should be in JSON format and should include the properties as defined in the schema.
     
     .EXAMPLE
-    $SubnetPoolConfig = '{
-        "deploymentMode": "routed",
-        "cidr": "192.168.0.0/16",
-        "mask": 24
-    }'
+    $SubnetPoolConfig = [PSCustomObject]@{
+        deploymentMode = "routed"
+        cidr = "192.168.0.0/16"
+        mask = 24
+    }
+
     $SubnetPoolConfig = $SubnetPoolConfig | ConvertTo-Json -Compress
-    
+
     Set-MerakiNetworkCellularGatewaySubnetPool -AuthToken "your-api-token" -NetworkId "N_1234" -SubnetPoolConfig $SubnetPoolConfig
-    
+
     This example updates the subnet pool for the Meraki network with ID "N_1234".
     
     .NOTES

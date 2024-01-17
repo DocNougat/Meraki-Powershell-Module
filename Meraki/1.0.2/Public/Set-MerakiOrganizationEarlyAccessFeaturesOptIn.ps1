@@ -19,12 +19,12 @@ function Set-MerakiOrganizationEarlyAccessFeaturesOptIn {
     A string containing the limit scope to networks information. The string should be in JSON format and should include the following property: "LimitScope".
 
     .EXAMPLE
-    $limitScope = '{
-        "LimitScope": ["N_123456789012345678", "N_234567890123456789"]
-    }'
-    $limitScope = $limitScope | ConvertTo-Json -Compress
-    Set-MerakiOrganizationEarlyAccessFeaturesOptIn -AuthToken "your-api-token" -OrganizationId "123456" -OptInId "456789" -LimitScope $limitScope
+    $limitScope = [PSCustomObject]@{
+        LimitScope = @("N_123456789012345678", "N_234567890123456789")
+    }
+    $limitScope = ConvertTo-Json -Compress
 
+    Set-MerakiOrganizationEarlyAccessFeaturesOptIn -AuthToken "your-api-token" -OrganizationId "123456" -OptInId "456789" -LimitScope $limitScope
     This example updates the early access feature opt-in with ID "456789" in the Meraki organization with ID "123456" to limit scope to the specified networks.
 
     .NOTES

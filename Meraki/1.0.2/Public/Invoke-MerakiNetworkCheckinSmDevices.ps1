@@ -16,22 +16,23 @@ function Invoke-MerakiNetworkCheckinSmDevices {
     A JSON formatted string of check-in configuration.
     
     .EXAMPLE
-    $config = '{
-        "wifiMacs": [ "00:11:22:33:44:55" ],
-        "ids": [
+    $config = [PSCustomObject]@{
+        wifiMacs = [ "00:11:22:33:44:55" ]
+        ids = @(
             "1284392014819",
             "2983092129865"
-        ],
-        "serials": [
+        )
+        serials = @(
             "Q234-ABCD-0001",
             "Q234-ABCD-0002",
             "Q234-ABCD-0003"
-        ],
-        "scope": [ "withAny", "tag1", "tag2" ]
-    }'
+        )
+        scope = [ "withAny", "tag1", "tag2" ]
+    }
+
     $config = $config | ConvertTo-Json
     Invoke-MerakiNetworkCheckinSmDevices -AuthToken "your-api-token" -NetworkId "1234" -CheckinConfig $config
-    
+
     This example checks in devices for the Meraki network with ID "1234" with the specified check-in configuration.
     
     .NOTES

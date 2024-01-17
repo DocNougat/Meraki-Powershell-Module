@@ -16,33 +16,34 @@ function New-MerakiDeviceSwitchRoutingInterface {
     A JSON formatted string of routing interface configuration.
     
     .EXAMPLE
-    $RoutingInterfaceConfig = '{
-        "name": "L3 interface",
-        "subnet": "192.168.1.0/24",
-        "interfaceIp": "192.168.1.2",
-        "multicastRouting": "disabled",
-        "vlanId": 100,
-        "defaultGateway": "192.168.1.1",
-        "ospfSettings": {
-            "area": "0",
-            "cost": 1,
-            "isPassiveEnabled": true
-        },
-        "ospfV3": {
-            "area": "1",
-            "cost": 2,
-            "isPassiveEnabled": true
-        },
-        "ipv6": {
-            "assignmentMode": "static",
-            "prefix": "1:2:3:4::/48",
-            "address": "1:2:3:4::1",
-            "gateway": "1:2:3:4::2"
+    $RoutingInterfaceConfig = [PSCustomObject]@{
+        name = "L3 interface"
+        subnet = "192.168.1.0/24"
+        interfaceIp = "192.168.1.2"
+        multicastRouting = "disabled"
+        vlanId = 100
+        defaultGateway = "192.168.1.1"
+        ospfSettings = @{
+            area = "0"
+            cost = 1
+            isPassiveEnabled = $true
         }
-    }'
+        ospfV3 = @{
+            area = "1"
+            cost = 2
+            isPassiveEnabled = $true
+        }
+        ipv6 = @{
+            assignmentMode = "static"
+            prefix = "1:2:3:4::/48"
+            address = "1:2:3:4::1"
+            gateway = "1:2:3:4::2"
+        }
+    }
+
     $RoutingInterfaceConfig = $RoutingInterfaceConfig | ConvertTo-Json
     New-MerakiDeviceSwitchRoutingInterface -AuthToken "your-api-token" -DeviceSerial "Q2GV-ABCD-1234" -RoutingInterfaceConfig $RoutingInterfaceConfig
-    
+
     This example creates a device switch routing interface with the specified configuration.
     
     .NOTES

@@ -19,22 +19,23 @@ function Set-MerakiNetworkVLANProfile {
     The JSON configuration for the VLAN profile to be updated. Refer to the JSON schema for required parameters and their format.
 
     .EXAMPLE
-    $VLANProfileConfig = '{
-        "name": "My VLAN profile name",
-        "vlanNames": [
-            {
-                "name": "named-1",
-                "vlanId": "1"
+    $VLANProfileConfig = [PSCustomObject]@{
+        name = "My VLAN profile name"
+        vlanNames = @(
+            @{
+                name = "named-1"
+                vlanId = "1"
             }
-        ],
-        "vlanGroups": [
-            {
-                "name": "named-group-1",
-                "vlanIds": "2,5-7"
+        )
+        vlanGroups = @(
+            @{
+                name = "named-group-1"
+                vlanIds = "2,5-7"
             }
-        ]
-    }'
-    $VLANProfileConfig = $VLANProfileConfig | ConvertTo-JSON -compress
+        )
+    }
+
+    $VLANProfileConfig = $VLANProfileConfig | ConvertTo-Json -Compress
 
     Set-MerakiNetworkVLANProfile -AuthToken "your-api-token" -NetworkId "L_123456789012345678" -ProfileName "My VLAN profile name" -VLANProfileConfig $VLANProfileConfig
 

@@ -16,49 +16,44 @@ function Set-MerakiDeviceCellularSims {
     A string containing the SIM configuration. The string should be in JSON format and should include the "simFailover" and "sims" properties, as well as the configuration for each SIM.
 
     .EXAMPLE
-    $config = '{
-        "simFailover": {
-            "enabled": true
-        },
-        "sims": [
-            {
-                "slot": "sim1",
-                "isPrimary": true,
-                "apns": [
-                    {
-                        "name": "APN1",
-                        "allowedIpTypes": [
-                            "ipv4"
-                        ],
-                        "authentication": {
-                            "type": "none"
+    $config = [PSCustomObject]@{
+        simFailover = @{
+            enabled = $true
+        }
+        sims = @(
+            @{
+                slot = "sim1"
+                isPrimary = $true
+                apns = @(
+                    @{
+                        name = "APN1"
+                        allowedIpTypes = @("ipv4")
+                        authentication = @{
+                            type = "none"
                         }
                     }
-                ]
+                )
             },
-            {
-                "slot": "sim2",
-                "isPrimary": false,
-                "apns": [
-                    {
-                        "name": "APN2",
-                        "allowedIpTypes": [
-                            "ipv4",
-                            "ipv6"
-                        ],
-                        "authentication": {
-                            "type": "chap",
-                            "username": "user",
-                            "password": "pass"
+            @{
+                slot = "sim2"
+                isPrimary = $false
+                apns = @(
+                    @{
+                        name = "APN2"
+                        allowedIpTypes = @("ipv4", "ipv6")
+                        authentication = @{
+                            type = "chap"
+                            username = "user"
+                            password = "pass"
                         }
                     }
-                ]
+                )
             }
-        ]
-    }'
-    $config = $config | ConvertTo-Json -Compress
-    Set-MerakiDeviceCellularSims -AuthToken "your-api-token" -SerialNumber "Q2XX-XXXX-XXXX" -SimConfig $config
-    
+        )
+    }
+
+    $configJson = $config | ConvertTo-Json -Compress
+    Set-MerakiDeviceCellularSims -AuthToken "your-api-token" -SerialNumber "Q2XX-XXXX-XXXX" -SimConfig $configJson
     This example updates the SIMs for the Meraki device with serial number "Q2XX-XXXX-XXXX". The first SIM in the list will be used for boot, and the second SIM will be used for failover. The first SIM has one APN configuration with name "APN1" and allowed IP type "ipv4". The second SIM has one APN configuration with name "APN2", allowed IP types "ipv4" and "ipv6", and authentication type "chap" with username "user" and password "pass".
 
     .NOTES

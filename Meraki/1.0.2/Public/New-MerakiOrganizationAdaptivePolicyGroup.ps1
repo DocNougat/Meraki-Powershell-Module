@@ -16,19 +16,19 @@ function New-MerakiOrganizationAdaptivePolicyGroup {
     The JSON configuration for the adaptive policy group. Refer to the JSON schema for required parameters and their format.
 
     .EXAMPLE
-    $config = '{
-        "name": "Test Group",
-        "description": "Test Group description",
-        "sgt": 123,
-        "policyObjects": [
-            {
-                "id": "1234567890",
-                "name": "Test Policy Object"
+    $config = [PSCustomObject]@{
+        name = "Test Group"
+        description = "Test Group description"
+        sgt = 123
+        policyObjects = @(
+            [PSCustomObject]@{
+                id = "1234567890"
+                name = "Test Policy Object"
             }
-        ]
-    }'
-    $config = $config | ConvertTo-JSON -compress
-    
+        )
+    }
+    $config = $config | ConvertTo-Json -Compress
+
     New-MerakiOrganizationAdaptivePolicyGroup -AuthToken "your-api-token" -OrganizationId "1234567890" -GroupConfig $config
 
     This example creates a new adaptive policy group for the Meraki organization with ID "1234567890" using the provided group configuration.

@@ -16,25 +16,28 @@ function Set-MerakiNetworkCellularGatewayConnectivityMonitoringDests {
     A string containing the connectivity monitoring destinations configuration. The string should be in JSON format and should include the properties as defined in the schema.
     
     .EXAMPLE
-    $ConnectivityMonitoringDestinations = '{
-        "destinations": [
-            {
-                "ip": "8.8.8.8",
-                "description": "Google",
-                "default": false
+    $ConnectivityMonitoringDestinations = [PSCustomObject]@{
+        destinations = @(
+            @{
+                ip = "8.8.8.8"
+                description = "Google"
+                default = $false
             },
-            {
-                "ip": "1.23.45.67",
-                "description": "test description",
-                "default": true
+            @{
+                ip = "1.23.45.67"
+                description = "test description"
+                default = $true
             },
-            { "ip": "9.8.7.6" }
-        ]
-    }'
+            @{
+                ip = "9.8.7.6"
+            }
+        )
+    }
+
     $ConnectivityMonitoringDestinations = $ConnectivityMonitoringDestinations | ConvertTo-Json -Compress
-    
+
     Set-MerakiNetworkCellularGatewayConnectivityMonitoringDests -AuthToken "your-api-token" -NetworkId "N_1234" -ConnectivityMonitoringDestinations $ConnectivityMonitoringDestinations
-    
+
     This example updates the connectivity monitoring destinations for the Meraki network with ID "N_1234".
     
     .NOTES

@@ -19,14 +19,15 @@ function Set-MerakiNetworkWebhooksHttpServer {
     The JSON configuration for the HTTP server to be updated. Refer to the JSON schema for required parameters and their format.
 
     .EXAMPLE
-    $WebhookServerConfig = '{
-        "name": "Example Webhook Server",
-        "sharedSecret": "shhh",
-        "payloadTemplate": {
-            "payloadTemplateId": "wpt_00001"
+    $WebhookServerConfig = [PSCustomObject]@{
+        name = "Example Webhook Server"
+        sharedSecret = "shhh"
+        payloadTemplate = @{
+            payloadTemplateId = "wpt_00001"
         }
-    }'
-    $WebhookServerConfig = $WebhookServerConfig | ConvertTo-JSON -compress
+    }
+
+    $WebhookServerConfig = $WebhookServerConfig | ConvertTo-Json -Compress
 
     Set-MerakiNetworkWebhooksHttpServer -AuthToken "your-api-token" -NetworkId "L_123456789012345678" -HttpServerId "1234" -WebhookServerConfig $WebhookServerConfig
 

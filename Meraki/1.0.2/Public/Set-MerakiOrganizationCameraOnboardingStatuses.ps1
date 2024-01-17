@@ -16,14 +16,15 @@ function Set-MerakiOrganizationCameraOnboardingStatuses {
     The JSON configuration for the onboarding status to be updated. Refer to the JSON schema for required parameters and their format.
     
     .EXAMPLE
-    $Device = '{
-        "serial": "Q2GV-ABCD-1234",
-        "wirelessCredentialsSent": true
-    }'
-    $Device = $Device | ConvertTo-JSON -compress
-    
+    $Device = [PSCustomObject]@{
+        serial = "Q2GV-ABCD-1234"
+        wirelessCredentialsSent = $true
+    }
+
+    $Device = $Device | ConvertTo-JSON -Compress
+
     Set-MerakiOrganizationCameraOnboardingStatuses -AuthToken "your-api-token" -OrganizationId "1234567890" -Device $Device
-    
+
     This example updates the onboarding status of the Meraki organization's camera with serial "Q2GV-ABCD-1234".
     
     .NOTES

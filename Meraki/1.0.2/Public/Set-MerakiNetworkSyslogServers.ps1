@@ -16,19 +16,20 @@ function Set-MerakiNetworkSyslogServers {
     The JSON configuration for the syslog server settings to be updated. Refer to the JSON schema for required parameters and their format.
 
     .EXAMPLE
-    $SyslogServerConfig = '{
-        "servers": [
-            {
-                "host": "1.2.3.4",
-                "port": 443,
-                "roles": [
+    $SyslogServerConfig = [PSCustomObject]@{
+        servers = @(
+            [PSCustomObject]@{
+                host = "1.2.3.4"
+                port = 443
+                roles = @(
                     "Wireless event log",
                     "URLs"
-                ]
+                )
             }
-        ]
-    }'
-    $SyslogServerConfig = $SyslogServerConfig | ConvertTo-JSON -compress
+        )
+    }
+
+    $SyslogServerConfig = $SyslogServerConfig | ConvertTo-Json -Compress
 
     Set-MerakiNetworkSyslogServers -AuthToken "your-api-token" -NetworkId "L_123456789012345678" -SyslogServerConfig $SyslogServerConfig
 

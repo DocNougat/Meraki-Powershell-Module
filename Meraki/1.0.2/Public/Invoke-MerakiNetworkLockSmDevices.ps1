@@ -16,22 +16,23 @@ function Invoke-MerakiNetworkLockSmDevices {
     A JSON formatted string of lock configuration.
     
     .EXAMPLE
-    $config = '{
-        "wifiMacs": [ "00:11:22:33:44:55" ],
-        "ids": [
+    $config = [PSCustomObject]@{
+        wifiMacs = [ "00:11:22:33:44:55" ]
+        ids = @(
             "1284392014819",
             "2983092129865"
-        ],
-        "serials": [
+        )
+        serials = @(
             "Q234-ABCD-0001",
             "Q234-ABCD-0002",
             "Q234-ABCD-0003"
-        ],
-        "scope": [ "withAny", "tag1", "tag2" ],
-        "pin": 123456
-    }'
-    $config = $config | ConvertTo-Json
-    Invoke-MerakiNetworkLockSmDevices -AuthToken "your-api-token" -NetworkId "1234" -LockConfig $config
+        )
+        scope = [ "withAny", "tag1", "tag2" ]
+        pin = 123456
+    }
+
+    $configJson = $config | ConvertTo-Json
+    Invoke-MerakiNetworkLockSmDevices -AuthToken "your-api-token" -NetworkId "1234" -LockConfig $configJson
     
     This example locks devices for the Meraki network with ID "1234" with the specified lock configuration.
     

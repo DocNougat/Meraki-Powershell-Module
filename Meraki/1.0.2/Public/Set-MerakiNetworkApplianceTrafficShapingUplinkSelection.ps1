@@ -16,72 +16,75 @@ function Set-MerakiNetworkApplianceTrafficShapingUplinkSelection {
     A string containing the uplink selection configuration. The string should be in JSON format and should include the "defaultUplink", "activeActiveAutoVPNEnabled", "loadBalancingEnabled", "failoverAndFailback", "wanTrafficUplinkPreferences", and "vpnTrafficUplinkPreferences" properties.
 
     .EXAMPLE
-    $config = '{
-        "activeActiveAutoVPNEnabled": true,
-        "defaultUplink": "wan1",
-        "loadBalancingEnabled": true,
-        "failoverAndFailback": {
-            "immediate": { "enabled": true }
-        },
-        "wanTrafficUplinkPreferences": [
-            {
-                "trafficFilters": [
-                    {
-                        "type": "custom",
-                        "value": {
-                            "protocol": "tcp",
-                            "source": {
-                                "port": "1-1024",
-                                "cidr": "192.168.1.0/24",
-                                "vlan": 10,
-                                "host": 254
-                            },
-                            "destination": {
-                                "port": "any",
-                                "cidr": "any"
-                            }
-                        }
-                    }
-                ],
-                "preferredUplink": "wan1"
+    $config = [PSCustomObject]@{
+        activeActiveAutoVPNEnabled = $true
+        defaultUplink = "wan1"
+        loadBalancingEnabled = $true
+        failoverAndFailback = @{
+            immediate = @{
+                enabled = $true
             }
-        ],
-        "vpnTrafficUplinkPreferences": [
-            {
-                "trafficFilters": [
-                    {
-                        "type": "applicationCategory",
-                        "value": {
-                            "id": "meraki:layer7/category/1",
-                            "protocol": "tcp",
-                            "source": {
-                                "port": "any",
-                                "cidr": "192.168.1.0/24",
-                                "network": "L_23456789",
-                                "vlan": 20,
-                                "host": 200
-                            },
-                            "destination": {
-                                "port": "1-1024",
-                                "cidr": "any",
-                                "network": "L_12345678",
-                                "vlan": 10,
-                                "host": 254,
-                                "fqdn": "www.google.com"
+        }
+        wanTrafficUplinkPreferences = @(
+            @{
+                trafficFilters = @(
+                    @{
+                        type = "custom"
+                        value = @{
+                            protocol = "tcp"
+                            source = @{
+                                port = "1-1024"
+                                cidr = "192.168.1.0/24"
+                                vlan = 10
+                                host = 254
+                            }
+                            destination = @{
+                                port = "any"
+                                cidr = "any"
                             }
                         }
                     }
-                ],
-                "preferredUplink": "bestForVoIP",
-                "failOverCriterion": "poorPerformance",
-                "performanceClass": {
-                    "type": "custom",
-                    "builtinPerformanceClassName": "VoIP",
-                    "customPerformanceClassId": "123456"
+                )
+                preferredUplink = "wan1"
+            }
+        )
+        vpnTrafficUplinkPreferences = @(
+            @{
+                trafficFilters = @(
+                    @{
+                        type = "applicationCategory"
+                        value = @{
+                            id = "meraki:layer7/category/1"
+                            protocol = "tcp"
+                            source = @{
+                                port = "any"
+                                cidr = "192.168.1.0/24"
+                                network = "L_23456789"
+                                vlan = 20
+                                host = 200
+                            }
+                            destination = @{
+                                port = "1-1024"
+                                cidr = "any"
+                                network = "L_12345678"
+                                vlan = 10
+                                host = 254
+                                fqdn = "www.google.com"
+                            }
+                        }
+                    }
+                )
+                preferredUplink = "bestForVoIP"
+                failOverCriterion = "poorPerformance"
+                performanceClass = @{
+                    type = "custom"
+                    builtinPerformanceClassName = "VoIP"
+                    customPerformanceClassId = "123456"
                 }
             }
-        ]
-    }'
+        )
+    }
+
     $config = $config | ConvertTo-Json -Compress
     Set-MerakiNetworkApplianceTrafficShapingUplinkSelection -AuthToken "your-api-token" -NetworkId "your-network-id" -UplinkSelectionConfig $config
 

@@ -16,7 +16,7 @@ function Invoke-MerakiNetworkAddSwitchToStack {
     The ID of the switch stack.
     
     .PARAMETER DeviceSerial
-    A JSON formatted string of the device serial.
+    A string of the device serial.
     
     .EXAMPLE
     Invoke-MerakiNetworkAddSwitchToStack -AuthToken "your-api-token" -NetworkId "1234" -SwitchStackId "5678" -DeviceSerial "QBZY-XWVU-TSRQ"

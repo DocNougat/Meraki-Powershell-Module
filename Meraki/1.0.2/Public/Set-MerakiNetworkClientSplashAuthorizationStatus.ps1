@@ -19,19 +19,20 @@ function Set-MerakiNetworkClientSplashAuthorizationStatus {
     A string containing the client splash authorization status configuration. The string should be in JSON format and should include the "ssids" property, as well as the authorization status for each SSID.
 
     .EXAMPLE
-    $config = '{
-        "ssids": {
-            "0": {
-                "isAuthorized": true
-            },
-            "1": {
-                "isAuthorized": false
-            },
-            "2": {
-                "isAuthorized": true
+    $config = [PSCustomObject]@{
+        ssids = @{
+            "0" = @{
+                isAuthorized = $true
+            }
+            "1" = @{
+                isAuthorized = $false
+            }
+            "2" = @{
+                isAuthorized = $true
             }
         }
-    }'
+    }
+
     $config = $config | ConvertTo-Json -Compress
     Set-MerakiNetworkClientSplashAuthorizationStatus -AuthToken "your-api-token" -NetworkId "L_123456789012345678" -ClientId "123456789012345" -ClientSplashAuthStatusConfig $config
 

@@ -16,34 +16,35 @@ function Set-MerakiDeviceCellularGatewayLAN {
     A string containing the LAN configuration. The string should be in JSON format and should include the properties as defined in the schema.
     
     .EXAMPLE
-    $LANConfig = '{
-        "deviceName": "name of the MG",
-        "deviceLanIp": "192.168.0.33",
-        "deviceSubnet": "192.168.0.32/27",
-        "fixedIpAssignments": [
-            {
-                "mac": "0b:00:00:00:00:ac",
-                "name": "server 1",
-                "ip": "192.168.0.10"
+    $LANConfig = [PSCustomObject]@{
+        deviceName = "name of the MG"
+        deviceLanIp = "192.168.0.33"
+        deviceSubnet = "192.168.0.32/27"
+        fixedIpAssignments = @(
+            [PSCustomObject]@{
+                mac = "0b:00:00:00:00:ac"
+                name = "server 1"
+                ip = "192.168.0.10"
             },
-            {
-                "mac": "0b:00:00:00:00:ab",
-                "name": "server 2",
-                "ip": "192.168.0.20"
+            [PSCustomObject]@{
+                mac = "0b:00:00:00:00:ab"
+                name = "server 2"
+                ip = "192.168.0.20"
             }
-        ],
-        "reservedIpRanges": [
-            {
-                "start": "192.168.1.0",
-                "end": "192.168.1.1",
-                "comment": "A reserved IP range"
+        )
+        reservedIpRanges = @(
+            [PSCustomObject]@{
+                start = "192.168.1.0"
+                end = "192.168.1.1"
+                comment = "A reserved IP range"
             }
-        ]
-    }'
+        )
+    }
+
     $LANConfig = $LANConfig | ConvertTo-Json -Compress
-    
+
     Set-MerakiDeviceCellularGatewayLAN -AuthToken "your-api-token" -Serial "Q2GV-ABCD-1234" -LANConfig $LANConfig
-    
+
     This example updates the LAN settings for the Meraki device with serial "Q2GV-ABCD-1234".
     
     .NOTES

@@ -16,48 +16,49 @@ function Set-MerakiNetworkApplianceTrafficShapingRules {
     A string containing the traffic shaping rule configuration. The string should be in JSON format and should include the "defaultRulesEnabled", "rules", and "definitions" properties.
 
     .EXAMPLE
-    $config = '{
-        "defaultRulesEnabled": true,
-        "rules": [
-            {
-                "definitions": [
-                    {
-                        "type": "host",
-                        "value": "google.com"
+    $config = [PSCustomObject]@{
+        defaultRulesEnabled = $true
+        rules = @(
+            [PSCustomObject]@{
+                definitions = @(
+                    [PSCustomObject]@{
+                        type = "host"
+                        value = "google.com"
                     },
-                    {
-                        "type": "port",
-                        "value": "9090"
+                    [PSCustomObject]@{
+                        type = "port"
+                        value = "9090"
                     },
-                    {
-                        "type": "ipRange",
-                        "value": "192.1.0.0"
+                    [PSCustomObject]@{
+                        type = "ipRange"
+                        value = "192.1.0.0"
                     },
-                    {
-                        "type": "ipRange",
-                        "value": "192.1.0.0/16"
+                    [PSCustomObject]@{
+                        type = "ipRange"
+                        value = "192.1.0.0/16"
                     },
-                    {
-                        "type": "ipRange",
-                        "value": "10.1.0.0/16:80"
+                    [PSCustomObject]@{
+                        type = "ipRange"
+                        value = "10.1.0.0/16:80"
                     },
-                    {
-                        "type": "localNet",
-                        "value": "192.168.0.0/16"
+                    [PSCustomObject]@{
+                        type = "localNet"
+                        value = "192.168.0.0/16"
                     }
-                ],
-                "perClientBandwidthLimits": {
-                    "settings": "custom",
-                    "bandwidthLimits": {
-                        "limitUp": 1000000,
-                        "limitDown": 1000000
+                )
+                perClientBandwidthLimits = [PSCustomObject]@{
+                    settings = "custom"
+                    bandwidthLimits = [PSCustomObject]@{
+                        limitUp = 1000000
+                        limitDown = 1000000
                     }
-                },
-                "dscpTagValue": 0,
-                "priority": "normal"
+                }
+                dscpTagValue = 0
+                priority = "normal"
             }
-        ]
-    }'
+        )
+    }
+
     $config = $config | ConvertTo-Json -Compress
     Set-MerakiNetworkApplianceTrafficShapingRules -AuthToken "your-api-token" -NetworkId "your-network-id" -RuleConfig $config
 

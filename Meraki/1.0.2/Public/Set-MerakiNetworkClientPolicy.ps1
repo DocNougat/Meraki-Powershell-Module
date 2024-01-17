@@ -19,17 +19,11 @@ function Set-MerakiNetworkClientPolicy {
     A string containing the client policy configuration. The string should be in JSON format and should include the "devicePolicy" property, as well as the "groupPolicyId" property if the device policy is set to "Group policy".
 
     .EXAMPLE
-    Set-MerakiNetworkClientPolicy -AuthToken "your-api-token" -NetworkId "L_123456789012345678" -ClientId "123456789012345" -ClientPolicyConfig '{
-        "devicePolicy": "Blocked"
-    }'
+    $config = [PSCustomObject]@{
+        devicePolicy = "Group policy"
+        groupPolicyId = "123456"
+    }
 
-    This example sets the policy for the client with ID "123456789012345" on the Meraki network with ID "L_123456789012345678" to "Blocked".
-
-    .EXAMPLE
-    $config = '{
-        "devicePolicy": "Group policy",
-        "groupPolicyId": "123456"
-    }'
     $config = $config | ConvertTo-Json -Compress
     Set-MerakiNetworkClientPolicy -AuthToken "your-api-token" -NetworkId "L_123456789012345678" -ClientId "123456789012345" -ClientPolicyConfig $config
 

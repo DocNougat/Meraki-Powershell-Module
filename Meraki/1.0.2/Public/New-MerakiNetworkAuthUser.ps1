@@ -16,19 +16,20 @@ function New-MerakiNetworkAuthUser {
     A JSON string containing the user configuration. The JSON string should conform to the schema definition provided by the Meraki Dashboard API.
 
     .EXAMPLE
-    $UserConfig = '{
-        "email": "user@example.com",
-        "name": "John Doe",
-        "password": "password123",
-        "isAdmin": false,
-        "authorizations": [
-            {
-                "ssidNumber": 1,
-                "expiresAt": "2022-12-31T23:59:59Z"
+    $UserConfig = [PSCustomObject]@{
+        email = "user@example.com"
+        name = "John Doe"
+        password = "password123"
+        isAdmin = $false
+        authorizations = @(
+            [PSCustomObject]@{
+                ssidNumber = 1
+                expiresAt = "2022-12-31T23:59:59Z"
             }
-        ]
-    }'
-    $UserConfig = $UserConfig | ConvertTo-JSON -compress
+        )
+    }
+
+    $UserConfig = $UserConfig | ConvertTo-JSON -Compress
 
     New-MerakiNetworkAuthUser -AuthToken "your-api-token" -NetworkId "L_1234567890" -UserConfig $UserConfig
 

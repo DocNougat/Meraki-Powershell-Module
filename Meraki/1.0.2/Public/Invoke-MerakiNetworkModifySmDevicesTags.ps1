@@ -16,24 +16,24 @@ function Invoke-MerakiNetworkModifySmDevicesTags {
     A JSON formatted string of tags configuration.
     
     .EXAMPLE
-    $config = '{
-        "wifiMacs": [ "00:11:22:33:44:55" ],
-        "ids": [
+    $config = [PSCustomObject]@{
+        wifiMacs = [ "00:11:22:33:44:55" ]
+        ids = @(
             "1284392014819",
             "2983092129865"
-        ],
-        "serials": [
+        )
+        serials = @(
             "Q234-ABCD-0001",
             "Q234-ABCD-0002",
             "Q234-ABCD-0003"
-        ],
-        "scope": [ "withAny, old_tag" ],
-        "tags": [ "tag1", "tag2" ],
-        "updateAction": "add"
-    }'
-    $config = $config | ConvertTo-Json
-    Invoke-MerakiNetworkModifySmDevicesTags -AuthToken "your-api-token" -NetworkId "1234" -TagsConfig $config
-    
+        )
+        scope = [ "withAny, old_tag" ]
+        tags = [ "tag1", "tag2" ]
+        updateAction = "add"
+    }
+
+    $configJson = $config | ConvertTo-Json
+    Invoke-MerakiNetworkModifySmDevicesTags -AuthToken "your-api-token" -NetworkId "1234" -TagsConfig $configJson
     This example modifies tags for devices in the Meraki network with ID "1234" with the specified tags configuration.
     
     .NOTES

@@ -16,36 +16,34 @@ function Set-MerakiDeviceCellularGatewayPortForwardingRules {
     A string containing the port forwarding rules configuration. The string should be in JSON format and should include the properties as defined in the schema.
     
     .EXAMPLE
-    $PortForwardingRules = '{
-        "rules": [
-            {
-                "lanIp": "172.31.128.5",
-                "name": "test",
-                "access": "any",
-                "publicPort": "11-12",
-                "localPort": "4",
-                "uplink": "both",
-                "protocol": "tcp"
+    $PortForwardingRules = [PSCustomObject]@{
+        rules = @(
+            [PSCustomObject]@{
+                lanIp = "172.31.128.5"
+                name = "test"
+                access = "any"
+                publicPort = "11-12"
+                localPort = "4"
+                uplink = "both"
+                protocol = "tcp"
             },
-            {
-                "lanIp": "172.31.128.5",
-                "name": "test 2",
-                "access": "restricted",
-                "allowedIps": [
-                    "10.10.10.10",
-                    "10.10.10.11"
-                ],
-                "publicPort": "99",
-                "localPort": "5",
-                "uplink": "both",
-                "protocol": "tcp"
+            [PSCustomObject]@{
+                lanIp = "172.31.128.5"
+                name = "test 2"
+                access = "restricted"
+                allowedIps = @("10.10.10.10", "10.10.10.11")
+                publicPort = "99"
+                localPort = "5"
+                uplink = "both"
+                protocol = "tcp"
             }
-        ]
-    }'
+        )
+    }
+
     $PortForwardingRules = $PortForwardingRules | ConvertTo-Json -Compress
-    
+
     Set-MerakiDeviceCellularGatewayPortForwardingRules -AuthToken "your-api-token" -Serial "Q2GV-ABCD-1234" -PortForwardingRules $PortForwardingRules
-    
+
     This example updates the port forwarding rules for the Meraki device with serial "Q2GV-ABCD-1234".
     
     .NOTES

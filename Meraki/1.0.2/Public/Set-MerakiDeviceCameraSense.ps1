@@ -16,15 +16,18 @@ function Set-MerakiDeviceCameraSense {
     A string containing the camera sense configuration. The string should be in JSON format and should include the properties as defined in the schema.
     
     .EXAMPLE
-    $CameraSenseConfig = '{
-        "senseEnabled": true,
-        "audioDetection": { "enabled": false },
-        "mqttBrokerId": "1234"
-    }'
+    $CameraSenseConfig = [PSCustomObject]@{
+        senseEnabled = $true
+        audioDetection = @{
+            enabled = $false
+        }
+        mqttBrokerId = "1234"
+    }
+
     $CameraSenseConfig = $CameraSenseConfig | ConvertTo-Json -Compress
-    
+
     Set-MerakiDeviceCameraSense -AuthToken "your-api-token" -Serial "Q2GV-ABCD-1234" -CameraSenseConfig $CameraSenseConfig
-    
+
     This example updates the camera sense settings for the Meraki device with serial number "Q2GV-ABCD-1234".
     
     .NOTES

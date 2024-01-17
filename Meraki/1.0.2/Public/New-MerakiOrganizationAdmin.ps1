@@ -16,25 +16,26 @@ function New-MerakiOrganizationAdmin {
     The ID of the Meraki organization for which you want to create a new administrator.
 
     .EXAMPLE
-    $adminInfo = '{
-        "email": "miles@meraki.com",
-        "name": "Miles Meraki",
-        "orgAccess": "none",
-        "tags": [
-            {
-                "tag": "west",
-                "access": "read-only"
+    $adminInfo = [PSCustomObject]@{
+        email = "miles@meraki.com"
+        name = "Miles Meraki"
+        orgAccess = "none"
+        tags = @(
+            @{
+                tag = "west"
+                access = "read-only"
             }
-        ],
-        "networks": [
-            {
-                "id": "N_24329156",
-                "access": "full"
+        )
+        networks = @(
+            @{
+                id = "N_24329156"
+                access = "full"
             }
-        ],
-        "authenticationMethod": "Email"
-    }'
-    $adminInfo = $adminInfo | ConvertTo-JSON -compress
+        )
+        authenticationMethod = "Email"
+    }
+
+    $adminInfo = $adminInfo | ConvertTo-Json -Compress
 
     New-MerakiOrganizationAdmin -AuthToken "your-api-token" -AdminInfo $adminInfo -OrganizationId "1234567890"
 

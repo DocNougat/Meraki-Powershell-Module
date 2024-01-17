@@ -16,41 +16,42 @@ function New-MerakiOrganizationBrandingPolicy {
     The ID of the Meraki organization for which you want to create a new branding policy.
 
     .EXAMPLE
-    $PolicyConfig = '{
-        "name": "Example branding policy",
-        "enabled": true,
-        "adminSettings": {
-            "appliesTo": "All organization admins",
-            "values": []
-        },
-        "customLogo": {
-            "enabled": true,
-            "image": {
-                "contents": "base64-encoded-image-contents",
-                "format": "png"
-            }
-        },
-        "helpSettings": {
-            "apiDocsSubtab": "default or inherit",
-            "casesSubtab": "default or inherit",
-            "ciscoMerakiProductDocumentation": "default or inherit",
-            "communitySubtab": "default or inherit",
-            "dataProtectionRequestsSubtab": "default or inherit",
-            "firewallInfoSubtab": "default or inherit",
-            "getHelpSubtab": "default or inherit",
-            "getHelpSubtabKnowledgeBaseSearch": "default or inherit",
-            "hardwareReplacementsSubtab": "default or inherit",
-            "helpTab": "default or inherit",
-            "helpWidget": "default or inherit",
-            "newFeaturesSubtab": "default or inherit",
-            "smForums": "default or inherit",
-            "supportContactInfo": "default or inherit",
-            "universalSearchKnowledgeBaseSearch": "default or inherit"
+    $PolicyConfig = [PSCustomObject]@{
+        name = "Example branding policy"
+        enabled = $true
+        adminSettings = @{
+            appliesTo = "All organization admins"
+            values = @()
         }
-    }'
-    $PolicyConfig = $PolicyConfig | ConvertTo-JSON -compress
+        customLogo = @{
+            enabled = $true
+            image = @{
+                contents = "base64-encoded-image-contents"
+                format = "png"
+            }
+        }
+        helpSettings = @{
+            apiDocsSubtab = "default or inherit"
+            casesSubtab = "default or inherit"
+            ciscoMerakiProductDocumentation = "default or inherit"
+            communitySubtab = "default or inherit"
+            dataProtectionRequestsSubtab = "default or inherit"
+            firewallInfoSubtab = "default or inherit"
+            getHelpSubtab = "default or inherit"
+            getHelpSubtabKnowledgeBaseSearch = "default or inherit"
+            hardwareReplacementsSubtab = "default or inherit"
+            helpTab = "default or inherit"
+            helpWidget = "default or inherit"
+            newFeaturesSubtab = "default or inherit"
+            smForums = "default or inherit"
+            supportContactInfo = "default or inherit"
+            universalSearchKnowledgeBaseSearch = "default or inherit"
+        }
+    }
 
-    New-MerakiOrganizationBrandingPolicy -AuthToken "your-api-token" -PolicyName "New Branding Policy" -PolicyConfig $PolicyConfig -OrganizationId "1234567890"
+    $PolicyConfig = $PolicyConfig | ConvertTo-Json -Compress
+
+    New-MerakiOrganizationBrandingPolicy -AuthToken "your-api-token" -PolicyConfig $PolicyConfig -OrganizationId "1234567890"
 
     This example creates a new branding policy with name "New Branding Policy" for the Meraki organization with ID "1234567890". The branding policy is configured to enable a custom logo and modify various Help page features.
 

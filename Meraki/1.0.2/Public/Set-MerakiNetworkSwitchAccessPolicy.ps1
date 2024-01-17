@@ -19,50 +19,51 @@ function Set-MerakiNetworkSwitchAccessPolicy {
     A JSON formatted string of policy configuration.
     
     .EXAMPLE
-    $AccessPolicy = '{
-        "name": "Access policy #1",
-        "radiusServers": [
-            {
-                "host": "1.2.3.4",
-                "port": 22,
-                "secret": "secret"
+    $AccessPolicy = [PSCustomObject]@{
+        name = "Access policy #1"
+        radiusServers = @(
+            @{
+                host = "1.2.3.4"
+                port = 22
+                secret = "secret"
             }
-        ],
-        "radius": {
-            "criticalAuth": {
-                "dataVlanId": 100,
-                "voiceVlanId": 100,
-                "suspendPortBounce": true
-            },
-            "failedAuthVlanId": 100,
-            "reAuthenticationInterval": 120
-        },
-        "guestPortBouncing": false,
-        "radiusTestingEnabled": false,
-        "radiusCoaSupportEnabled": false,
-        "radiusAccountingEnabled": true,
-        "radiusAccountingServers": [
-            {
-                "host": "1.2.3.4",
-                "port": 22,
-                "secret": "secret"
+        )
+        radius = @{
+            criticalAuth = @{
+                dataVlanId = 100
+                voiceVlanId = 100
+                suspendPortBounce = $true
             }
-        ],
-        "radiusGroupAttribute": "11",
-        "hostMode": "Single-Host",
-        "accessPolicyType": "Hybrid authentication",
-        "increaseAccessSpeed": false,
-        "guestVlanId": 100,
-        "dot1x": {
-            "controlDirection": "inbound"
-        },
-        "voiceVlanClients": true,
-        "urlRedirectWalledGardenEnabled": true,
-        "urlRedirectWalledGardenRanges": [ "192.168.1.0/24" ]
-    }'
+            failedAuthVlanId = 100
+            reAuthenticationInterval = 120
+        }
+        guestPortBouncing = $false
+        radiusTestingEnabled = $false
+        radiusCoaSupportEnabled = $false
+        radiusAccountingEnabled = $true
+        radiusAccountingServers = @(
+            @{
+                host = "1.2.3.4"
+                port = 22
+                secret = "secret"
+            }
+        )
+        radiusGroupAttribute = "11"
+        hostMode = "Single-Host"
+        accessPolicyType = "Hybrid authentication"
+        increaseAccessSpeed = $false
+        guestVlanId = 100
+        dot1x = @{
+            controlDirection = "inbound"
+        }
+        voiceVlanClients = $true
+        urlRedirectWalledGardenEnabled = $true
+        urlRedirectWalledGardenRanges = @("192.168.1.0/24")
+    }
+
     $AccessPolicy = $AccessPolicy | ConvertTo-Json
     Set-MerakiNetworkSwitchAccessPolicy -AuthToken "your-api-token" -NetworkId "1234" -AccessPolicyNumber "1" -AccessPolicy $AccessPolicy
-    
+
     This example updates the access policy for the network switch in the Meraki network with ID "1234" with the specified policy configuration.
     
     .NOTES

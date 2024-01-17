@@ -19,64 +19,69 @@ function Set-MerakiNetworkSensorAlertsProfile {
     A string containing the alerts profile configuration. The string should be in JSON format and should include the properties as defined in the schema.
     
     .EXAMPLE
-    $AlertsProfileConfig = '{
-        "name": "My Sensor Alert Profile",
-        "schedule": { "id": "5" },
-        "conditions": [
-            {
-                "metric": "temperature",
-                "threshold": {
-                    "temperature": {
-                        "celsius": 20.5,
-                        "fahrenheit": 70,
-                        "quality": "good"
-                    },
-                    "humidity": {
-                        "relativePercentage": 65,
-                        "quality": "inadequate"
-                    },
-                    "water": { "present": true },
-                    "door": { "open": true },
-                    "tvoc": {
-                        "concentration": 400,
-                        "quality": "poor"
-                    },
-                    "pm25": {
-                        "concentration": 90,
-                        "quality": "fair"
-                    },
-                    "noise": {
-                        "ambient": {
-                            "level": 120,
-                            "quality": "poor"
-                        }
-                    },
-                    "indoorAirQuality": {
-                        "score": 80,
-                        "quality": "fair"
+    $AlertsProfileConfig = [PSCustomObject]@{
+        name = "My Sensor Alert Profile"
+        schedule = @{
+            id = "5"
+        }
+        conditions = @(
+            @{
+                metric = "temperature"
+                threshold = @{
+                    temperature = @{
+                        celsius = 20.5
+                        fahrenheit = 70
+                        quality = "good"
                     }
-                },
-                "direction": "above",
-                "duration": 60
+                    humidity = @{
+                        relativePercentage = 65
+                        quality = "inadequate"
+                    }
+                    water = @{
+                        present = $true
+                    }
+                    door = @{
+                        open = $true
+                    }
+                    tvoc = @{
+                        concentration = 400
+                        quality = "poor"
+                    }
+                    pm25 = @{
+                        concentration = 90
+                        quality = "fair"
+                    }
+                    noise = @{
+                        ambient = @{
+                            level = 120
+                            quality = "poor"
+                        }
+                    }
+                    indoorAirQuality = @{
+                        score = 80
+                        quality = "fair"
+                    }
+                }
+                direction = "above"
+                duration = 60
             }
-        ],
-        "recipients": {
-            "emails": [ "miles@meraki.com" ],
-            "smsNumbers": [ "+15555555555" ],
-            "httpServerIds": [
-                "aHR0cHM6Ly93d3cuZXhhbXBsZS5jb20vd2ViaG9va3M="
-            ]
-        },
-        "serials": [
+        )
+        recipients = @{
+            emails = @("miles@meraki.com")
+            smsNumbers = @("+15555555555")
+            httpServerIds = @("aHR0cHM6Ly93d3cuZXhhbXBsZS5jb20vd2ViaG9va3M=")
+        }
+        serials = @(
             "Q234-ABCD-0001",
             "Q234-ABCD-0002",
             "Q234-ABCD-0003"
-        ]
-    }'
+        )
+    }
+
     $AlertsProfileConfig = $AlertsProfileConfig | ConvertTo-Json -Compress
-    
+
     Set-MerakiNetworkSensorAlertsProfile -AuthToken "your-api-token" -NetworkId "1234" -ProfileId "5678" -AlertsProfileConfig $AlertsProfileConfig
-    
+
     This example updates the sensor alerts profile with ID "5678" for the Meraki network with ID "1234".
     
     .NOTES

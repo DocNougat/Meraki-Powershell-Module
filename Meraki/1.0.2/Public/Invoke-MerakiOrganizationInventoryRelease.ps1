@@ -16,9 +16,12 @@ function Invoke-MerakiOrganizationInventoryRelease {
     A pre-formatted JSON string containing an array of serials of the devices that should be released.
 
     .EXAMPLE
-    $serials = '["Q2HP-XXXX-XXXX", "Q2HP-YYYY-YYYY"]'
-    Invoke-MerakiOrganizationInventoryRelease -AuthToken "1234" -Serials $serials
+    $serials = [PSCustomObject]@{
+        serials = @("Q2HP-XXXX-XXXX", "Q2HP-YYYY-YYYY")
+    }
+    $serials = ConvertTo-Json -Compress
 
+    Invoke-MerakiOrganizationInventoryRelease -AuthToken "1234" -Serials $serials
     This example releases the devices with serials 'Q2HP-XXXX-XXXX' and 'Q2HP-YYYY-YYYY' from the inventory of the first organization associated with the authentication token '1234'.
 
     .NOTES

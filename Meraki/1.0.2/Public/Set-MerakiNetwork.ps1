@@ -16,13 +16,14 @@ function Set-MerakiNetwork {
     The JSON configuration for the network to be updated. Refer to the JSON schema for required parameters and their format.
 
     .EXAMPLE
-    $NetworkConfig = '{
-        "name": "Main Office",
-        "timeZone": "America/Los_Angeles",
-        "tags": [ "tag1", "tag2" ],
-        "enrollmentString": "my-enrollment-string",
-        "notes": "Additional description of the network"
-    }'
+    $NetworkConfig = [PSCustomObject]@{
+        name = "Main Office"
+        timeZone = "America/Los_Angeles"
+        tags = @("tag1", "tag2")
+        enrollmentString = "my-enrollment-string"
+        notes = "Additional description of the network"
+    }
+
     $NetworkConfig = $NetworkConfig | ConvertTo-JSON -compress
 
     Set-MerakiNetwork -AuthToken "your-api-token" -NetworkId "L_123456789012345678" -NetworkConfig $NetworkConfig

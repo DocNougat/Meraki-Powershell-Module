@@ -16,19 +16,20 @@ function Set-MerakiDeviceCameraQualityAndRetention {
     The JSON configuration for the quality and retention settings to be updated. Refer to the JSON schema for required parameters and their format.
     
     .EXAMPLE
-    $QualityAndRetentionConfig = '{
-        "motionBasedRetentionEnabled": false,
-        "audioRecordingEnabled": false,
-        "restrictedBandwidthModeEnabled": false,
-        "profileId": "1234",
-        "quality": "Standard",
-        "motionDetectorVersion": 2,
-        "resolution": "1280x720"
-    }'
-    $QualityAndRetentionConfig = $QualityAndRetentionConfig | ConvertTo-JSON -compress
-    
+    $QualityAndRetentionConfig = [PSCustomObject]@{
+        motionBasedRetentionEnabled = $false
+        audioRecordingEnabled = $false
+        restrictedBandwidthModeEnabled = $false
+        profileId = "1234"
+        quality = "Standard"
+        motionDetectorVersion = 2
+        resolution = "1280x720"
+    }
+
+    $QualityAndRetentionConfig = $QualityAndRetentionConfig | ConvertTo-Json -Compress
+
     Set-MerakiDeviceCameraQualityAndRetention -AuthToken "your-api-token" -Serial "Q2GV-ABCD-1234" -QualityAndRetentionConfig $QualityAndRetentionConfig
-    
+
     This example updates the quality and retention settings of the Meraki device's camera with serial "Q2GV-ABCD-1234".
     
     .NOTES

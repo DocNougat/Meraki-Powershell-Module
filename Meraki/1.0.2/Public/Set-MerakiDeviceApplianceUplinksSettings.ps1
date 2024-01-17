@@ -16,86 +16,77 @@ function Set-MerakiDeviceApplianceUplinksSettings {
     A string containing the Uplinks configuration. The string should be in JSON format and should include the "interfaces" property, as well as the configuration for each interface.
 
     .EXAMPLE
-    $config = '{
-        "interfaces": {
-            "wan1": {
-                "enabled": true,
-                "vlanTagging": {
-                    "enabled": true,
-                    "vlanId": 1
-                },
-                "svis": {
-                    "ipv4": {
-                        "assignmentMode": "static",
-                        "address": "9.10.11.10/16",
-                        "gateway": "13.14.15.16",
-                        "nameservers": {
-                            "addresses": [
-                                "1.2.3.4"
-                            ]
-                        }
-                    },
-                    "ipv6": {
-                        "assignmentMode": "static",
-                        "address": "1:2:3::4",
-                        "gateway": "1:2:3::5",
-                        "nameservers": {
-                            "addresses": [
-                                "1001:4860:4860::8888",
-                                "1001:4860:4860::8844"
-                            ]
+    $config = [PSCustomObject]@{
+        interfaces = @{
+            wan1 = @{
+                enabled = $true
+                vlanTagging = @{
+                    enabled = $true
+                    vlanId = 1
+                }
+                svis = @{
+                    ipv4 = @{
+                        assignmentMode = "static"
+                        address = "9.10.11.10/16"
+                        gateway = "13.14.15.16"
+                        nameservers = @{
+                            addresses = @("1.2.3.4")
                         }
                     }
-                },
-                "pppoe": {
-                    "enabled": true,
-                    "authentication": {
-                        "enabled": true,
-                        "username": "username",
-                        "password": "password"
+                    ipv6 = @{
+                        assignmentMode = "static"
+                        address = "1:2:3::4"
+                        gateway = "1:2:3::5"
+                        nameservers = @{
+                            addresses = @("1001:4860:4860::8888", "1001:4860:4860::8844")
+                        }
                     }
                 }
-            },
-            "wan2": {
-                "enabled": true,
-                "vlanTagging": {
-                    "enabled": true,
-                    "vlanId": 1
-                },
-                "svis": {
-                    "ipv4": {
-                        "assignmentMode": "static",
-                        "address": "9.10.11.10/16",
-                        "gateway": "13.14.15.16",
-                        "nameservers": {
-                            "addresses": [
-                                "1.2.3.4"
-                            ]
-                        }
-                    },
-                    "ipv6": {
-                        "assignmentMode": "static",
-                        "address": "1:2:3::4",
-                        "gateway": "1:2:3::5",
-                        "nameservers": {
-                            "addresses": [
-                                "1001:4860:4860::8888",
-                                "1001:4860:4860::8844"
-                            ]
+                pppoe = @{
+                    enabled = $true
+                    authentication = @{
+                        enabled = $true
+                        username = "username"
+                        password = "password"
+                    }
+                }
+            }
+            wan2 = @{
+                enabled = $true
+                vlanTagging = @{
+                    enabled = $true
+                    vlanId = 1
+                }
+                svis = @{
+                    ipv4 = @{
+                        assignmentMode = "static"
+                        address = "9.10.11.10/16"
+                        gateway = "13.14.15.16"
+                        nameservers = @{
+                            addresses = @("1.2.3.4")
                         }
                     }
-                },
-                "pppoe": {
-                    "enabled": true,
-                    "authentication": {
-                        "enabled": true,
-                        "username": "username",
-                        "password": "password"
+                    ipv6 = @{
+                        assignmentMode = "static"
+                        address = "1:2:3::4"
+                        gateway = "1:2:3::5"
+                        nameservers = @{
+                            addresses = @("1001:4860:4860::8888", "1001:4860:4860::8844")
+                        }
+                    }
+                }
+                pppoe = @{
+                    enabled = $true
+                    authentication = @{
+                        enabled = $true
+                        username = "username"
+                        password = "password"
                     }
                 }
             }
         }
-    }'
+    }
+
     $config = $config | ConvertTo-Json -Compress
     Set-MerakiDeviceApplianceUplinksSettings -AuthToken "your-api-token" -DeviceSerial "Q2XX-XXXX-XXXX" -UplinksConfig $config
 

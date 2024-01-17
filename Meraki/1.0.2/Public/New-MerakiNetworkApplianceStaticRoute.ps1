@@ -16,11 +16,12 @@ function New-MerakiNetworkApplianceStaticRoute {
     A string containing the static route configuration. The string should be in JSON format and should include the "name", "subnet", and "gatewayIp" properties.
 
     .EXAMPLE
-    $config = '{
-        "name": "My route",
-        "subnet": "192.168.1.0/24",
-        "gatewayIp": "1.2.3.5"
-    }'
+    $config = [PSCustomObject]@{
+        name = "My route"
+        subnet = "192.168.1.0/24"
+        gatewayIp = "1.2.3.5"
+    }
+
     $config = $config | ConvertTo-Json -Compress
     New-MerakiNetworkApplianceStaticRoute -AuthToken "your-api-token" -NetworkId "your-network-id" -StaticRouteConfig $config
 

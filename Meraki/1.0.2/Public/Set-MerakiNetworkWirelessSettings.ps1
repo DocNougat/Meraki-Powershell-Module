@@ -16,19 +16,19 @@ function Set-MerakiNetworkWirelessSettings {
     A JSON formatted string of the wireless settings.
     
     .EXAMPLE
-    $WirelessSettings = '{
-        "meshingEnabled": true,
-        "ipv6BridgeEnabled": false,
-        "locationAnalyticsEnabled": false,
-        "upgradeStrategy": "minimizeUpgradeTime",
-        "ledLightsOn": false,
-        "namedVlans": {
-            "poolDhcpMonitoring": {
-                "enabled": true,
-                "duration": 5
+    $WirelessSettings = [PSCustomObject]@{
+        meshingEnabled = $true
+        ipv6BridgeEnabled = $false
+        locationAnalyticsEnabled = $false
+        upgradeStrategy = "minimizeUpgradeTime"
+        ledLightsOn = $false
+        namedVlans = @{
+            poolDhcpMonitoring = @{
+                enabled = $true
+                duration = 5
             }
         }
-    }'
+    }
     $WirelessSettings = $WirelessSettings | ConvertTo-Json -Compress
     Set-MerakiNetworkWirelessSettings -AuthToken "your-api-token" -NetworkId "1234" -WirelessSettings $WirelessSettings
     

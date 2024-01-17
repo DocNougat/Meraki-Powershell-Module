@@ -19,23 +19,23 @@ function Set-MerakiOrganizationActionBatch {
     The JSON configuration for the updated action batch. Refer to the JSON schema for required parameters and their format.
 
     .EXAMPLE
-    $config = '{
-        "confirmed": true,
-        "synchronous": true,
-        "actions": [
-            {
-                "resource": "/organizations/{organizationId}/networks/{networkId}/devices/{serial}/switchPorts/{portId}",
-                "operation": "update",
-                "body": {
-                    "name": "New port name"
+    $config = [PSCustomObject]@{
+        confirmed = $true
+        synchronous = $true
+        actions = @(
+            [PSCustomObject]@{
+                resource = "/organizations/{organizationId}/networks/{networkId}/devices/{serial}/switchPorts/{portId}"
+                operation = "update"
+                body = [PSCustomObject]@{
+                    name = "New port name"
                 }
             }
-        ]
-    }'
-    $config = $config | ConvertTo-JSON -compress
-    
-    Set-MerakiOrganizationActionBatch -AuthToken "your-api-token" -OrganizationId "1234567890" -ActionBatchId "AB_1234567890" -ActionBatchConfig $config
+        )
+    }
 
+    $config = $config | ConvertTo-Json -Compress
+
+    Set-MerakiOrganizationActionBatch -AuthToken "your-api-token" -OrganizationId "1234567890" -ActionBatchId "AB_1234567890" -ActionBatchConfig $config
     This example updates the action batch with ID "AB_1234567890" for the Meraki organization with ID "1234567890" using the provided action batch configuration.
 
     .NOTES

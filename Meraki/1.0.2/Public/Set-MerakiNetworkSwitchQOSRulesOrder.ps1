@@ -16,15 +16,16 @@ function Set-MerakiNetworkSwitchQOSRulesOrder {
     A JSON formatted string of QoS rules order.
     
     .EXAMPLE
-    $QOSOrder = '{
-        "ruleIds": [
+    $QOSOrder = [PSCustomObject]@{
+        ruleIds = @(
             "1284392014819",
             "2983092129865"
-        ]
-    }'
+        )
+    }
+
     $QOSOrder = $QOSOrder | ConvertTo-Json -Compress
     Set-MerakiNetworkSwitchQOSRulesOrder -AuthToken "your-api-token" -NetworkId "N_1234" -QOSOrder $QOSOrder
-    
+
     This example updates the order of network switch QoS rules with the specified order.
     
     .NOTES

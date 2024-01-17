@@ -16,21 +16,22 @@ function Set-MerakiDeviceSensorRelationships {
     A string of related devices for the role.
     
     .EXAMPLE
-    $config = '{
-        "livestream": {
-            "relatedDevices": [
-                {
-                    "serial": "Q2XX-XXXX-XXXX"
+    $config = [PSCustomObject]@{
+        livestream = @{
+            relatedDevices = @(
+                @{
+                    serial = "Q2XX-XXXX-XXXX"
                 },
-                {
-                    "serial": "Q4XX-XXXX-XXXX"
+                @{
+                    serial = "Q4XX-XXXX-XXXX"
                 }
-            ]
+            )
         }
-    }'
-    $config = $config | ConvertTo-JSON -compress
+    }
+
+    $config = $config | ConvertTo-Json -Compress
     Set-MerakiDeviceSensorRelationships -AuthToken "your-api-token" -Serial "1234" -SensorRelationships $config
-    
+
     .NOTES
     The function requires the "Invoke-RestMethod" cmdlet to be available.
     

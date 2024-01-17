@@ -16,21 +16,22 @@ function Set-MerakiOrganizationAlertsProfile {
     The JSON configuration for the alerts profile to be updated. Refer to the JSON schema for required parameters and their format.
 
     .EXAMPLE
-    $AlertProfileConfig = '{
-        "description": "Updated alert profile",
-        "type": "wanUtilization",
-        "networkTags": ["tag1", "tag2"],
-        "alertCondition": {
-            "bit_rate_bps": 2000000,
-            "duration": 120,
-            "window": 7200
-        },
-        "recipients": {
-            "emails": ["alerts@example.com", "alerts2@example.com"],
-            "httpServerIds": []
+    $AlertProfileConfig = [PSCustomObject]@{
+        description = "Updated alert profile"
+        type = "wanUtilization"
+        networkTags = @("tag1", "tag2")
+        alertCondition = @{
+            bit_rate_bps = 2000000
+            duration = 120
+            window = 7200
         }
-    }'
-    $AlertProfileConfig = $AlertProfileConfig | ConvertTo-JSON -compress
+        recipients = @{
+            emails = @("alerts@example.com", "alerts2@example.com")
+            httpServerIds = @()
+        }
+    }
+
+    $AlertProfileConfig = $AlertProfileConfig | ConvertTo-Json -Compress
 
     Set-MerakiOrganizationAlertsProfile -AuthToken "your-api-token" -AlertProfileId "1234567890" -AlertProfileConfig $AlertProfileConfig
 

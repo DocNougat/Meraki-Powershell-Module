@@ -16,21 +16,24 @@ function Set-MerakiNetworkApplianceConnectivityMonitoringDestinations {
     A string containing the monitoring configuration. The string should be in JSON format and should include the "destinations" array, which contains objects with the "ip", "description", and "default" properties.
 
     .EXAMPLE
-    $config = '{
-        "destinations": [
-            {
-                "ip": "8.8.8.8",
-                "description": "Google",
-                "default": false
+    $config = [PSCustomObject]@{
+        destinations = @(
+            @{
+                ip = "8.8.8.8"
+                description = "Google"
+                default = $false
             },
-            {
-                "ip": "1.23.45.67",
-                "description": "test description",
-                "default": true
+            @{
+                ip = "1.23.45.67"
+                description = "test description"
+                default = $true
             },
-            { "ip": "9.8.7.6" }
-        ]
-    }'
+            @{
+                ip = "9.8.7.6"
+            }
+        )
+    }
+
     $config = $config | ConvertTo-Json -Compress
     Set-MerakiNetworkApplianceConnectivityMonitoringDestinations -AuthToken "your-api-token" -NetworkId "your-network-id" -MonitoringConfig $config
 

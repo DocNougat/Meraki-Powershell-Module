@@ -16,29 +16,28 @@ function Set-MerakiNetworkApplianceSingleLan {
     A string containing the single LAN configuration. The string should be in JSON format and should include the "applianceIp", "subnet", "ipv6", and "mandatoryDHCP" properties.
 
     .EXAMPLE
-    $config = '{
-        "applianceIp": "192.168.1.1",
-        "subnet": "192.168.1.0/24",
-        "ipv6": {
-            "enabled": true,
-            "prefixAssignments": [
-                {
-                    "staticPrefix": "2001:db8:abcd:0012::/64",
-                    "autonomous": true,
-                    "origin": {
-                        "type": "internet"
-                    },
-                    "interfaces": [
-                        "lan"
-                    ]
+    $config = [PSCustomObject]@{
+        applianceIp = "192.168.1.1"
+        subnet = "192.168.1.0/24"
+        ipv6 = @{
+            enabled = $true
+            prefixAssignments = @(
+                @{
+                    staticPrefix = "2001:db8:abcd:0012::/64"
+                    autonomous = $true
+                    origin = @{
+                        type = "internet"
+                    }
+                    interfaces = @("lan")
                 }
-            ],
-            "staticApplianceIp6": "2001:db8:abcd:0012::1"
-        },
-        "mandatoryDHCP": {
-            "enabled": true
+            )
+            staticApplianceIp6 = "2001:db8:abcd:0012::1"
         }
-    }'
+        mandatoryDHCP = @{
+            enabled = $true
+        }
+    }
+
     $config = $config | ConvertTo-Json -Compress
     Set-MerakiNetworkApplianceSingleLan -AuthToken "your-api-token" -NetworkId "your-network-id" -SingleLanConfig $config
 

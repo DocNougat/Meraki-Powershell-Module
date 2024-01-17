@@ -16,28 +16,29 @@ function Set-MerakiOrganizationLoginSecurity {
     A JSON string containing the login security configuration. The JSON string should conform to the schema definition provided by the Meraki Dashboard API.
 
     .EXAMPLE
-    $SecurityConfig = '{
-        "accountLockoutAttempts": 5,
-        "idleTimeoutMinutes": 30,
-        "numDifferentPasswords": 5,
-        "passwordExpirationDays": 90,
-        "enforceAccountLockout": true,
-        "enforceDifferentPasswords": true,
-        "enforceIdleTimeout": true,
-        "enforceLoginIpRanges": true,
-        "enforcePasswordExpiration": true,
-        "enforceStrongPasswords": true,
-        "enforceTwoFactorAuth": true,
-        "loginIpRanges": ["192.168.1.0/24", "10.0.0.0/8"],
-        "apiAuthentication": {
-            "enabled": true,
-            "ipRestrictionsForKeys": {
-                "enabled": true,
-                "ranges": ["192.168.1.0/24", "10.0.0.0/8"]
+    $SecurityConfig = [PSCustomObject]@{
+        accountLockoutAttempts = 5
+        idleTimeoutMinutes = 30
+        numDifferentPasswords = 5
+        passwordExpirationDays = 90
+        enforceAccountLockout = $true
+        enforceDifferentPasswords = $true
+        enforceIdleTimeout = $true
+        enforceLoginIpRanges = $true
+        enforcePasswordExpiration = $true
+        enforceStrongPasswords = $true
+        enforceTwoFactorAuth = $true
+        loginIpRanges = @("192.168.1.0/24", "10.0.0.0/8")
+        apiAuthentication = @{
+            enabled = $true
+            ipRestrictionsForKeys = @{
+                enabled = $true
+                ranges = @("192.168.1.0/24", "10.0.0.0/8")
             }
         }
-    }'
-    $SecurityConfig = $SecurityConfig | ConvertTo-JSON -compress
+    }
+
+    $SecurityConfig = $SecurityConfig | ConvertTo-JSON -Compress
 
     Set-MerakiOrganizationLoginSecurity -AuthToken "your-api-token" -OrganizationId "1234567890" -SecurityConfig $SecurityConfig
 

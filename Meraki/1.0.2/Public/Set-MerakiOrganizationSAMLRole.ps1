@@ -19,23 +19,24 @@ function Set-MerakiOrganizationSAMLRole {
     The JSON configuration for the SAML role to be updated. Refer to the JSON schema for required parameters and their format.
 
     .EXAMPLE
-    $SAMLRoleConfig = '{
-        "role": "myrole",
-        "orgAccess": "none",
-        "tags": [
-            {
-                "tag": "west",
-                "access": "read-only"
+    $SAMLRoleConfig = [PSCustomObject]@{
+        role = "myrole"
+        orgAccess = "none"
+        tags = @(
+            @{
+                tag = "west"
+                access = "read-only"
             }
-        ],
-        "networks": [
-            {
-                "id": "N_24329156",
-                "access": "full"
+        )
+        networks = @(
+            @{
+                id = "N_24329156"
+                access = "full"
             }
-        ]
-    }'
-    $SAMLRoleConfig = $SAMLRoleConfig | ConvertTo-JSON -compress
+        )
+    }
+
+    $SAMLRoleConfig = $SAMLRoleConfig | ConvertTo-Json -Compress
 
     Set-MerakiOrganizationSAMLRole -AuthToken "your-api-token" -OrganizationId "1234567890" -SAMLRoleId "5678" -SAMLRoleConfig $SAMLRoleConfig
 

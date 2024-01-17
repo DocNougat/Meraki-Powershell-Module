@@ -16,20 +16,36 @@ function Set-MerakiNetworkApplianceVPNSiteToSiteVPN {
     The JSON configuration for the site-to-site VPN. Refer to the JSON schema for required parameters and their format.
 
     .EXAMPLE
-    $config = '{
-        "mode": "spoke",
-        "hubs": [
-            {"hubId": "N_638948197133212683", "useDefaultRoute": false},
-            {"hubId": "N_725079540006653672", "useDefaultRoute": false},
-            {"hubId": "L_725079540006651259", "useDefaultRoute": false}
-        ],
-        "subnets": [
-            {"localSubnet": "10.117.14.0/24", "useVPN": true},
-            {"localSubnet": "10.117.100.0/24", "useVPN": false}
-        ]
-    }'
-    $config = $config | ConvertTo-JSON -compress
-    
+    $config = [PSCustomObject]@{
+        mode = "spoke"
+        hubs = @(
+            @{
+                hubId = "N_638948197133212683"
+                useDefaultRoute = $false
+            },
+            @{
+                hubId = "N_725079540006653672"
+                useDefaultRoute = $false
+            },
+            @{
+                hubId = "L_725079540006651259"
+                useDefaultRoute = $false
+            }
+        )
+        subnets = @(
+            @{
+                localSubnet = "10.117.14.0/24"
+                useVPN = $true
+            },
+            @{
+                localSubnet = "10.117.100.0/24"
+                useVPN = $false
+            }
+        )
+    }
+
+    $config = $config | ConvertTo-Json -Compress
+
     Set-MerakiNetworkApplianceVPNSiteToSiteVPN -AuthToken "your-api-token" -NetworkId "N_1234567890" -VPNConfig $config
 
     This example configures site-to-site VPN settings for the Meraki network with ID "N_1234567890" using the provided VPN configuration.

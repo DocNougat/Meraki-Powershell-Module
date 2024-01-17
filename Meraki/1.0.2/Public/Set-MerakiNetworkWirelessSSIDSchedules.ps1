@@ -19,23 +19,24 @@ function Set-MerakiNetworkWirelessSSIDSchedules {
     A string containing the SSID schedule configuration. The string should be in JSON format and should include the "enabled" property and the "ranges" array, which contains objects with the "startDay", "startTime", "endDay", and "endTime" properties.
 
     .EXAMPLE
-    $schedule = '{
-        "enabled": true,
-        "ranges": [
-            {
-                "startDay": "Tuesday",
-                "startTime": "01:00",
-                "endDay": "Tuesday",
-                "endTime": "05:00"
+    $schedule = [PSCustomObject]@{
+        enabled = $true
+        ranges = @(
+            @{
+                startDay = "Tuesday"
+                startTime = "01:00"
+                endDay = "Tuesday"
+                endTime = "05:00"
             },
-            {
-                "startDay": "Fri",
-                "startTime": "19:00",
-                "endDay": "monday",
-                "endTime": "05:00"
+            @{
+                startDay = "Fri"
+                startTime = "19:00"
+                endDay = "monday"
+                endTime = "05:00"
             }
-        ]
-    }'
+        )
+    }
+
     $schedule = $schedule | ConvertTo-Json -Compress
     Set-MerakiNetworkWirelessSSIDSchedules -AuthToken "your-api-token" -NetworkId "your-network-id" -SSIDNumber "1" -SSIDSchedule $schedule
 

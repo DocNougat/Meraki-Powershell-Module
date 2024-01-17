@@ -13,18 +13,19 @@ function New-MerakiOrganization {
     The JSON configuration for the organization to be created. Refer to the JSON schema for required parameters and their format.
 
     .EXAMPLE
-    $OrganizationConfig = '{
-        "name": "My organization",
-        "management": {
-            "details": [
-                {
-                    "name": "MSP ID",
-                    "value": "123456"
+    $OrganizationConfig = [PSCustomObject]@{
+        name = "My organization"
+        management = @{
+            details = @(
+                @{
+                    name = "MSP ID"
+                    value = "123456"
                 }
-            ]
+            )
         }
-    }'
-    $OrganizationConfig = $OrganizationConfig | ConvertTo-JSON -compress
+    }
+
+    $OrganizationConfig = $OrganizationConfig | ConvertTo-Json -Compress
 
     New-MerakiOrganization -AuthToken "your-api-token" -OrganizationConfig $OrganizationConfig
 

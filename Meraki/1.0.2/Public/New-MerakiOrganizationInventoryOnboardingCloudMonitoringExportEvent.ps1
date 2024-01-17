@@ -16,12 +16,13 @@ function New-MerakiOrganizationInventoryOnboardingCloudMonitoringExportEvent {
     A string containing the export configuration. The string should be in JSON format and should include the following properties: "timestamp", "logEvent", "request", and "targetOS".
 
     .EXAMPLE
-    $exportConfig = '{
-        "timestamp": 1627584000,
-        "logEvent": "download",
-        "request": "redirect",
-        "targetOS": "Windows"
-    }'
+    $exportConfig = [PSCustomObject]@{
+        timestamp = 1627584000
+        logEvent = "download"
+        request = "redirect"
+        targetOS = "Windows"
+    }
+
     $exportConfig = $exportConfig | ConvertTo-Json -Compress
     New-MerakiOrganizationInventoryOnboardingCloudMonitoringExportEvent -AuthToken "your-api-token" -OrganizationId "123456" -ExportConfig $exportConfig
 

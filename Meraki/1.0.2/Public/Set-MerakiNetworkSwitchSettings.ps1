@@ -16,25 +16,26 @@ function Set-MerakiNetworkSwitchSettings {
     A JSON formatted string of switch settings configuration.
     
     .EXAMPLE
-    $SwitchSettings = '{
-        "uplinkClientSampling": {
-            "enabled": true
-        },
-        "macBlocklist": {
-            "enabled": true
-        },
-        "vlan": 100,
-        "useCombinedPower": true,
-        "powerExceptions": [
-            {
-                "powerType": "redundant",
-                "serial": "qwert-12345-qwert"
+    $SwitchSettings = [PSCustomObject]@{
+        "uplinkClientSampling" = @{
+            "enabled" = $true
+        }
+        "macBlocklist" = @{
+            "enabled" = $true
+        }
+        "vlan" = 100
+        "useCombinedPower" = $true
+        "powerExceptions" = @(
+            @{
+                "powerType" = "redundant"
+                "serial" = "qwert-12345-qwert"
             }
-        ]
-    }'
+        )
+    }
+
     $SwitchSettings = $SwitchSettings | ConvertTo-Json
     Set-MerakiNetworkSwitchSettings -AuthToken "your-api-token" -NetworkId "1234" -SwitchSettings $SwitchSettings
-    
+
     This example updates network switch settings with the specified configuration.
     
     .NOTES

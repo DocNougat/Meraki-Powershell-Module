@@ -22,18 +22,18 @@ function Set-MerakiNetworkFloorPlan {
     $image = "C:\path\to\image.png"
     $base64 = Convert-MerakiImageToBase64 -FilePath $image
 
-    $config = @{
+    $config = [PSCustomObject]@{
         "imageContents" = $base64
         "name" = "Floor Plan 1"
-        "bottomLeftCorner" = @{
+        "bottomLeftCorner" = [PSCustomObject]@{
             "lat" = 37.418095
             "lng" = -122.098531
         }
-        "topLeftCorner" = @{
+        "topLeftCorner" = [PSCustomObject]@{
             "lat" = 37.418095
             "lng" = -122.095083
         }
-        "topRightCorner" = @{
+        "topRightCorner" = [PSCustomObject]@{
             "lat" = 37.420352
             "lng" = -122.095083
         }

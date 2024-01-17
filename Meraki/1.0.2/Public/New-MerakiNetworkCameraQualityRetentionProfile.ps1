@@ -16,26 +16,27 @@ function New-MerakiNetworkCameraQualityRetentionProfile {
     A string containing the retention profile configuration. The string should be in JSON format and should include the properties as defined in the schema.
     
     .EXAMPLE
-    $RetentionProfileConfig = '{
-        "maxRetentionDays": 30,
-        "motionDetectorVersion": 2,
-        "name": "My Profile",
-        "scheduleId": "1234",
-        "audioRecordingEnabled": false,
-        "cloudArchiveEnabled": false,
-        "motionBasedRetentionEnabled": false,
-        "restrictedBandwidthModeEnabled": false,
-        "videoSettings": {
-            "MV12": {
-                "quality": "Standard",
-                "resolution": "1280x720"
+    $RetentionProfileConfig = [PSCustomObject]@{
+        maxRetentionDays = 30
+        motionDetectorVersion = 2
+        name = "My Profile"
+        scheduleId = "1234"
+        audioRecordingEnabled = $false
+        cloudArchiveEnabled = $false
+        motionBasedRetentionEnabled = $false
+        restrictedBandwidthModeEnabled = $false
+        videoSettings = @{
+            MV12 = @{
+                quality = "Standard"
+                resolution = "1280x720"
             }
         }
-    }'
+    }
+
     $RetentionProfileConfig = $RetentionProfileConfig | ConvertTo-Json -Compress
-    
+
     New-MerakiNetworkCameraQualityRetentionProfile -AuthToken "your-api-token" -NetworkId "N_1234567890" -RetentionProfileConfig $RetentionProfileConfig
-    
+
     This example creates a new camera quality retention profile for the Meraki network with ID "N_1234567890".
     
     .NOTES

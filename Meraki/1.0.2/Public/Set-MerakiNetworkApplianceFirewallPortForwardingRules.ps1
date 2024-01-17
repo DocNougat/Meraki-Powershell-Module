@@ -16,19 +16,20 @@ function Set-MerakiNetworkApplianceFirewallPortForwardingRules {
     A string containing the firewall configuration. The string should be in JSON format and should include the "rules" array, which contains objects with the "lanIp", "allowedIps", "name", "protocol", "publicPort", "localPort", and "uplink" properties.
 
     .EXAMPLE
-    $config = '{
-        "rules": [
-            {
-                "lanIp": "192.168.128.1",
-                "allowedIps": [ "any" ],
-                "name": "Description of Port Forwarding Rule",
-                "protocol": "tcp",
-                "publicPort": "8100-8101",
-                "localPort": "442-443",
-                "uplink": "both"
+    $config = [PSCustomObject]@{
+        rules = @(
+            [PSCustomObject]@{
+                lanIp = "192.168.128.1"
+                allowedIps = @("any")
+                name = "Description of Port Forwarding Rule"
+                protocol = "tcp"
+                publicPort = "8100-8101"
+                localPort = "442-443"
+                uplink = "both"
             }
-        ]
-    }'
+        )
+    }
+
     $config = $config | ConvertTo-Json -Compress
     Set-MerakiNetworkApplianceFirewallPortForwardingRules -AuthToken "your-api-token" -NetworkId "your-network-id" -FirewallConfig $config
 

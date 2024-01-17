@@ -12,7 +12,7 @@ function Set-MerakiNetworkWirelessSSID {
     .PARAMETER NetworkId
     The ID of the network.
     
-    .PARAMETER Number
+    .PARAMETER SSIDNumber
     The number of the SSID.
     
     .PARAMETER SSIDConfig
@@ -175,7 +175,7 @@ function Set-MerakiNetworkWirelessSSID {
         }
     }'
     $SSIDConfig = $SSIDConfig | ConvertTo-Json -Compress
-    Set-MerakiNetworkWirelessSSID -AuthToken "your-api-token" -NetworkId "1234" -Number 0 -SSIDConfig $SSIDConfig
+    Set-MerakiNetworkWirelessSSID -AuthToken "your-api-token" -NetworkId "1234" -SSIDNumber 0 -SSIDConfig $SSIDConfig
     
     This example updates a network wireless SSID with the specified configuration.
     
@@ -192,7 +192,7 @@ function Set-MerakiNetworkWirelessSSID {
             [parameter(Mandatory=$true)]
             [string]$NetworkId,
             [parameter(Mandatory=$true)]
-            [int]$Number,
+            [int]$SSIDNumber,
             [parameter(Mandatory=$true)]
             [string]$SSIDConfig
         )
@@ -203,7 +203,7 @@ function Set-MerakiNetworkWirelessSSID {
                 "content-type" = "application/json; charset=utf-8"
             }
     
-            $url = "https://api.meraki.com/api/v1/networks/$NetworkId/wireless/ssids/$Number"
+            $url = "https://api.meraki.com/api/v1/networks/$NetworkId/wireless/ssids/$SSIDNumber"
     
             $body = $SSIDConfig
     

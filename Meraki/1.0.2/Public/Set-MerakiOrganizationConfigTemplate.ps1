@@ -19,10 +19,11 @@ function Set-MerakiOrganizationConfigTemplate {
     A string containing the configuration template configuration. The string should be in JSON format and should include the "name" and "timeZone" properties.
 
     .EXAMPLE
-    $config = '{
-        "name": "My Updated Config Template",
-        "timeZone": "America/Los_Angeles"
-    }'
+    $config = [PSCustomObject]@{
+        name = "My Updated Config Template"
+        timeZone = "America/Los_Angeles"
+    }
+
     $config = $config | ConvertTo-Json -Compress
     Set-MerakiOrganizationConfigTemplate -AuthToken "your-api-token" -OrganizationId "123456789012345678" -ConfigTemplateId "123456789012345" -ConfigTemplateConfig $config
 

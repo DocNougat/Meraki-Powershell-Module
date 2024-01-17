@@ -16,15 +16,14 @@ function Invoke-MerakiNetworkSmBypassActivationLockAttempt {
     A string of device IDs for the bypass activation lock attempt.
     
     .EXAMPLE
-    $config = '{
-        "ids": [
+    $config = [PSCustomObject]@{
+        ids = @(
             "1284392014819",
             "2983092129865"
-        ]
-    }'
-    $config = $config | ConvertTo-Json
+        )
+    }
+    $config = $config | ConvertTo-Json -Compress
     Invoke-MerakiNetworkSmBypassActivationLockAttempt -AuthToken "your-api-token" -NetworkId "1234" -BypassAttempt $config
-    
     This example creates a new bypass activation lock attempt for the Meraki network with ID "1234" and sets the device IDs to "1284392014819, 2983092129865".
     
     .NOTES

@@ -12,7 +12,7 @@ function Set-MerakiNetworkWirelessSSIDEAPOverride {
     .PARAMETER NetworkId
     The ID of the network.
     
-    .PARAMETER Number
+    .PARAMETER SSIDNumber
     The number of the SSID.
     
     .PARAMETER EAPOverride
@@ -46,7 +46,7 @@ function Set-MerakiNetworkWirelessSSIDEAPOverride {
             [parameter(Mandatory=$true)]
             [string]$NetworkId,
             [parameter(Mandatory=$true)]
-            [int]$Number,
+            [int]$SSIDNumber,
             [parameter(Mandatory=$true)]
             [string]$EAPOverride
         )
@@ -57,7 +57,7 @@ function Set-MerakiNetworkWirelessSSIDEAPOverride {
                 "content-type" = "application/json; charset=utf-8"
             }
     
-            $url = "https://api.meraki.com/api/v1/networks/$NetworkId/wireless/ssids/$Number/eapOverride"
+            $url = "https://api.meraki.com/api/v1/networks/$NetworkId/wireless/ssids/$SSIDNumber/eapOverride"
     
             $body = $EAPOverride
     

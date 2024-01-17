@@ -16,11 +16,12 @@ function Invoke-MerakiOrganizationAssignLicensesSeats {
     A string containing the license assignment configuration. The string should be in JSON format and should include the following properties: "seatCount", "licenseId", and "networkId".
 
     .EXAMPLE
-    $licenseAssignmentConfig = '{
-        "seatCount": 10,
-        "licenseId": "N_123456789012345678",
-        "networkId": "N_123456789012345678"
-    }'
+    $licenseAssignmentConfig = [PSCustomObject]@{
+        seatCount = 10
+        licenseId = "N_123456789012345678"
+        networkId = "N_123456789012345678"
+    }
+
     $licenseAssignmentConfig = $licenseAssignmentConfig | ConvertTo-Json -Compress
     Invoke-MerakiOrganizationAssignLicensesSeats -AuthToken "your-api-token" -OrganizationId "123456" -LicenseAssignmentConfig $licenseAssignmentConfig
 

@@ -16,13 +16,16 @@ function Set-MerakiNetworkFirmwareUpgradesStagedStages {
     A string containing the staged stages configuration. The string should be in JSON format and should include the "_json" property, which is an array of objects containing the "group" and "id" properties.
 
     .EXAMPLE
-    $config = '{
-        "_json": [
-            {
-                "group": { "id": "1234" }
+    $config = [PSCustomObject]@{
+        _json = @(
+            @{
+                group = @{
+                    id = "1234"
+                }
             }
-        ]
-    }'
+        )
+    }
+
     $config = $config | ConvertTo-Json -Compress
     Set-MerakiNetworkFirmwareUpgradesStagedStages -AuthToken "your-api-token" -NetworkId "L_123456789012345678" -StagedStagesConfig $config
 

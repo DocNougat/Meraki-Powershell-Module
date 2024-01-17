@@ -16,12 +16,15 @@ function Set-MerakiNetworkVLANProfilesAssignments {
     The JSON configuration for the VLAN profile assignments to be reassigned. Refer to the JSON schema for required parameters and their format.
 
     .EXAMPLE
-    $VLANProfileAssignment = '{
-        "vlanProfile": { "iname": "Profile1" },
-        "serials": [ "Q234-ABCD-5678" ],
-        "stackIds": [ "1234" ]
-    }'
-    $VLANProfileAssignment = $VLANProfileAssignment | ConvertTo-JSON -compress
+    $VLANProfileAssignment = [PSCustomObject]@{
+        vlanProfile = @{
+            iname = "Profile1"
+        }
+        serials = @("Q234-ABCD-5678")
+        stackIds = @("1234")
+    }
+
+    $VLANProfileAssignment = $VLANProfileAssignment | ConvertTo-Json -Compress
 
     Set-MerakiNetworkVLANProfilesAssignments -AuthToken "your-api-token" -NetworkId "L_123456789012345678" -VLANProfileAssignment $VLANProfileAssignment
 

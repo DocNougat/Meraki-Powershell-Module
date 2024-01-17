@@ -19,14 +19,15 @@ function Set-MerakiNetworkAppliancePort {
     A string containing the port configuration. The string should be in JSON format and should include the "vlan", "accessPolicy", "allowedVlans", "type", "dropUntaggedTraffic", and "enabled" properties.
 
     .EXAMPLE
-    $config = '{
-        "enabled": true,
-        "dropUntaggedTraffic": false,
-        "type": "access",
-        "vlan": 3,
-        "allowedVlans": "all",
-        "accessPolicy": "open"
-    }'
+    $config = [PSCustomObject]@{
+        enabled = $true
+        dropUntaggedTraffic = $false
+        type = "access"
+        vlan = 3
+        allowedVlans = "all"
+        accessPolicy = "open"
+    }
+
     $config = $config | ConvertTo-Json -Compress
     Set-MerakiNetworkAppliancePort -AuthToken "your-api-token" -NetworkId "your-network-id" -PortId "your-port-id" -PortConfig $config
 

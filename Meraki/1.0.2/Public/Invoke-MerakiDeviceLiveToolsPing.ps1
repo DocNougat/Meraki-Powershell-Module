@@ -16,10 +16,11 @@ function Invoke-MerakiDeviceLiveToolsPing {
     A string containing the ping configuration. The string should be in JSON format and should include the "target" and "count" properties.
 
     .EXAMPLE
-    $config = '{
-        "target": "75.75.75.75",
-        "count": 2
-    }'
+    $config = [PSCustomObject]@{
+        target = "75.75.75.75"
+        count = 2
+    }
+
     $config = $config | ConvertTo-Json -Compress
     Invoke-MerakiDeviceLiveToolsPing -AuthToken "your-api-token" -Serial "Q2HP-XXXX-XXXX" -PingConfig $config
 

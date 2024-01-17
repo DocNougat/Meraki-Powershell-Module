@@ -16,21 +16,22 @@ function Set-MerakiNetworkApplianceTrafficShapingVPNExclusions {
     A string containing the VPN exclusion configuration. The string should be in JSON format and should include the "custom" and "majorApplications" properties.
 
     .EXAMPLE
-    $config = '{
-        "custom": [
-            {
-                "protocol": "tcp",
-                "destination": "192.168.3.0/24",
-                "port": "8000"
+    $config = [PSCustomObject]@{
+        custom = @(
+            @{
+                protocol = "tcp"
+                destination = "192.168.3.0/24"
+                port = "8000"
             }
-        ],
-        "majorApplications": [
-            {
-                "id": "meraki:vpnExclusion/application/2",
-                "name": "Office 365 Sharepoint"
+        )
+        majorApplications = @(
+            @{
+                id = "meraki:vpnExclusion/application/2"
+                name = "Office 365 Sharepoint"
             }
-        ]
-    }'
+        )
+    }
+
     $config = $config | ConvertTo-Json -Compress
     Set-MerakiNetworkApplianceTrafficShapingVPNExclusions -AuthToken "your-api-token" -NetworkId "your-network-id" -VPNExclusionsConfig $config
 

@@ -16,23 +16,24 @@ function New-MerakiOrganizationSAMLRole {
     The JSON configuration for the SAML role to be created. Refer to the JSON schema for required parameters and their format.
 
     .EXAMPLE
-    $SAMLRoleConfig = '{
-        "role": "myrole",
-        "orgAccess": "none",
-        "networks": [
-            {
-                "id": "N_24329156",
-                "access": "full"
+    $SAMLRoleConfig = [PSCustomObject]@{
+        role = "myrole"
+        orgAccess = "none"
+        networks = @(
+            @{
+                id = "N_24329156"
+                access = "full"
             }
-        ],
-        "tags": [
-            {
-                "tag": "west",
-                "access": "read-only"
+        )
+        tags = @(
+            @{
+                tag = "west"
+                access = "read-only"
             }
-        ]
-    }'
-    $SAMLRoleConfig = $SAMLRoleConfig | ConvertTo-JSON -compress
+        )
+    }
+
+    $SAMLRoleConfig = $SAMLRoleConfig | ConvertTo-Json -Compress
 
     New-MerakiOrganizationSAMLRole -AuthToken "your-api-token" -OrganizationId "1234567890" -SAMLRoleConfig $SAMLRoleConfig
 

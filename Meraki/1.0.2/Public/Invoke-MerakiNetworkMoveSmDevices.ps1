@@ -16,23 +16,24 @@ function Invoke-MerakiNetworkMoveSmDevices {
     A JSON formatted string of move configuration.
     
     .EXAMPLE
-    $config = '{
-        "wifiMacs": [ "00:11:22:33:44:55" ],
-        "ids": [
+    $config = [PSCustomObject]@{
+        wifiMacs = [ "00:11:22:33:44:55" ]
+        ids = @(
             "1284392014819",
             "2983092129865"
-        ],
-        "serials": [
+        )
+        serials = @(
             "Q234-ABCD-0001",
             "Q234-ABCD-0002",
             "Q234-ABCD-0003"
-        ],
-        "scope": [ "withAny", "tag1", "tag2" ],
-        "newNetwork": "1284392014819"
-    }'
+        )
+        scope = [ "withAny", "tag1", "tag2" ]
+        newNetwork = "1284392014819"
+    }
+
     $config = $config | ConvertTo-Json
     Invoke-MerakiNetworkMoveSmDevices -AuthToken "your-api-token" -NetworkId "1234" -MoveConfig $config
-    
+
     This example moves devices from the Meraki network with ID "1234" to the new network with the specified move configuration.
     
     .NOTES

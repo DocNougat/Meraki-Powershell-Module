@@ -16,33 +16,34 @@ function Set-MerakiNetworkAlertSettings {
     The JSON configuration for the alert settings to be updated. Refer to the JSON schema for required parameters and their format.
 
     .EXAMPLE
-    $AlertSettingsConfig = '{
-        "defaultDestinations": {
-            "allAdmins": true,
-            "snmp": true,
-            "emails": ["alerts@example.com", "alerts2@example.com"],
-            "httpServerIds": []
-        },
-        "muting": {
-            "byPortSchedules": {
-                "enabled": true
+    $AlertSettingsConfig = [PSCustomObject]@{
+        defaultDestinations = @{
+            allAdmins = $true
+            snmp = $true
+            emails = @("alerts@example.com", "alerts2@example.com")
+            httpServerIds = @()
+        }
+        muting = @{
+            byPortSchedules = @{
+                enabled = $true
             }
-        },
-        "alerts": [
-            {
-                "type": "gatewayDown",
-                "enabled": true,
-                "alertDestinations": {
-                    "allAdmins": true,
-                    "snmp": true,
-                    "emails": ["alerts@example.com", "alerts2@example.com"],
-                    "httpServerIds": []
-                },
-                "filters": {}
+        }
+        alerts = @(
+            @{
+                type = "gatewayDown"
+                enabled = $true
+                alertDestinations = @{
+                    allAdmins = $true
+                    snmp = $true
+                    emails = @("alerts@example.com", "alerts2@example.com")
+                    httpServerIds = @()
+                }
+                filters = @{}
             }
-        ]
-    }'
-    $AlertSettingsConfig = $AlertSettingsConfig | ConvertTo-JSON -compress
+        )
+    }
+
+    $AlertSettingsConfig = $AlertSettingsConfig | ConvertTo-Json -Compress
 
     Set-MerakiNetworkAlertSettings -AuthToken "your-api-token" -NetworkId "L_1234567890" -AlertSettingsConfig $AlertSettingsConfig
 

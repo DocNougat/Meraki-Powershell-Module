@@ -16,18 +16,18 @@ function Set-MerakiNetworkSwitchDSCPToCOSMappings {
     A JSON formatted string of mappings.
     
     .EXAMPLE
-    $Mappings = '{
-        "mappings": [
-            {
-                "dscp": 1,
-                "cos": 1,
-                "title": "Video"
+    $Mappings = [PSCustomObject]@{
+        mappings = @(
+            [PSCustomObject]@{
+                dscp = 1
+                cos = 1
+                title = "Video"
             }
-        ]
-    }'
+        )
+    }
     $Mappings = $Mappings | ConvertTo-Json -Compress
     Set-MerakiNetworkSwitchDSCPToCOSMappings -AuthToken "your-api-token" -NetworkId "1234" -Mappings $Mappings
-    
+
     This example updates the DSCP to CoS mappings for the network switch in the Meraki network with ID "1234" with the specified mappings.
     
     .NOTES

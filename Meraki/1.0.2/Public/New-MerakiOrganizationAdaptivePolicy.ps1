@@ -16,35 +16,35 @@ function New-MerakiOrganizationAdaptivePolicy {
     The JSON configuration for the adaptive policy. Refer to the JSON schema for required parameters and their format.
 
     .EXAMPLE
-    $config = '{
-        "name": "Test Policy",
-        "description": "Test Policy description",
-        "lastEntryRule": "default",
-        "destinationGroup": {
-            "id": "1234567890",
-            "name": "Test Destination Group",
-            "sgt": 123
-        },
-        "sourceGroup": {
-            "id": "0987654321",
-            "name": "Test Source Group",
-            "sgt": 456
-        },
-        "acls": [
-            {
-                "id": "1111111111",
-                "name": "Test ACL 1"
+    $config = [PSCustomObject]@{
+        name = "Test Policy"
+        description = "Test Policy description"
+        lastEntryRule = "default"
+        destinationGroup = @{
+            id = "1234567890"
+            name = "Test Destination Group"
+            sgt = 123
+        }
+        sourceGroup = @{
+            id = "0987654321"
+            name = "Test Source Group"
+            sgt = 456
+        }
+        acls = @(
+            @{
+                id = "1111111111"
+                name = "Test ACL 1"
             },
-            {
-                "id": "2222222222",
-                "name": "Test ACL 2"
+            @{
+                id = "2222222222"
+                name = "Test ACL 2"
             }
-        ]
-    }'
-    $config = $config | ConvertTo-JSON -compress
-    
-    New-MerakiOrganizationAdaptivePolicy -AuthToken "your-api-token" -OrganizationId "1234567890" -PolicyConfig $config
+        )
+    }
 
+    $configJson = $config | ConvertTo-Json -Compress
+
+    New-MerakiOrganizationAdaptivePolicy -AuthToken "your-api-token" -OrganizationId "1234567890" -PolicyConfig $configJson
     This example creates a new adaptive policy for the Meraki organization with ID "1234567890" using the provided policy configuration.
 
     .NOTES

@@ -19,18 +19,19 @@ function Set-MerakiNetworkSwitchQOSRule {
     A JSON formatted string of QoS configuration.
     
     .EXAMPLE
-    $QOSConfig = '{
-        "vlan": 100,
-        "protocol": "TCP",
-        "srcPort": 2000,
-        "srcPortRange": "70-80",
-        "dstPort": 3000,
-        "dstPortRange": "3000-3100",
-        "dscp": 0
-    }'
+    $QOSConfig = [PSCustomObject]@{
+        vlan = 100
+        protocol = "TCP"
+        srcPort = 2000
+        srcPortRange = "70-80"
+        dstPort = 3000
+        dstPortRange = "3000-3100"
+        dscp = 0
+    }
+
     $QOSConfig = $QOSConfig | ConvertTo-Json -Compress
     Set-MerakiNetworkSwitchQOSRule -AuthToken "your-api-token" -NetworkId "N_1234" -QosRuleId "QOS_1234" -QOSConfig $QOSConfig
-    
+
     This example updates a network switch QoS rule with the specified QoS configuration.
     
     .NOTES

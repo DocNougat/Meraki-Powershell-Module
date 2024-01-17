@@ -16,30 +16,31 @@ function Set-MerakiNetworkApplianceFirewallL7FirewallRules {
     A string containing the firewall configuration. The string should be in JSON format and should include the "rules" array, which contains objects with the "policy", "type", and "value" properties.
 
     .EXAMPLE
-    $config = '{
-        "rules": [
-            {
-                "policy": "deny",
-                "type": "host",
-                "value": "google.com"
+    $config = [PSCustomObject]@{
+        rules = @(
+            [PSCustomObject]@{
+                policy = "deny"
+                type = "host"
+                value = "google.com"
             },
-            {
-                "policy": "deny",
-                "type": "port",
-                "value": "23"
+            [PSCustomObject]@{
+                policy = "deny"
+                type = "port"
+                value = "23"
             },
-            {
-                "policy": "deny",
-                "type": "ipRange",
-                "value": "10.11.12.00/24"
+            [PSCustomObject]@{
+                policy = "deny"
+                type = "ipRange"
+                value = "10.11.12.00/24"
             },
-            {
-                "policy": "deny",
-                "type": "ipRange",
-                "value": "10.11.12.00/24:5555"
+            [PSCustomObject]@{
+                policy = "deny"
+                type = "ipRange"
+                value = "10.11.12.00/24:5555"
             }
-        ]
-    }'
+        )
+    }
+
     $config = $config | ConvertTo-Json -Compress
     Set-MerakiNetworkApplianceFirewallL7FirewallRules -AuthToken "your-api-token" -NetworkId "your-network-id" -FirewallConfig $config
 

@@ -16,19 +16,22 @@ function Set-MerakiOrganization {
     The JSON configuration for the organization to be updated. Refer to the JSON schema for required parameters and their format.
 
     .EXAMPLE
-    $OrgConfig = '{
-        "name": "My organization",
-        "management": {
-            "details": [
-                {
-                    "name": "MSP ID",
-                    "value": "123456"
+    $OrgConfig = [PSCustomObject]@{
+        name = "My organization"
+        management = @{
+            details = @(
+                @{
+                    name = "MSP ID"
+                    value = "123456"
                 }
-            ]
-        },
-        "api": { "enabled": true }
-    }'
-    $OrgConfig = $OrgConfig | ConvertTo-JSON -compress
+            )
+        }
+        api = @{
+            enabled = $true
+        }
+    }
+
+    $OrgConfig = $OrgConfig | ConvertTo-Json -Compress
 
     Set-MerakiOrganization -AuthToken "your-api-token" -OrganizationId "1234567890" -OrgConfig $OrgConfig
 

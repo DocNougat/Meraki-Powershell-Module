@@ -16,49 +16,50 @@ function New-MerakiOrganizationInventoryOnboardingCloudMonitoringPrepare {
     A string containing the prepare configuration. The string should be in JSON format and should include the following properties: "devices", "sudi", "tunnel", "user", "vty", "accessList", "authentication", and "authorization".
 
     .EXAMPLE
-    $prepConfig = '{
-        "devices": [
-            {
-                "serial": "Q2XX-XXXX-XXXX",
-                "name": "My Device"
+    $prepConfig = [PSCustomObject]@{
+        devices = @(
+            @{
+                serial = "Q2XX-XXXX-XXXX"
+                name = "My Device"
             }
-        ],
-        "sudi": "ABCD1234",
-        "tunnel": {
-            "localInterface": 1,
-            "loopbackNumber": 0,
-            "certificateName": "My Certificate",
-            "name": "My Tunnel"
-        },
-        "user": {
-            "username": "myuser"
-        },
-        "vty": {
-            "endLineNumber": 15,
-            "rotaryNumber": 0,
-            "startLineNumber": 0,
-            "accessList": {
-                "vtyIn": {
-                    "name": "My ACL"
-                },
-                "vtyOut": {
-                    "name": "My ACL"
+        )
+        sudi = "ABCD1234"
+        tunnel = @{
+            localInterface = 1
+            loopbackNumber = 0
+            certificateName = "My Certificate"
+            name = "My Tunnel"
+        }
+        user = @{
+            username = "myuser"
+        }
+        vty = @{
+            endLineNumber = 15
+            rotaryNumber = 0
+            startLineNumber = 0
+            accessList = @{
+                vtyIn = @{
+                    name = "My ACL"
                 }
-            },
-            "authentication": {
-                "group": {
-                    "name": "My Group"
+                vtyOut = @{
+                    name = "My ACL"
                 }
-            },
-            "authorization": {
-                "group": {
-                    "name": "My Group"
+            }
+            authentication = @{
+                group = @{
+                    name = "My Group"
+                }
+            }
+            authorization = @{
+                group = @{
+                    name = "My Group"
                 }
             }
         }
-    }'
-    $prepConfig = $prepConfig | ConvertTo-Json -Compress
-    New-MerakiOrganizationInventoryOnboardingCloudMonitoringPrepare -AuthToken "your-api-token" -OrganizationId "123456" -PrepConfig $prepConfig
+    }
+
+    $prepConfigJson = $prepConfig | ConvertTo-Json -Compress
+    New-MerakiOrganizationInventoryOnboardingCloudMonitoringPrepare -AuthToken "your-api-token" -OrganizationId "123456" -PrepConfig $prepConfigJson
 
     This example creates an inventory onboarding cloud monitoring prepare in the Meraki organization with ID "123456".
 

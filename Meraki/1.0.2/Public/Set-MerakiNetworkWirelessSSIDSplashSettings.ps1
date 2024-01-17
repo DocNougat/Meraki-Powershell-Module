@@ -19,60 +19,61 @@ function Set-MerakiNetworkWirelessSSIDSplashSettings {
     A string containing the SSID splash settings configuration. The string should be in JSON format and should include the properties as defined in the schema.
 
     .EXAMPLE
-    $splashSettings = '{
-        "splashUrl": "https://www.custom_splash_url.com",
-        "useSplashUrl": true,
-        "splashTimeout": 1440,
-        "redirectUrl": "https://example.com",
-        "useRedirectUrl": true,
-        "welcomeMessage": "Welcome!",
-        "splashLogo": {
-            "md5": "abcd1234",
-            "extension": "jpg",
-            "image": {
-                "format": "jpg",
-                "contents": "Q2lzY28gTWVyYWtp"
+    $splashSettings = [PSCustomObject]@{
+        splashUrl = "https://www.custom_splash_url.com"
+        useSplashUrl = $true
+        splashTimeout = 1440
+        redirectUrl = "https://example.com"
+        useRedirectUrl = $true
+        welcomeMessage = "Welcome!"
+        splashLogo = @{
+            md5 = "abcd1234"
+            extension = "jpg"
+            image = @{
+                format = "jpg"
+                contents = "Q2lzY28gTWVyYWtp"
             }
-        },
-        "splashImage": {
-            "md5": "542cccac8d7dedee0f185311d154d194",
-            "extension": "jpg",
-            "image": {
-                "format": "jpg",
-                "contents": "Q2lzY28gTWVyYWtp"
-            }
-        },
-        "splashPrepaidFront": {
-            "md5": "542cccac8d7dedee0f185311d154d194",
-            "extension": "jpg",
-            "image": {
-                "format": "jpg",
-                "contents": "Q2lzY28gTWVyYWtp"
-            }
-        },
-        "blockAllTrafficBeforeSignOn": false,
-        "controllerDisconnectionBehavior": "default",
-        "allowSimultaneousLogins": false,
-        "guestSponsorship": {
-            "durationInMinutes": 30,
-            "guestCanRequestTimeframe": false
-        },
-        "billing": {
-            "freeAccess": {
-                "enabled": true,
-                "durationInMinutes": 120
-            },
-            "prepaidAccessFastLoginEnabled": true,
-            "replyToEmailAddress": "user@email.com"
-        },
-        "sentryEnrollment": {
-            "systemsManagerNetwork": { "id": "N_1234" },
-            "strength": "focused",
-            "enforcedSystems": [ "iOS" ]
         }
-    }'
-    $splashSettings = $splashSettings | ConvertTo-Json -Compress
-    Set-MerakiNetworkWirelessSSIDSplashSettings -AuthToken "your-api-token" -NetworkId "your-network-id" -SSIDNumber "1" -SSIDSplashSettings $splashSettings
+        splashImage = @{
+            md5 = "542cccac8d7dedee0f185311d154d194"
+            extension = "jpg"
+            image = @{
+                format = "jpg"
+                contents = "Q2lzY28gTWVyYWtp"
+            }
+        }
+        splashPrepaidFront = @{
+            md5 = "542cccac8d7dedee0f185311d154d194"
+            extension = "jpg"
+            image = @{
+                format = "jpg"
+                contents = "Q2lzY28gTWVyYWtp"
+            }
+        }
+        blockAllTrafficBeforeSignOn = $false
+        controllerDisconnectionBehavior = "default"
+        allowSimultaneousLogins = $false
+        guestSponsorship = @{
+            durationInMinutes = 30
+            guestCanRequestTimeframe = $false
+        }
+        billing = @{
+            freeAccess = @{
+                enabled = $true
+                durationInMinutes = 120
+            }
+            prepaidAccessFastLoginEnabled = $true
+            replyToEmailAddress = "user@email.com"
+        }
+        sentryEnrollment = @{
+            systemsManagerNetwork = @{ id = "N_1234" }
+            strength = "focused"
+            enforcedSystems = @("iOS")
+        }
+    }
+
+    $splashSettingsJson = $splashSettings | ConvertTo-Json -Compress
+    Set-MerakiNetworkWirelessSSIDSplashSettings -AuthToken "your-api-token" -NetworkId "your-network-id" -SSIDNumber "1" -SSIDSplashSettings $splashSettingsJson
 
     This example updates the splash settings for the SSID with number 1 in the network with ID "your-network-id", using the specified splash settings configuration.
 

@@ -16,45 +16,46 @@ function New-MerakiNetworkSwitchLinkAggregation {
     A JSON formatted string of aggregation configuration.
     
     .EXAMPLE
-    $AggregationConfig = '{
-        "switchPorts": [
-            {
-                "serial": "Q234-ABCD-0001",
-                "portId": "1"
+    $AggregationConfig = [PSCustomObject]@{
+        switchPorts = @(
+            @{
+                serial = "Q234-ABCD-0001"
+                portId = "1"
             },
-            {
-                "serial": "Q234-ABCD-0002",
-                "portId": "2"
+            @{
+                serial = "Q234-ABCD-0002"
+                portId = "2"
             },
-            {
-                "serial": "Q234-ABCD-0003",
-                "portId": "3"
+            @{
+                serial = "Q234-ABCD-0003"
+                portId = "3"
             },
-            {
-                "serial": "Q234-ABCD-0004",
-                "portId": "4"
+            @{
+                serial = "Q234-ABCD-0004"
+                portId = "4"
             },
-            {
-                "serial": "Q234-ABCD-0005",
-                "portId": "5"
+            @{
+                serial = "Q234-ABCD-0005"
+                portId = "5"
             },
-            {
-                "serial": "Q234-ABCD-0006",
-                "portId": "6"
+            @{
+                serial = "Q234-ABCD-0006"
+                portId = "6"
             },
-            {
-                "serial": "Q234-ABCD-0007",
-                "portId": "7"
+            @{
+                serial = "Q234-ABCD-0007"
+                portId = "7"
             },
-            {
-                "serial": "Q234-ABCD-0008",
-                "portId": "8"
+            @{
+                serial = "Q234-ABCD-0008"
+                portId = "8"
             }
-        ]
-    }'
+        )
+    }
+
     $AggregationConfig = $AggregationConfig | ConvertTo-Json -Compress
     New-MerakiNetworkSwitchLinkAggregation -AuthToken "your-api-token" -NetworkId "1234" -AggregationConfig $AggregationConfig
-    
+
     This example creates a new link aggregation for the network switch in the Meraki network with ID "1234" with the specified aggregation configuration.
     
     .NOTES

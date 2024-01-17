@@ -16,21 +16,22 @@ function New-MerakiOrganizationAdaptivePolicyACL {
     The JSON configuration for the adaptive policy ACL. Refer to the JSON schema for required parameters and their format.
 
     .EXAMPLE
-    $config = '{
-        "name": "Test ACL",
-        "description": "Test ACL description",
-        "ipVersion": "ipv4",
-        "rules": [
-            {
-                "policy": "allow"
-                "protocol": "tcp",
-                "dstPort": "80",
-                "srcPort": "any",
+    $config = [PSCustomObject]@{
+        name = "Test ACL"
+        description = "Test ACL description"
+        ipVersion = "ipv4"
+        rules = @(
+            [PSCustomObject]@{
+                policy = "allow"
+                protocol = "tcp"
+                dstPort = "80"
+                srcPort = "any"
             }
-        ]
-    }'
-    $config = $config | ConvertTo-JSON -compress
-    
+        )
+    }
+
+    $config = $config | ConvertTo-Json -Compress
+
     New-MerakiOrganizationAdaptivePolicyACL -AuthToken "your-api-token" -OrganizationId "1234567890" -ACLConfig $config
 
     This example creates a new adaptive policy ACL for the Meraki organization with ID "1234567890" using the provided ACL configuration.

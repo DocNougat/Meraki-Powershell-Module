@@ -16,20 +16,22 @@ function New-MerakiNetworkMqttBroker {
     A string containing the MQTT broker configuration. The string should be in JSON format and should include the "name", "host", "port", and optionally the "security", "authentication", and "caCertificate" properties.
 
     .EXAMPLE
-    $config = @{
-        "name" = "MQTT_Broker_1"
-        "host" = "1.1.1.1"
-        "port" = 1234
-        "security" = @{
-            "mode" = "tls"
-            "tls" = @{
-                "verifyHostnames" = $true
+    $config = [PSCustomObject]@{
+        name = "MQTT_Broker_1"
+        host = "1.1.1.1"
+        port = 1234
+        security = [PSCustomObject]@{
+            mode = "tls"
+            tls = [PSCustomObject]@{
+                verifyHostnames = $true
             }
         }
-        "authentication" = @{
-            "username" = "Username"
+        authentication = [PSCustomObject]@{
+            username = "Username"
         }
-    } | ConvertTo-Json -Compress
+    }
+
+    $config = $config | ConvertTo-Json -Compress
 
     New-MerakiNetworkMqttBroker -AuthToken "your-api-token" -NetworkId "L_123456789012345678" -MqttBrokerConfig $config
 

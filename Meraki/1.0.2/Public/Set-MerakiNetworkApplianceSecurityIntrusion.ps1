@@ -16,26 +16,26 @@ function Set-MerakiNetworkApplianceSecurityIntrusion {
     A string containing the security intrusion configuration. The string should be in JSON format and should include the "mode", "idsRulesets", "protectedNetworks", and "useDefault" properties.
 
     .EXAMPLE
-    $config = '{
-        "mode": "prevention",
-        "idsRulesets": "balanced",
-        "protectedNetworks": {
-            "useDefault": false,
-            "includedCidr": [
+    $config = [PSCustomObject]@{
+        mode = "prevention"
+        idsRulesets = "balanced"
+        protectedNetworks = [PSCustomObject]@{
+            useDefault = $false
+            includedCidr = @(
                 "10.0.0.0/8",
                 "127.0.0.0/8",
                 "169.254.0.0/16",
                 "172.16.0.0/12"
-            ],
-            "excludedCidr": [
+            )
+            excludedCidr = @(
                 "10.0.0.0/8",
                 "127.0.0.0/8"
-            ]
+            )
         }
-    }'
+    }
+
     $config = $config | ConvertTo-Json -Compress
     Set-MerakiNetworkApplianceSecurityIntrusion -AuthToken "your-api-token" -NetworkId "your-network-id" -SecurityIntrusionConfig $config
-
     This example updates the security intrusion settings for the Meraki network with ID "your-network-id", using the specified security intrusion configuration.
 
     .NOTES

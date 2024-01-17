@@ -16,18 +16,19 @@ function Set-MerakiNetworkFirmwareUpgradesStagedEvent {
     A string containing the firmware staged event configuration. The string should be in JSON format and should include the "stages", "group", "id", "milestones", and "scheduledFor" properties.
 
     .EXAMPLE
-    $config = '{
-        "stages": [
-            {
-                "group": {
-                    "id": "1234"
-                },
-                "milestones": {
-                    "scheduledFor": "2018-02-11T00:00:00Z"
+    $config = [PSCustomObject]@{
+        "stages" = @(
+            [PSCustomObject]@{
+                "group" = @{
+                    "id" = "1234"
+                }
+                "milestones" = @{
+                    "scheduledFor" = "2018-02-11T00:00:00Z"
                 }
             }
-        ]
-    }'
+        )
+    }
+
     $config = $config | ConvertTo-Json -Compress
     Set-MerakiNetworkFirmwareUpgradesStagedEvent -AuthToken "your-api-token" -NetworkId "L_123456789012345678" -FirmwareStagedEventConfig $config
 

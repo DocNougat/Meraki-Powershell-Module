@@ -16,21 +16,21 @@ function Set-MerakiDeviceWirelessRadioSettings {
     A JSON formatted string of the radio settings.
     
     .EXAMPLE
-    $RadioSettings = '{
-        "rfProfileId": "1234",
-        "twoFourGhzSettings": {
-            "channel": 11,
-            "targetPower": 21
-        },
-        "fiveGhzSettings": {
-            "channel": 149,
-            "channelWidth": 20,
-            "targetPower": 15
+    $RadioSettings = [PSCustomObject]@{
+        rfProfileId = "1234"
+        twoFourGhzSettings = @{
+            channel = 11
+            targetPower = 21
         }
-    }'
+        fiveGhzSettings = @{
+            channel = 149
+            channelWidth = 20
+            targetPower = 15
+        }
+    }
     $RadioSettings = $RadioSettings | ConvertTo-Json
     Set-MerakiDeviceWirelessRadioSettings -AuthToken "your-api-token" -Serial "1234" -RadioSettings $RadioSettings
-    
+
     This example updates a device wireless radio settings with the specified configuration.
     
     .NOTES

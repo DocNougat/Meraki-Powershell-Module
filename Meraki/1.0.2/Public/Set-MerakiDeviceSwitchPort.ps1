@@ -19,46 +19,41 @@ function Set-MerakiDeviceSwitchPort {
     A JSON formatted string of port configuration.
     
     .EXAMPLE
-    $PortConfig = '{
-        "name": "My switch port",
-        "tags": [ "tag1", "tag2" ],
-        "enabled": true,
-        "poeEnabled": true,
-        "type": "access",
-        "vlan": 10,
-        "voiceVlan": 20,
-        "allowedVlans": "1,3,5-10",
-        "isolationEnabled": false,
-        "rstpEnabled": true,
-        "stpGuard": "disabled",
-        "linkNegotiation": "Auto negotiate",
-        "portScheduleId": "1234",
-        "udld": "Alert only",
-        "accessPolicyType": "Sticky MAC allow list",
-        "accessPolicyNumber": 2,
-        "macAllowList": [
-            "34:56:fe:ce:8e:b0",
-            "34:56:fe:ce:8e:b1"
-        ],
-        "stickyMacAllowList": [
-            "34:56:fe:ce:8e:b0",
-            "34:56:fe:ce:8e:b1"
-        ],
-        "stickyMacAllowListLimit": 5,
-        "stormControlEnabled": true,
-        "adaptivePolicyGroupId": "123",
-        "peerSgtCapable": false,
-        "flexibleStackingEnabled": true,
-        "daiTrusted": false,
-        "profile": {
-            "enabled": false,
-            "id": "1284392014819",
-            "iname": "iname"
+    $PortConfig = [PSCustomObject]@{
+        name = "My switch port"
+        tags = @("tag1", "tag2")
+        enabled = $true
+        poeEnabled = $true
+        type = "access"
+        vlan = 10
+        voiceVlan = 20
+        allowedVlans = "1,3,5-10"
+        isolationEnabled = $false
+        rstpEnabled = $true
+        stpGuard = "disabled"
+        linkNegotiation = "Auto negotiate"
+        portScheduleId = "1234"
+        udld = "Alert only"
+        accessPolicyType = "Sticky MAC allow list"
+        accessPolicyNumber = 2
+        macAllowList = @("34:56:fe:ce:8e:b0", "34:56:fe:ce:8e:b1")
+        stickyMacAllowList = @("34:56:fe:ce:8e:b0", "34:56:fe:ce:8e:b1")
+        stickyMacAllowListLimit = 5
+        stormControlEnabled = $true
+        adaptivePolicyGroupId = "123"
+        peerSgtCapable = $false
+        flexibleStackingEnabled = $true
+        daiTrusted = $false
+        profile = @{
+            enabled = $false
+            id = "1284392014819"
+            iname = "iname"
         }
-    }'
+    }
+
     $PortConfig = $PortConfig | ConvertTo-Json -Compress
     Set-MerakiDeviceSwitchPort -AuthToken "your-api-token" -DeviceSerial "Q2GV-ABCD-1234" -PortId "5" -PortConfig $PortConfig
-    
+
     This example updates the device switch port with the specified port configuration.
     
     .NOTES

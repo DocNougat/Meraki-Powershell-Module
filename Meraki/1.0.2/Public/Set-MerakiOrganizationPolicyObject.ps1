@@ -19,12 +19,13 @@ function Set-MerakiOrganizationPolicyObject {
     The JSON configuration for the policy object to be updated. Refer to the JSON schema for required parameters and their format.
 
     .EXAMPLE
-    $PolicyObjectConfig = '{
-        "name": "Web Servers - Datacenter 10",
-        "type": "cidr",
-        "groupIds": []
-    }'
-    $PolicyObjectConfig = $PolicyObjectConfig | ConvertTo-JSON -compress
+    $PolicyObjectConfig = [PSCustomObject]@{
+        name = "Web Servers - Datacenter 10"
+        type = "cidr"
+        groupIds = @()
+    }
+
+    $PolicyObjectConfig = $PolicyObjectConfig | ConvertTo-JSON -Compress
 
     Set-MerakiOrganizationPolicyObject -AuthToken "your-api-token" -OrganizationId "1234567890" -PolicyObjectId "1234" -PolicyObjectConfig $PolicyObjectConfig
 

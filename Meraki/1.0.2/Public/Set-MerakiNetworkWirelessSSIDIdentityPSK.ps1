@@ -22,13 +22,13 @@ function Set-MerakiNetworkWirelessSSIDIdentityPSK {
     The Identity PSK configuration to set for the specified SSID.
 
     .EXAMPLE
-    $IdentityPSK = '{
-    "id": "1284392014819",
-    "name": "Sample Identity PSK",
-    "passphrase": "secret",
-    "groupPolicyId": "101",
-    "expiresAt": "2018-02-11T00:00:00.090210Z"
-    }'
+    $IdentityPSK = [PSCustomObject]@{
+        id = "1284392014819"
+        name = "Sample Identity PSK"
+        passphrase = "secret"
+        groupPolicyId = "101"
+        expiresAt = "2018-02-11T00:00:00.090210Z"
+    }
     $IdentityPSK = $IdentityPSK | ConvertTo-Json -Compress
     Set-MerakiNetworkWirelessSSIDIdentityPSK -AuthToken "1234" -NetworkId "5678" -SSIDNumber "1" -IdentityPSKId "1284392014819" -IdentityPSK $IdentityPSK
 

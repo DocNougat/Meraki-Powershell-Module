@@ -16,11 +16,14 @@ function Set-MerakiNetworkApplianceFirewallSettings {
     A string containing the firewall configuration. The string should be in JSON format and should include the "spoofingProtection" object, which contains the "ipSourceGuard" object with the "mode" property.
 
     .EXAMPLE
-    $config = '{
-        "spoofingProtection": {
-            "ipSourceGuard": { "mode": "block" }
+    $config = [PSCustomObject]@{
+        spoofingProtection = @{
+            ipSourceGuard = @{
+                mode = "block"
+            }
         }
-    }'
+    }
+
     $config = $config | ConvertTo-Json -Compress
     Set-MerakiNetworkApplianceFirewallSettings -AuthToken "your-api-token" -NetworkId "your-network-id" -FirewallConfig $config
 

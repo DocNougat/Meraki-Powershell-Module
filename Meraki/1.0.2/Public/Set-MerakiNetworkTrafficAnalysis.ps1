@@ -16,37 +16,38 @@ function Set-MerakiNetworkTrafficAnalysis {
     The JSON configuration for the traffic analysis settings to be updated. Refer to the JSON schema for required parameters and their format.
 
     .EXAMPLE
-    $TrafficAnalysisConfig = '{
-        "mode": "detailed",
-        "customPieChartItems": [
-            {
-                "name": "Item from hostname",
-                "type": "host",
-                "value": "example.com"
+    $TrafficAnalysisConfig = [PSCustomObject]@{
+        mode = "detailed"
+        customPieChartItems = @(
+            [PSCustomObject]@{
+                name = "Item from hostname"
+                type = "host"
+                value = "example.com"
             },
-            {
-                "name": "Item from port",
-                "type": "port",
-                "value": "440"
+            [PSCustomObject]@{
+                name = "Item from port"
+                type = "port"
+                value = "440"
             },
-            {
-                "name": "Item from IP",
-                "type": "ipRange",
-                "value": "192.1.0.0"
+            [PSCustomObject]@{
+                name = "Item from IP"
+                type = "ipRange"
+                value = "192.1.0.0"
             },
-            {
-                "name": "Item from IP range (CIDR)",
-                "type": "ipRange",
-                "value": "192.2.0.0/16"
+            [PSCustomObject]@{
+                name = "Item from IP range (CIDR)"
+                type = "ipRange"
+                value = "192.2.0.0/16"
             },
-            {
-                "name": "Item from IP range with port",
-                "type": "ipRange",
-                "value": "192.3.0.0/16:80"
+            [PSCustomObject]@{
+                name = "Item from IP range with port"
+                type = "ipRange"
+                value = "192.3.0.0/16:80"
             }
-        ]
-    }'
-    $TrafficAnalysisConfig = $TrafficAnalysisConfig | ConvertTo-JSON -compress
+        )
+    }
+
+    $TrafficAnalysisConfig = $TrafficAnalysisConfig | ConvertTo-Json -Compress
 
     Set-MerakiNetworkTrafficAnalysis -AuthToken "your-api-token" -NetworkId "L_123456789012345678" -TrafficAnalysisConfig $TrafficAnalysisConfig
 

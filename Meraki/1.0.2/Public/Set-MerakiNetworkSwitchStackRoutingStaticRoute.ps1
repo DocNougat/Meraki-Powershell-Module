@@ -22,16 +22,17 @@ function Set-MerakiNetworkSwitchStackRoutingStaticRoute {
     A JSON formatted string of the static route configuration.
     
     .EXAMPLE
-    $StaticRoute = '{
-        "name": "My route",
-        "subnet": "192.168.1.0/24",
-        "nextHopIp": "1.2.3.4",
-        "advertiseViaOspfEnabled": false,
-        "preferOverOspfRoutesEnabled": false
-    }'
-    $StaticRoute = $StaticRoute | ConvertTo-Json -Compress
+    $StaticRouteConfig = [PSCustomObject]@{
+        name = "My route"
+        subnet = "192.168.1.0/24"
+        nextHopIp = "1.2.3.4"
+        advertiseViaOspfEnabled = $false
+        preferOverOspfRoutesEnabled = $false
+    }
+
+    $StaticRoute = $StaticRouteConfig | ConvertTo-Json -Compress
     Set-MerakiNetworkSwitchStackRoutingStaticRoute -AuthToken "your-api-token" -NetworkId "1234" -SwitchStackId "5678" -StaticRouteId "91011" -StaticRoute $StaticRoute
-    
+
     This example updates a network switch stack routing static route with the specified configuration.
     
     .NOTES

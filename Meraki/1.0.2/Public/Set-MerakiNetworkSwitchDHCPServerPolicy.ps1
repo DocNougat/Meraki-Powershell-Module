@@ -16,22 +16,29 @@ function Set-MerakiNetworkSwitchDHCPServerPolicy {
     A JSON formatted string of DHCP server policy.
     
     .EXAMPLE
-    $DHCPServerPolicy = '{
-        "alerts": { "email": { "enabled": true } },
-        "defaultPolicy": "block",
-        "blockedServers": [
+    $DHCPServerPolicy = [PSCustomObject]@{
+        alerts = @{
+            email = @{
+                enabled = $true
+            }
+        }
+        defaultPolicy = "block"
+        blockedServers = @(
             "00:50:56:00:00:03",
             "00:50:56:00:00:04"
-        ],
-        "allowedServers": [
+        )
+        allowedServers = @(
             "00:50:56:00:00:01",
             "00:50:56:00:00:02"
-        ],
-        "arpInspection": { "enabled": true }
-    }'
+        )
+        arpInspection = @{
+            enabled = $true
+        }
+    }
+
     $DHCPServerPolicy = $DHCPServerPolicy | ConvertTo-Json
     Set-MerakiNetworkSwitchDHCPServerPolicy -AuthToken "your-api-token" -NetworkId "1234" -DHCPServerPolicy $DHCPServerPolicy
-    
+
     This example updates the DHCP server policy for the network switch in the Meraki network with ID "1234" with the specified DHCP server policy.
     
     .NOTES

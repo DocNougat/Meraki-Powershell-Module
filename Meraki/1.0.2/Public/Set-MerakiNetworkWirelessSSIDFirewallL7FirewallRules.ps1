@@ -12,7 +12,7 @@ function Set-MerakiNetworkWirelessSSIDFirewallL7FirewallRules {
     .PARAMETER NetworkId
     The ID of the network.
     
-    .PARAMETER Number
+    .PARAMETER SSIDNumber
     The number of the SSID.
     
     .PARAMETER L7FirewallRules
@@ -61,7 +61,7 @@ function Set-MerakiNetworkWirelessSSIDFirewallL7FirewallRules {
             [parameter(Mandatory=$true)]
             [string]$NetworkId,
             [parameter(Mandatory=$true)]
-            [int]$Number,
+            [int]$SSIDNumber,
             [parameter(Mandatory=$true)]
             [string]$L7FirewallRules
         )
@@ -72,7 +72,7 @@ function Set-MerakiNetworkWirelessSSIDFirewallL7FirewallRules {
                 "content-type" = "application/json; charset=utf-8"
             }
     
-            $url = "https://api.meraki.com/api/v1/networks/$NetworkId/wireless/ssids/$Number/firewall/l7FirewallRules"
+            $url = "https://api.meraki.com/api/v1/networks/$NetworkId/wireless/ssids/$SSIDNumber/firewall/l7FirewallRules"
     
             $body = $L7FirewallRules
     

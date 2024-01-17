@@ -16,17 +16,18 @@ function Set-MerakiNetworkApplianceWarmSpare {
     The JSON configuration for the warm spare settings to be updated. Refer to the JSON schema for required parameters and their format.
     
     .EXAMPLE
-    $WarmSpareConfig = '{
-        "enabled": true,
-        "spareSerial": "Q234-ABCD-5678",
-        "uplinkMode": "virtual",
-        "virtualIp1": "1.2.3.4",
-        "virtualIp2": "1.2.3.4"
-    }'
-    $WarmSpareConfig = $WarmSpareConfig | ConvertTo-JSON -compress
-    
+    $WarmSpareConfig = [PSCustomObject]@{
+        enabled = $true
+        spareSerial = "Q234-ABCD-5678"
+        uplinkMode = "virtual"
+        virtualIp1 = "1.2.3.4"
+        virtualIp2 = "1.2.3.4"
+    }
+
+    $WarmSpareConfig = $WarmSpareConfig | ConvertTo-JSON -Compress
+
     Set-MerakiNetworkApplianceWarmSpare -AuthToken "your-api-token" -NetworkId "L_123456789012345678" -WarmSpareConfig $WarmSpareConfig
-    
+
     This example updates the warm spare settings of the Meraki network appliance with ID "L_123456789012345678".
     
     .NOTES

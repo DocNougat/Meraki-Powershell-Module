@@ -16,33 +16,36 @@ function New-MerakiNetworkApplianceVLAN {
     A string containing the VLAN configuration. The string should be in JSON format and should include the properties as defined in the schema.
 
     .EXAMPLE
-    $vlanConfig = '{
-        "id": "1234",
-        "name": "My VLAN",
-        "subnet": "192.168.1.0/24",
-        "applianceIp": "192.168.1.2",
-        "groupPolicyId": "101",
-        "templateVlanType": "same",
-        "cidr": "192.168.1.0/24",
-        "mask": 28,
-        "ipv6": {
-            "enabled": true,
-            "prefixAssignments": [
-                {
-                    "autonomous": false,
-                    "staticPrefix": "2001:db8:3c4d:15::/64",
-                    "staticApplianceIp6": "2001:db8:3c4d:15::1",
-                    "origin": {
-                        "type": "internet",
-                        "interfaces": [ "wan0" ]
+    $vlanConfig = [PSCustomObject]@{
+        id = "1234"
+        name = "My VLAN"
+        subnet = "192.168.1.0/24"
+        applianceIp = "192.168.1.2"
+        groupPolicyId = "101"
+        templateVlanType = "same"
+        cidr = "192.168.1.0/24"
+        mask = 28
+        ipv6 = @{
+            enabled = $true
+            prefixAssignments = @(
+                @{
+                    autonomous = $false
+                    staticPrefix = "2001:db8:3c4d:15::/64"
+                    staticApplianceIp6 = "2001:db8:3c4d:15::1"
+                    origin = @{
+                        type = "internet"
+                        interfaces = @("wan0")
                     }
                 }
-            ]
-        },
-        "mandatoryDhcp": { "enabled": true }
-    }'
-    $vlanConfig = $vlanConfig | ConvertTo-Json -Compress
-    New-MerakiNetworkApplianceVLAN -AuthToken "your-api-token" -NetworkId "your-network-id" -VLANConfig $vlanConfig
+            )
+        }
+        mandatoryDhcp = @{
+            enabled = $true
+        }
+    }
+
+    $vlanConfigJson = $vlanConfig | ConvertTo-Json -Compress
+    New-MerakiNetworkApplianceVLAN -AuthToken "your-api-token" -NetworkId "your-network-id" -VLANConfig $vlanConfigJson
 
     This example creates a new VLAN for the network with ID "your-network-id", using the specified VLAN configuration.
 

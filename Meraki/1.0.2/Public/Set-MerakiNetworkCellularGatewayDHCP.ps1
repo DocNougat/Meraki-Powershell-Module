@@ -16,18 +16,19 @@ function Set-MerakiNetworkCellularGatewayDHCP {
     A string containing the DHCP configuration. The string should be in JSON format and should include the properties as defined in the schema.
     
     .EXAMPLE
-    $DHCPConfig = '{
-        "dhcpLeaseTime": "1 hour",
-        "dnsNameservers": "custom",
-        "dnsCustomNameservers": [
+    $DHCPConfig = [PSCustomObject]@{
+        dhcpLeaseTime = "1 hour"
+        dnsNameservers = "custom"
+        dnsCustomNameservers = @(
             "172.16.2.111",
             "172.16.2.30"
-        ]
-    }'
+        )
+    }
+
     $DHCPConfig = $DHCPConfig | ConvertTo-Json -Compress
-    
+
     Set-MerakiNetworkCellularGatewayDHCP -AuthToken "your-api-token" -NetworkId "N_1234" -DHCPConfig $DHCPConfig
-    
+
     This example updates the DHCP settings for the Meraki network with ID "N_1234".
     
     .NOTES

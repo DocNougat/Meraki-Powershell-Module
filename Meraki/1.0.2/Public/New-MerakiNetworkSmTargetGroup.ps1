@@ -16,11 +16,12 @@ function New-MerakiNetworkSmTargetGroup {
     A JSON formatted string of group configuration.
     
     .EXAMPLE
-    $groupConfig = '{
-        "name": "My target group",
-        "scope": "none"
-    }'
-    $config = $config | ConvertTo-Json
+    $config = [PSCustomObject]@{
+        name = "My target group"
+        scope = "none"
+    }
+
+    $groupConfig = $config | ConvertTo-Json -Compress
     New-MerakiNetworkSmTargetGroup -AuthToken "your-api-token" -NetworkId "1234" -GroupConfig $groupConfig
     
     This example creates a target group in the Meraki network with ID "1234" with the specified group configuration.

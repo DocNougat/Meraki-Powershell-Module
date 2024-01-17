@@ -16,38 +16,39 @@ function Set-MerakiNetworkSwitchRoutingOSPF {
     A JSON formatted string of OSPF configuration.
     
     .EXAMPLE
-    $OSPFConfig = '{
-        "enabled": true,
-        "helloTimerInSeconds": 10,
-        "deadTimerInSeconds": 40,
-        "areas": [
-            {
-                "areaId": "1284392014819",
-                "areaName": "Backbone",
-                "areaType": "normal"
+    $OSPFConfig = [PSCustomObject]@{
+        enabled = $true
+        helloTimerInSeconds = 10
+        deadTimerInSeconds = 40
+        areas = @(
+            [PSCustomObject]@{
+                areaId = "1284392014819"
+                areaName = "Backbone"
+                areaType = "normal"
             }
-        ],
-        "v3": {
-            "enabled": true,
-            "helloTimerInSeconds": 10,
-            "deadTimerInSeconds": 40,
-            "areas": [
-                {
-                    "areaId": "1284392014819",
-                    "areaName": "V3 Backbone",
-                    "areaType": "normal"
+        )
+        v3 = [PSCustomObject]@{
+            enabled = $true
+            helloTimerInSeconds = 10
+            deadTimerInSeconds = 40
+            areas = @(
+                [PSCustomObject]@{
+                    areaId = "1284392014819"
+                    areaName = "V3 Backbone"
+                    areaType = "normal"
                 }
-            ]
-        },
-        "md5AuthenticationEnabled": true,
-        "md5AuthenticationKey": {
-            "id": 1234,
-            "passphrase": "abc1234"
+            )
         }
-    }'
+        md5AuthenticationEnabled = $true
+        md5AuthenticationKey = [PSCustomObject]@{
+            id = 1234
+            passphrase = "abc1234"
+        }
+    }
+
     $OSPFConfig = $OSPFConfig | ConvertTo-Json
     Set-MerakiNetworkSwitchRoutingOSPF -AuthToken "your-api-token" -NetworkId "N_1234" -OSPFConfig $OSPFConfig
-    
+
     This example updates a network switch routing OSPF with the specified configuration.
     
     .NOTES

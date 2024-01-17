@@ -16,40 +16,41 @@ function Set-MerakiNetworkSwitchRoutingMulticast {
     A JSON formatted string of multicast configuration.
     
     .EXAMPLE
-    $MulticastConfig = '{
-        "defaultSettings": {
-            "igmpSnoopingEnabled": true,
-            "floodUnknownMulticastTrafficEnabled": true
-        },
-        "overrides": [
-            {
-                "switches": [
+    $MulticastConfig = [PSCustomObject]@{
+        defaultSettings = @{
+            igmpSnoopingEnabled = $true
+            floodUnknownMulticastTrafficEnabled = $true
+        }
+        overrides = @(
+            @{
+                switches = @(
                     "Q234-ABCD-0001",
                     "Q234-ABCD-0002",
                     "Q234-ABCD-0003"
-                ],
-                "igmpSnoopingEnabled": true,
-                "floodUnknownMulticastTrafficEnabled": true
+                )
+                igmpSnoopingEnabled = $true
+                floodUnknownMulticastTrafficEnabled = $true
             },
-            {
-                "stacks": [
+            @{
+                stacks = @(
                     "789102",
                     "123456",
                     "129102"
-                ],
-                "igmpSnoopingEnabled": true,
-                "floodUnknownMulticastTrafficEnabled": true
+                )
+                igmpSnoopingEnabled = $true
+                floodUnknownMulticastTrafficEnabled = $true
             },
-            {
-                "switchProfiles": [ "1234", "4567" ],
-                "igmpSnoopingEnabled": true,
-                "floodUnknownMulticastTrafficEnabled": true
+            @{
+                switchProfiles = @("1234", "4567")
+                igmpSnoopingEnabled = $true
+                floodUnknownMulticastTrafficEnabled = $true
             }
-        ]
-    }'
+        )
+    }
+
     $MulticastConfig = $MulticastConfig | ConvertTo-Json
     Set-MerakiNetworkSwitchRoutingMulticast -AuthToken "your-api-token" -NetworkId "N_1234" -MulticastConfig $MulticastConfig
-    
+
     This example updates a network switch routing multicast with the specified configuration.
     
     .NOTES

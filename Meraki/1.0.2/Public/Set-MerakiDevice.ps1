@@ -16,17 +16,18 @@ function Set-MerakiDevice {
     A string containing the device configuration. The string should be in JSON format and should include the following properties: "address", "floorPlanId", "name", "notes", "switchProfileId", "moveMapMarker", "lat", "lng", and "tags".
 
     .EXAMPLE
-    $config = '{
-        "address": "123 Main St",
-        "floorPlanId": "123456",
-        "name": "My Device",
-        "notes": "This is my device",
-        "switchProfileId": "789012",
-        "moveMapMarker": true,
-        "lat": 37.7749,
-        "lng": -122.4194,
-        "tags": ["tag1", "tag2"]
-    }'
+    $config = [PSCustomObject]@{
+        address = "123 Main St"
+        floorPlanId = "123456"
+        name = "My Device"
+        notes = "This is my device"
+        switchProfileId = "789012"
+        moveMapMarker = $true
+        lat = 37.7749
+        lng = -122.4194
+        tags = @("tag1", "tag2")
+    }
+
     $config = $config | ConvertTo-Json -Compress
     Set-MerakiDevice -AuthToken "your-api-token" -DeviceSerial "Q2HP-XXXX-XXXX" -DeviceConfig $config
 

@@ -16,14 +16,15 @@ function Set-MerakiNetworkApplianceSettings {
     A string containing the appliance configuration. The string should be in JSON format and should include the "clientTrackingMethod", "deploymentMode", and "dynamicDns" properties.
 
     .EXAMPLE
-    $config = '{
-        "clientTrackingMethod": "MAC address",
-        "deploymentMode": "routed",
-        "dynamicDns": {
-            "prefix": "test",
-            "enabled": true
+    $config = [PSCustomObject]@{
+        clientTrackingMethod = "MAC address"
+        deploymentMode = "routed"
+        dynamicDns = @{
+            prefix = "test"
+            enabled = $true
         }
-    }'
+    }
+
     $config = $config | ConvertTo-Json -Compress
     Set-MerakiNetworkApplianceSettings -AuthToken "your-api-token" -NetworkId "your-network-id" -ApplianceConfig $config
 

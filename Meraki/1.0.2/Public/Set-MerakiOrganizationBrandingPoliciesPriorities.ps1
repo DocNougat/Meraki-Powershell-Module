@@ -16,7 +16,7 @@ function Set-MerakiOrganizationBrandingPoliciesPriorities {
     A list of branding policy IDs in the desired order. The first ID in the list will have the highest priority.
 
     .EXAMPLE
-    Set-MerakiOrganizationBrandingPoliciesPriorities -AuthToken "your-api-token" -OrganizationId "1234567890" -PolicyIds "1234567890","0987654321"
+    Set-MerakiOrganizationBrandingPoliciesPriorities -AuthToken "your-api-token" -OrganizationId "1234567890" -PolicyIds @("1234567890","0987654321")
 
     This example updates the priorities of branding policies for the Meraki organization with ID "1234567890". The branding policy with ID "1234567890" will have the highest priority, followed by the branding policy with ID "0987654321".
 

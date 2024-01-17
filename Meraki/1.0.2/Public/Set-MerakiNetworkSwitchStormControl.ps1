@@ -16,14 +16,15 @@ function Set-MerakiNetworkSwitchStormControl {
     A JSON formatted string of the storm control configuration.
     
     .EXAMPLE
-    $StormControlConfig = '{
-        "broadcastThreshold": 30,
-        "multicastThreshold": 30,
-        "unknownUnicastThreshold": 30
-    }'
+    $StormControlConfig = [PSCustomObject]@{
+        broadcastThreshold = 30
+        multicastThreshold = 30
+        unknownUnicastThreshold = 30
+    }
+
     $StormControlConfig = $StormControlConfig | ConvertTo-Json -Compress
     Set-MerakiNetworkSwitchStormControl -AuthToken "your-api-token" -NetworkId "1234" -StormControlConfig $StormControlConfig
-    
+
     This example updates a network switch storm control with the specified configuration.
     
     .NOTES

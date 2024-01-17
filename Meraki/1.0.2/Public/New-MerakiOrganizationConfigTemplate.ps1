@@ -23,11 +23,12 @@ function New-MerakiOrganizationConfigTemplate {
     This example creates a new configuration template with the name "My Config Template" for the Meraki organization with ID "123456789012345678".
 
     .EXAMPLE
-    $config = '{
-        "name": "My Config Template",
-        "copyFromNetworkId": "N_123456789012345678",
-        "timeZone": "America/Los_Angeles"
-    }'
+    $config = [PSCustomObject]@{
+        name = "My Config Template"
+        copyFromNetworkId = "N_123456789012345678"
+        timeZone = "America/Los_Angeles"
+    }
+
     $config = $config | ConvertTo-Json -Compress
     New-MerakiOrganizationConfigTemplate -AuthToken "your-api-token" -OrganizationId "123456789012345678" -ConfigTemplateConfig $config
 

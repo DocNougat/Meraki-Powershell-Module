@@ -19,54 +19,52 @@ The number of the SSID to set the Hotspot 2.0 configuration for.
 The Hotspot 2.0 configuration to set for the specified SSID.
 
 .EXAMPLE
-$HotspotConfig = '{
-    "enabled": true,
-    "operator": {
-        "name": "Meraki Product Management"
-    },
-    "venue": {
-        "name": "SF Branch",
-        "type": "Unspecified Assembly"
-    },
-    "networkAccessType": "Private network",
-    "domains": [
+$HotspotConfig = [PSCustomObject]@{
+    enabled = $true
+    operator = @{
+        name = "Meraki Product Management"
+    }
+    venue = @{
+        name = "SF Branch"
+        type = "Unspecified Assembly"
+    }
+    networkAccessType = "Private network"
+    domains = @(
         "meraki.local",
         "domain2.com"
-    ],
-    "roamConsortOis": [ "ABC123", "456EFG" ],
-    "mccMncs": [
-        {
-            "mcc": "123",
-            "mnc": "456"
+    )
+    roamConsortOis = @(
+        "ABC123",
+        "456EFG"
+    )
+    mccMncs = @(
+        @{
+            mcc = "123"
+            mnc = "456"
         },
-        {
-            "mcc": "563",
-            "mnc": "232"
+        @{
+            mcc = "563"
+            mnc = "232"
         }
-    ],
-    "naiRealms": [
-        {
-            "format": "1",
-            "name": "Realm 1",
-            "methods": [
-                {
-                    "id": "1",
-                    "authenticationTypes": {
-                        "nonEapInnerAuthentication": [ "MSCHAP" ],
-                        "eapInnerAuthentication": [
-                            "EAP-TTLS with MSCHAPv2"
-                        ],
-                        "credentials": [],
-                        "tunneledEapMethodCredentials": []
+    )
+    naiRealms = @(
+        @{
+            format = "1"
+            name = "Realm 1"
+            methods = @(
+                @{
+                    id = "1"
+                    authenticationTypes = @{
+                        nonEapInnerAuthentication = @("MSCHAP")
+                        eapInnerAuthentication = @("EAP-TTLS with MSCHAPv2")
+                        credentials = @()
+                        tunneledEapMethodCredentials = @()
                     }
                 }
-            ]
+            )
         }
-    ]
-}'
-$HotspotConfig = $HotspotConfig | ConvertTo-Json -Compress
-Set-MerakiNetworkWirelessSSIDHotspot20 -AuthToken "1234" -NetworkId "5678" -SSIDNumber "1" -HotspotConfig $HotspotConfig
-
+    )
+}
 This example sets the Hotspot 2.0 configuration for SSID 1 in the Meraki wireless network with ID 5678 using the specified Hotspot 2.0 configuration and the Meraki Dashboard API key "1234".
 
 .NOTES

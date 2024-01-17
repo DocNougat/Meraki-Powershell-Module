@@ -16,13 +16,12 @@ function Invoke-MerakiDeviceBlinkLEDs {
     The JSON configuration for the LED blink. Refer to the JSON schema for required parameters and their format.
 
     .EXAMPLE
-    $BlinkLEDConfig = '{
-        "duration": 20,
-        "period": 160,
-        "duty": 50
-    }'
-    $BlinkLEDConfig = $BlinkLEDConfig | ConvertTo-JSON -compress
-
+    $BlinkLEDConfig = [PSCustomObject]@{
+        duration = 20
+        period = 160
+        duty = 50
+    }
+    $BlinkLEDConfig = ConvertTo-Json -Compress
     Invoke-MerakiDeviceBlinkLEDs -AuthToken "1234" -Serial "Q2HP-XXXX-XXXX" -BlinkLEDConfig $BlinkLEDConfig
 
     This example blinks the LEDs of the device with serial number 'Q2HP-XXXX-XXXX' with the specified configuration.

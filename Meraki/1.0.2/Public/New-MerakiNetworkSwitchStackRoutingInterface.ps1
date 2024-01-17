@@ -19,33 +19,34 @@ function New-MerakiNetworkSwitchStackRoutingInterface {
     A JSON formatted string of the routing interface configuration.
     
     .EXAMPLE
-    $RoutingInterfaceConfig = '{
-        "name": "L3 interface",
-        "subnet": "192.168.1.0/24",
-        "interfaceIp": "192.168.1.2",
-        "multicastRouting": "disabled",
-        "vlanId": 100,
-        "defaultGateway": "192.168.1.1",
-        "ospfSettings": {
-            "area": "0",
-            "cost": 1,
-            "isPassiveEnabled": true
-        },
-        "ospfV3": {
-            "area": "1",
-            "cost": 2,
-            "isPassiveEnabled": true
-        },
-        "ipv6": {
-            "assignmentMode": "static",
-            "address": "1:2:3:4::1",
-            "prefix": "1:2:3:4::/48",
-            "gateway": "1:2:3:4::2"
+    $RoutingInterfaceConfig = [PSCustomObject]@{
+        name = "L3 interface"
+        subnet = "192.168.1.0/24"
+        interfaceIp = "192.168.1.2"
+        multicastRouting = "disabled"
+        vlanId = 100
+        defaultGateway = "192.168.1.1"
+        ospfSettings = @{
+            area = "0"
+            cost = 1
+            isPassiveEnabled = $true
         }
-    }'
+        ospfV3 = @{
+            area = "1"
+            cost = 2
+            isPassiveEnabled = $true
+        }
+        ipv6 = @{
+            assignmentMode = "static"
+            address = "1:2:3:4::1"
+            prefix = "1:2:3:4::/48"
+            gateway = "1:2:3:4::2"
+        }
+    }
+
     $RoutingInterfaceConfig = $RoutingInterfaceConfig | ConvertTo-Json
     New-MerakiNetworkSwitchStackRoutingInterface -AuthToken "your-api-token" -NetworkId "1234" -SwitchStackId "5678" -RoutingInterfaceConfig $RoutingInterfaceConfig
-    
+
     This example creates a network switch stack routing interface with the specified configuration.
     
     .NOTES

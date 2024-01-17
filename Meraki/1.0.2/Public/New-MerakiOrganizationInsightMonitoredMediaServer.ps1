@@ -16,15 +16,16 @@ function New-MerakiOrganizationInsightMonitoredMediaServer {
     A string containing the monitored media server configuration. The string should be in JSON format and should include the properties as defined in the schema.
     
     .EXAMPLE
-    $MonitoredMediaServerConfig = '{
-        "name": "Sample VoIP Provider",
-        "address": "123.123.123.1",
-        "bestEffortMonitoringEnabled": true
-    }'
+    $MonitoredMediaServerConfig = [PSCustomObject]@{
+        name = "Sample VoIP Provider"
+        address = "123.123.123.1"
+        bestEffortMonitoringEnabled = $true
+    }
+
     $MonitoredMediaServerConfig = $MonitoredMediaServerConfig | ConvertTo-Json -Compress
-    
+
     New-MerakiOrganizationInsightMonitoredMediaServer -AuthToken "your-api-token" -OrganizationId "1234" -MonitoredMediaServerConfig $MonitoredMediaServerConfig
-    
+
     This example creates a monitored media server for the Meraki organization with ID "1234".
     
     .NOTES
