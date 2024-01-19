@@ -19,20 +19,20 @@ function Set-MerakiNetworkWirelessSSIDFirewallL3FirewallRules {
     A JSON formatted string of the L3 Firewall Rules.
     
     .EXAMPLE
-    $L3FirewallRules = '{
-        "rules": [
-            {
-                "comment": "Allow TCP traffic to subnet with HTTP servers.",
-                "policy": "allow",
-                "protocol": "tcp",
-                "destPort": "443",
-                "destCidr": "192.168.1.0/24"
+    $L3FirewallRules = [PSCustomObject]@{
+        rules = @(
+            [PSCustomObject]@{
+                comment = "Allow TCP traffic to subnet with HTTP servers."
+                policy = "allow"
+                protocol = "tcp"
+                destPort = "443"
+                destCidr = "192.168.1.0/24"
             }
-        ]
-    }'
+        )
+    }
     $L3FirewallRules = $L3FirewallRules | ConvertTo-Json -Compress
     Set-MerakiNetworkWirelessSSIDFirewallL3FirewallRules -AuthToken "your-api-token" -NetworkId "1234" -Number 0 -L3FirewallRules $L3FirewallRules
-    
+
     This example updates a network wireless SSID Firewall L3 Firewall Rules with the specified configuration.
     
     .NOTES

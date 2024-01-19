@@ -19,23 +19,23 @@ function Set-MerakiNetworkWirelessSSIDDeviceTypeGroupPolicies {
     A JSON formatted string of the group policies.
     
     .EXAMPLE
-    $GroupPolicies = '{
-        "enabled": true,
-        "deviceTypePolicies": [
-            {
-                "deviceType": "Android",
-                "devicePolicy": "Allowed"
+    $GroupPolicies = [PSCustomObject]@{
+        enabled = $true
+        deviceTypePolicies = @(
+            [PSCustomObject]@{
+                deviceType = "Android"
+                devicePolicy = "Allowed"
             },
-            {
-                "deviceType": "iPhone",
-                "devicePolicy": "Group policy",
-                "groupPolicyId": 101
+            [PSCustomObject]@{
+                deviceType = "iPhone"
+                devicePolicy = "Group policy"
+                groupPolicyId = 101
             }
-        ]
-    }'
+        )
+    }
     $GroupPolicies = $GroupPolicies | ConvertTo-Json -Compress
-    Set-MerakiNetworkWirelessSSIDDeviceTypeGroupPolicies -AuthToken "your-api-token" -NetworkId "1234" -Number 0 -GroupPolicies $GroupPolicies
-    
+    Set-MerakiNetworkWirelessSSIDDeviceTypeGroupPolicies -AuthToken "your-api-token" -NetworkId "1234" -SSIDNumber 0 -GroupPolicies $GroupPolicies
+
     This example updates a network wireless SSID device type group policies with the specified configuration.
     
     .NOTES

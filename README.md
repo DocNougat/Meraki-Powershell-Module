@@ -44,18 +44,15 @@ Get-MerakiNetworkPoliciesByClient -AuthToken "your-api-token" -perPage 5 -timesp
 * Other commands (Invoke-, New-, Remove-,  or Set-) may require JSON formatted inputs:
    * Example: The command to call the Create Organization Network endpoint is New-MerakiOrganizationNetwork. It has one required parameter, AuthToken, one optional parameter, OrganizationID (required in systems with multiple organizations under the same auth token), & also requires a JSON formatted string of next defining the details of the network being created.
 ```powershell
-$NetworkConfig = '{
-   "name": "Main Office",
-   "productTypes": [
-      "appliance",
-      "switch",
-      "wireless"
-   ],
-   "tags": [ "tag1", "tag2" ],
-   "timeZone": "America/Los_Angeles",
-   "copyFromNetworkId": "N_24329156",
-   "notes": "Additional description of the network"
-}'
+$NetworkConfig = [PSCustomObject]@{
+   "name" = "Main Office"
+   "productTypes" = @("appliance", "switch", "wireless")
+   "tags" = @("tag1", "tag2")
+   "timeZone" = "America/Los_Angeles"
+   "copyFromNetworkId" = "N_24329156"
+   "notes" = "Additional description of the network"
+}
+
 $NetworkConfig = $NetworkConfig | ConvertTo-JSON -compress
 New-MerakiOrganizationNetwork -AuthToken "your-api-token" -NetworkConfig $NetworkConfig
 ```

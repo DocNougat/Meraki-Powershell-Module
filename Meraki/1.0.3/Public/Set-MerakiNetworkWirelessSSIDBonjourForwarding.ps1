@@ -19,24 +19,21 @@ function Set-MerakiNetworkWirelessSSIDBonjourForwarding {
     A string containing the Bonjour forwarding configuration. The string should be in JSON format and should include the "enabled" and "exception" properties, as well as an array of "rules" if applicable.
 
     .EXAMPLE
-    $config = '{
-        "enabled": true,
-        "exception": {
-            "enabled": true,
-            "rules": [
-                {
-                    "description": "My Bonjour rule",
-                    "vlanId": "123",
-                    "services": [
-                        "AirPlay",
-                        "iTunes"
-                    ]
+    $BonjourConfig = [PSCustomObject]@{
+        enabled = $true
+        exception = [PSCustomObject]@{
+            enabled = $true
+            rules = @(
+                [PSCustomObject]@{
+                    description = "My Bonjour rule"
+                    vlanId = "123"
+                    services = @("AirPlay", "iTunes")
                 }
-            ]
+            )
         }
-    }'
-    $config = $config | ConvertTo-Json -Compress
-    Set-MerakiNetworkWirelessSSIDBonjourForwarding -AuthToken "your-api-token" -NetworkId "N_1234567890" -SsidNumber 1 -BonjourConfig $config
+    }
+    $BonjourConfig = $BonjourConfig | ConvertTo-Json -Compress
+    Set-MerakiNetworkWirelessSSIDBonjourForwarding -AuthToken "your-api-token" -NetworkId "N_1234567890" -SsidNumber 1 -BonjourConfig $BonjourConfig
 
     This example enables Bonjour forwarding on the first wireless SSID of the Meraki network with ID "N_1234567890". It also enables Bonjour forwarding exception and adds a single Bonjour forwarding rule that allows AirPlay and iTunes services on VLAN 123.
 

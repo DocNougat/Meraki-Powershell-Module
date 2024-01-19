@@ -65,7 +65,9 @@ $HotspotConfig = [PSCustomObject]@{
         }
     )
 }
-This example sets the Hotspot 2.0 configuration for SSID 1 in the Meraki wireless network with ID 5678 using the specified Hotspot 2.0 configuration and the Meraki Dashboard API key "1234".
+
+$HotspotConfig = $HotspotConfig | ConvertTo-Json -Compress
+Set-MerakiNetworkWirelessSSIDHotspot20 -AuthToken "your-api-token" -NetworkId "1234" -SSIDNumber "1" -HotspotConfig $HotspotConfig
 
 .NOTES
 For more information about the Meraki Dashboard API, see https://developer.cisco.com/meraki/api/.

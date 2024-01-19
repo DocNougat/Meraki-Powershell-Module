@@ -19,18 +19,21 @@ function Set-MerakiNetworkWirelessSSIDEAPOverride {
     A JSON formatted string of the EAP Override.
     
     .EXAMPLE
-    $EAPOverride = '{
-        "timeout": 5,
-        "identity": { "retries": 5, "timeout": 5 },
-        "maxRetries": 5,
-        "eapolKey": {
-            "retries": 5,
-            "timeoutInMs": 5000
+    $EAPOverride = [PSCustomObject]@{
+        timeout = 5
+        identity = @{
+            retries = 5
+            timeout = 5
         }
-    }'
+        maxRetries = 5
+        eapolKey = @{
+            retries = 5
+            timeoutInMs = 5000
+        }
+    }
     $EAPOverride = $EAPOverride | ConvertTo-Json -Compress
-    Set-MerakiNetworkWirelessSSIDEAPOverride -AuthToken "your-api-token" -NetworkId "1234" -Number 0 -EAPOverride $EAPOverride
-    
+    Set-MerakiNetworkWirelessSSIDEAPOverride -AuthToken "your-api-token" -NetworkId "1234" -SSIDNumber 0 -EAPOverride $EAPOverride
+
     This example updates a network wireless SSID EAP Override with the specified configuration.
     
     .NOTES

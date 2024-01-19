@@ -19,33 +19,32 @@ function Set-MerakiNetworkWirelessSSIDFirewallL7FirewallRules {
     A JSON formatted string of the L7 Firewall Rules.
     
     .EXAMPLE
-    $L7FirewallRules = '{
-        "rules": [
-            {
-                "policy": "deny",
-                "type": "host",
-                "value": "google.com"
+    $L7FirewallRules = [PSCustomObject]@{
+        rules = @(
+            @{
+                policy = "deny"
+                type = "host"
+                value = "google.com"
             },
-            {
-                "policy": "deny",
-                "type": "port",
-                "value": "23"
+            @{
+                policy = "deny"
+                type = "port"
+                value = "23"
             },
-            {
-                "policy": "deny",
-                "type": "ipRange",
-                "value": "10.11.12.00/24"
+            @{
+                policy = "deny"
+                type = "ipRange"
+                value = "10.11.12.00/24"
             },
-            {
-                "policy": "deny",
-                "type": "ipRange",
-                "value": "10.11.12.00/24:5555"
+            @{
+                policy = "deny"
+                type = "ipRange"
+                value = "10.11.12.00/24:5555"
             }
-        ]
-    }'
-    $L7FirewallRules = $L7FirewallRules | ConvertTo-Json -Compress
+        )
+    } | ConvertTo-Json -Compress
+
     Set-MerakiNetworkWirelessSSIDFirewallL7FirewallRules -AuthToken "your-api-token" -NetworkId "1234" -Number 0 -L7FirewallRules $L7FirewallRules
-    
     This example updates a network wireless SSID Firewall L7 Firewall Rules with the specified configuration.
     
     .NOTES
