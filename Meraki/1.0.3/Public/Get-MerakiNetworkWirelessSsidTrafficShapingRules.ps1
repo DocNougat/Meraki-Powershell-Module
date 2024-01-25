@@ -12,7 +12,7 @@ function Get-MerakiNetworkWirelessSsidTrafficShapingRules {
     .PARAMETER networkId
     The ID of the network that the SSID belongs to.
 
-    .PARAMETER number
+    .PARAMETER SSIDNumber
     The number of the SSID to retrieve the traffic shaping rules for.
 
     .EXAMPLE
@@ -30,13 +30,13 @@ function Get-MerakiNetworkWirelessSsidTrafficShapingRules {
         [Parameter(Mandatory=$true)]
         [string]$networkId,
         [Parameter(Mandatory=$true)]
-        [string]$number
+        [string]$SSIDNumber
     )
     try {
         $header = @{
             "X-Cisco-Meraki-API-Key" = $AuthToken
         }
-        $response = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/networks/$networkId/wireless/ssids/$number/trafficShaping/rules" -Header $header -UserAgent "MerakiPowerShellModule/1.0.2 DocNougat"
+        $response = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/networks/$networkId/wireless/ssids/$SSIDNumber/trafficShaping/rules" -Header $header -UserAgent "MerakiPowerShellModule/1.0.2 DocNougat"
         return $response
     } catch {
         Write-Error $_

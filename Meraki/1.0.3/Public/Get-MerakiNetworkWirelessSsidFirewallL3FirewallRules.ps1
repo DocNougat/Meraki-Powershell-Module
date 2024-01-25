@@ -8,7 +8,7 @@ function Get-MerakiNetworkWirelessSsidFirewallL3FirewallRules {
     The Meraki API token for the account.
     .PARAMETER networkId
     The ID of the Meraki network for which to retrieve the layer 3 firewall rules.
-    .PARAMETER number
+    .PARAMETER SSIDNumber
     The number of the SSID for which to retrieve the layer 3 firewall rules.
     .EXAMPLE
     PS> Get-MerakiNetworkWirelessSsidFirewallL3FirewallRules -AuthToken "1234" -networkId "abcd" -number 1
@@ -21,7 +21,7 @@ function Get-MerakiNetworkWirelessSsidFirewallL3FirewallRules {
         [parameter(Mandatory=$true)]
         [string]$networkId,
         [parameter(Mandatory=$true)]
-        [string]$number
+        [string]$SSIDNumber
     )
 
     try {
@@ -29,7 +29,7 @@ function Get-MerakiNetworkWirelessSsidFirewallL3FirewallRules {
             "X-Cisco-Meraki-API-Key" = $AuthToken
         }
 
-        $response = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/networks/$networkId/wireless/ssids/$number/firewall/l3FirewallRules" -Header $header -UserAgent "MerakiPowerShellModule/1.0.2 DocNougat"
+        $response = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/networks/$networkId/wireless/ssids/$SSIDNumber/firewall/l3FirewallRules" -Header $header -UserAgent "MerakiPowerShellModule/1.0.2 DocNougat"
         return $response
     }
     catch {

@@ -1,7 +1,7 @@
 @{
     # Required module metadata
     RootModule = 'Meraki.psm1'
-    ModuleVersion = '1.0.3'
+    ModuleVersion = '1.0.4'
     GUID = 'a4c78621-53d6-4d07-a3c2-18986038ae94'
     Author = 'Alex Heimbuch'
     CompanyName = ''
