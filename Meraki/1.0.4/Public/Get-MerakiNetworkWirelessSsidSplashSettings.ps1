@@ -16,7 +16,7 @@ function Get-MerakiNetworkWirelessSsidSplashSettings {
     The number of the SSID to retrieve the splash settings for.
 
     .EXAMPLE
-    PS C:\> Get-MerakiNetworkWirelessSsidSplashSettings -AuthToken "your_api_key" -networkId "your_network_id" -number "1"
+    PS C:\> Get-MerakiNetworkWirelessSsidSplashSettings -AuthToken "your_api_key" -networkId "your_network_id" -SSIDNumber "1"
 
     Retrieves the splash settings for the first wireless SSID in the specified network.
 

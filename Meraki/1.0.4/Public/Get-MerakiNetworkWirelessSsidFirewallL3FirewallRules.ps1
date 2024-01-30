@@ -11,7 +11,7 @@ function Get-MerakiNetworkWirelessSsidFirewallL3FirewallRules {
     .PARAMETER SSIDNumber
     The number of the SSID for which to retrieve the layer 3 firewall rules.
     .EXAMPLE
-    PS> Get-MerakiNetworkWirelessSsidFirewallL3FirewallRules -AuthToken "1234" -networkId "abcd" -number 1
+    PS> Get-MerakiNetworkWirelessSsidFirewallL3FirewallRules -AuthToken "1234" -networkId "abcd" -SSIDNumber 1
     Retrieves the layer 3 firewall rules for SSID 1 in network "abcd" using the Meraki API token "1234".
     #>
     [CmdletBinding()]

@@ -16,7 +16,7 @@ function Get-MerakiNetworkWirelessSsidSchedules {
     The number of the SSID to retrieve the schedules for.
 
     .EXAMPLE
-    PS C:\> Get-MerakiNetworkWirelessSsidSchedules -AuthToken "your_api_key" -networkId "your_network_id" -number "1"
+    PS C:\> Get-MerakiNetworkWirelessSsidSchedules -AuthToken "your_api_key" -networkId "your_network_id" -SSIDNumber "1"
 
     Retrieves the schedules for the first wireless SSID in the specified network.
 

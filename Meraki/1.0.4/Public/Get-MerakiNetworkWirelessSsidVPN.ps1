@@ -16,7 +16,7 @@ function Get-MerakiNetworkWirelessSsidVPN {
     The number of the SSID to retrieve the VPN settings for.
 
     .EXAMPLE
-    PS C:\> Get-MerakiNetworkWirelessSsidVPN -AuthToken "your_api_key" -networkId "your_network_id" -number "1"
+    PS C:\> Get-MerakiNetworkWirelessSsidVPN -AuthToken "your_api_key" -networkId "your_network_id" -SSIDNumber "1"
 
     Retrieves the VPN settings for the first wireless SSID in the specified network.
 

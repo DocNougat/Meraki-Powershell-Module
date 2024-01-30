@@ -11,7 +11,7 @@ function Get-MerakiNetworkWirelessSsid {
     .PARAMETER SSIDNumber
     The number of the SSID for which to retrieve the configuration.
     .EXAMPLE
-    PS> Get-MerakiNetworkWirelessSsid -AuthToken "1234" -networkId "abcd" -number 1
+    PS> Get-MerakiNetworkWirelessSsid -AuthToken "1234" -networkId "abcd" -SSIDNumber 1
     Retrieves the configuration for SSID 1 in network "abcd" using the Meraki API token "1234".
     #>
     [CmdletBinding()]

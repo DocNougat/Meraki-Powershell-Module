@@ -16,7 +16,7 @@ function Get-MerakiNetworkWirelessSsidTrafficShapingRules {
     The number of the SSID to retrieve the traffic shaping rules for.
 
     .EXAMPLE
-    PS C:\> Get-MerakiNetworkWirelessSsidTrafficShapingRules -AuthToken "your_api_key" -networkId "your_network_id" -number "1"
+    PS C:\> Get-MerakiNetworkWirelessSsidTrafficShapingRules -AuthToken "your_api_key" -networkId "your_network_id" -SSIDNumber "1"
 
     Retrieves the traffic shaping rules for the first wireless SSID in the specified network.
 

@@ -13,7 +13,7 @@ function Get-MerakiNetworkWirelessSsidIdentityPsk {
     .PARAMETER identityPskId
     The ID of the identity PSK for which to retrieve the settings.
     .EXAMPLE
-    PS> Get-MerakiNetworkWirelessSsidIdentityPsk -AuthToken "1234" -networkId "abcd" -number 1 -identityPskId "efgh"
+    PS> Get-MerakiNetworkWirelessSsidIdentityPsk -AuthToken "1234" -networkId "abcd" -SSIDNumber 1 -identityPskId "efgh"
     Retrieves the identity PSK settings for SSID 1 in network "abcd" and identity PSK "efgh" using the Meraki API token "1234".
     #>
     [CmdletBinding()]

@@ -11,7 +11,7 @@ function Get-MerakiNetworkWirelessSsidBonjourForwarding {
     .PARAMETER SSIDNumber
     The number of the SSID for which to retrieve the Bonjour forwarding settings.
     .EXAMPLE
-    PS> Get-MerakiNetworkWirelessSsidBonjourForwarding -AuthToken "1234" -networkId "abcd" -number 1
+    PS> Get-MerakiNetworkWirelessSsidBonjourForwarding -AuthToken "1234" -networkId "abcd" -SSIDNumber 1
     Retrieves the Bonjour forwarding settings for SSID 1 in network "abcd" using the Meraki API token "1234".
     #>
     [CmdletBinding()]

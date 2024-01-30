@@ -11,7 +11,7 @@ function Get-MerakiNetworkWirelessSsidEapOverride {
     .PARAMETER SSIDNumber
     The number of the SSID for which to retrieve the EAP override settings.
     .EXAMPLE
-    PS> Get-MerakiNetworkWirelessSsidEapOverride -AuthToken "1234" -networkId "abcd" -number 1
+    PS> Get-MerakiNetworkWirelessSsidEapOverride -AuthToken "1234" -networkId "abcd" -SSIDNumber 1
     Retrieves the EAP override settings for SSID 1 in network "abcd" using the Meraki API token "1234".
     #>
     [CmdletBinding()]

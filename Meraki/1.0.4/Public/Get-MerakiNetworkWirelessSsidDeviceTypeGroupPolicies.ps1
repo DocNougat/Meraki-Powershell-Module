@@ -11,7 +11,7 @@ function Get-MerakiNetworkWirelessSsidDeviceTypeGroupPolicies {
     .PARAMETER SSIDNumber
     The number of the SSID for which to retrieve the device type group policies.
     .EXAMPLE
-    PS> Get-MerakiNetworkWirelessSsidDeviceTypeGroupPolicies -AuthToken "1234" -networkId "abcd" -number 1
+    PS> Get-MerakiNetworkWirelessSsidDeviceTypeGroupPolicies -AuthToken "1234" -networkId "abcd" -SSIDNumber 1
     Retrieves the device type group policies for SSID 1 in network "abcd" using the Meraki API token "1234".
     #>
     [CmdletBinding()]

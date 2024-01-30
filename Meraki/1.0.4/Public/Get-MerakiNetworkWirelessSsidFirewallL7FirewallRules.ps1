@@ -11,7 +11,7 @@ function Get-MerakiNetworkWirelessSsidFirewallL7FirewallRules {
     .PARAMETER SSIDNumber
     The number of the SSID for which to retrieve the layer 7 firewall rules.
     .EXAMPLE
-    PS> Get-MerakiNetworkWirelessSsidFirewallL7FirewallRules -AuthToken "1234" -networkId "abcd" -number 1
+    PS> Get-MerakiNetworkWirelessSsidFirewallL7FirewallRules -AuthToken "1234" -networkId "abcd" -SSIDNumber 1
     Retrieves the layer 7 firewall rules for SSID 1 in network "abcd" using the Meraki API token "1234".
     #>
     [CmdletBinding()]
