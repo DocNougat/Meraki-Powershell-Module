@@ -71,6 +71,7 @@ function Invoke-MerakiOrganizationMoveLicensingCotermLicenses {
             }
             catch {
                 Write-Host $_
+                Throw $_
             }
         }
     }

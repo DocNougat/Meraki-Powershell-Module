@@ -44,6 +44,7 @@ function Remove-MerakiNetwork {
         Invoke-RestMethod -Uri $url -Method Delete -Headers $header -UserAgent "MerakiPowerShellModule/1.02 DocNougat" -Body $body
         Write-Host "Successfully removed Network: $NetworkID"
     } catch {
-        Write-Error "Error removing Network: $NetworkID"
+        Write-Host $_
+        Throw $_
     }
 }

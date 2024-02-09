@@ -59,7 +59,7 @@ function New-MerakiNetworkCameraWirelessProfile {
             return $response
         }
         catch {
-        Write-Host $_
-        Throw $_
-    }
+            Write-Host $_
+            Throw $_
+        }
     }
