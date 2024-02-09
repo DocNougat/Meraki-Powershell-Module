@@ -27,6 +27,7 @@ function Get-MerakiNetworkApplianceFirewallPortForwardingRules {
         return $response
     }
     catch {
-        Write-Error "An error occurred while retrieving the port forwarding rules for network '$NetworkId': $_"
+        Write-Host $_
+        Throw $_
     }
 }

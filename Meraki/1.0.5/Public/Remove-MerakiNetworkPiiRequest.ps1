@@ -48,5 +48,6 @@ function Remove-MerakiNetworkPiiRequest {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

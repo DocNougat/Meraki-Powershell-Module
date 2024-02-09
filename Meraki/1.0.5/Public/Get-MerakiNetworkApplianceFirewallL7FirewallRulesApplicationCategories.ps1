@@ -28,6 +28,7 @@ function Get-MerakiNetworkApplianceFirewallL7FirewallRulesApplicationCategories 
         return $response
     }
     catch {
-        Write-Error "An error occurred while retrieving the application categories for L7 firewall rules on network '$NetworkId': $_"
+        Write-Host $_
+        Throw $_
     }
 }

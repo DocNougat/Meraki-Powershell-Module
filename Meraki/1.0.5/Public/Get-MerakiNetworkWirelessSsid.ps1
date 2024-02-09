@@ -33,6 +33,7 @@ function Get-MerakiNetworkWirelessSsid {
         return $response
     }
     catch {
-        Write-Error $_
+        Write-Host $_
+        Throw $_
     }
 }

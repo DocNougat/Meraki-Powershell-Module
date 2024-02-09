@@ -37,6 +37,7 @@ function Get-MerakiNetworkSwitchAlternateManagementInterface {
         return $response
     }
     catch {
-        Write-Error "Error retrieving alternate management interface configuration: $_"
+        Write-Host $_
+        Throw $_
     }
 }

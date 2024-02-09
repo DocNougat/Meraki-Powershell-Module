@@ -56,5 +56,6 @@ function New-MerakiNetworkPiiRequest {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

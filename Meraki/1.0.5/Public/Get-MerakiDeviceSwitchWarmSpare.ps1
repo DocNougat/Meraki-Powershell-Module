@@ -35,7 +35,7 @@ function Get-MerakiDeviceSwitchWarmSpare {
         return $response
     }
     catch {
-        Write-Error "Error retrieving warm spare configuration: $_"
-        return $null
+        Write-Host $_
+        Throw $_
     }
 }

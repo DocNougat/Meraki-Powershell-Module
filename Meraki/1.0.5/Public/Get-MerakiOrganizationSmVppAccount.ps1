@@ -45,7 +45,8 @@ function Get-MerakiOrganizationSmVppAccount {
             return $response
         }
         catch {
-            Write-Error $_
-        }
+        Write-Host $_
+        Throw $_
+    }
     }
 }

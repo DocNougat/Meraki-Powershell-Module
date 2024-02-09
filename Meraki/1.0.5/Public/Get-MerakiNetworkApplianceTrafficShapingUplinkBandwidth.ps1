@@ -37,6 +37,7 @@ function Get-MerakiNetworkApplianceTrafficShapingUplinkBandwidth {
         return $response
     }
     catch {
-        Write-Error $_
+        Write-Host $_
+        Throw $_
     }
 }

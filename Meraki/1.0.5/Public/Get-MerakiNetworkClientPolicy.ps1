@@ -40,6 +40,7 @@ function Get-MerakiNetworkClientPolicy {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve client policy: $_"
+        Write-Host $_
+        Throw $_
     }
 }

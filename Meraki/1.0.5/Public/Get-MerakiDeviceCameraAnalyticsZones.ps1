@@ -27,6 +27,7 @@ function Get-MerakiDeviceCameraAnalyticsZones {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve Meraki camera analytic zones: $_"
+        Write-Host $_
+        Throw $_
     }
 }

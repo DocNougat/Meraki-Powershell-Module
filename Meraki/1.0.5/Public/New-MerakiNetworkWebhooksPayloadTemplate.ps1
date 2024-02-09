@@ -63,5 +63,6 @@ function New-MerakiNetworkWebhooksPayloadTemplate {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

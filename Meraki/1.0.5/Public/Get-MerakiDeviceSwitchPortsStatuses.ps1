@@ -62,6 +62,7 @@ function Get-MerakiDeviceSwitchPortsStatuses {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve switch port statuses. Error: $_"
+        Write-Host $_
+        Throw $_
     }
 }

@@ -86,5 +86,6 @@ function Set-MerakiDeviceCellularSims {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

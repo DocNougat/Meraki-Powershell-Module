@@ -29,6 +29,7 @@ function Get-MerakiNetworkSyslogServers {
         return $response
     }
     catch {
-        Write-Error "An error occurred while retrieving the syslog servers for network $NetworkId : $_"
+        Write-Host $_
+        Throw $_
     }
 }

@@ -35,6 +35,7 @@ function Get-MerakiNetworkPrefixesDelegatedStatics {
         return $response
     }
     catch {
-        Write-Error $_
+        Write-Host $_
+        Throw $_
     }
 }

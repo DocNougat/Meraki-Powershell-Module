@@ -79,5 +79,6 @@ function Set-MerakiNetworkAlertSettings {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

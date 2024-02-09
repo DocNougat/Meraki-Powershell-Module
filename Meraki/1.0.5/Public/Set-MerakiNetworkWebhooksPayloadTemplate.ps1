@@ -70,5 +70,6 @@ function Set-MerakiNetworkWebhooksPayloadTemplate {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

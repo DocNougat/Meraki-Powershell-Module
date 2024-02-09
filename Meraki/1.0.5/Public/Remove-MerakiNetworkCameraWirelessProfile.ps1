@@ -48,6 +48,7 @@ function Remove-MerakiNetworkCameraWirelessProfile {
             return $response
         }
         catch {
-            Write-Host $_
-        }
+        Write-Host $_
+        Throw $_
+    }
     }

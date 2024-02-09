@@ -42,6 +42,7 @@ function Get-MerakiNetworkWebhooksPayloadTemplates {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve payload templates for network '$NetworkId'. $_"
+        Write-Host $_
+        Throw $_
     }
 }    

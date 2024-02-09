@@ -63,7 +63,8 @@ function Get-MerakiOrganizationWebhooksAlertTypes {
             return $response
         }
         catch {
-            Write-Error $_
-        }
+        Write-Host $_
+        Throw $_
+    }
     }
 }

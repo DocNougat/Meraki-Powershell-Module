@@ -27,6 +27,7 @@ function Get-MerakiDeviceAppliancePrefixesDelegatedVlanAssignments {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve Meraki appliance delegated prefix VLAN assignment information: $_"
+        Write-Host $_
+        Throw $_
     }
 }

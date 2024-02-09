@@ -30,7 +30,9 @@ function Get-MerakiNetworkSwitchRoutingMulticastRendezvousPoint {
         }
         $response = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/networks/$networkId/switch/routing/multicast/rendezvousPoints/$rendezvousPointId" -Header $header -UserAgent "MerakiPowerShellModule/1.0.2 DocNougat"
         return $response
-    } catch {
-        Write-Error "Failed to retrieve multicast rendezvous point configuration for network '$networkId' and rendezvous point '$rendezvousPointId'. Error: $_"
+    }
+    catch {
+        Write-Host $_
+        Throw $_
     }
 }

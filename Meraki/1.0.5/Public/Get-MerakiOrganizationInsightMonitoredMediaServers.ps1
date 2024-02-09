@@ -36,7 +36,8 @@ function Get-MerakiOrganizationInsightMonitoredMediaServers {
             return $response
         }
         catch {
-            Write-Error $_
-        }
+        Write-Host $_
+        Throw $_
+    }
     }
 }

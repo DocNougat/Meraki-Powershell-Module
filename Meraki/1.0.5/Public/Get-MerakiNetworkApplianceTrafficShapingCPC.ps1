@@ -31,6 +31,7 @@ function Get-MerakiNetworkApplianceTrafficShapingCPC {
         return $response
     }
     catch {
-        Write-Error "An error occurred while retrieving the custom performance class settings for custom performance class '$CustomPerformanceClassId' in network '$NetworkId': $_"
+        Write-Host $_
+        Throw $_
     }
 }

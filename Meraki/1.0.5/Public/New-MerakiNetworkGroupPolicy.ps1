@@ -206,5 +206,6 @@ For more information about the Meraki Dashboard API, see https://developer.cisco
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

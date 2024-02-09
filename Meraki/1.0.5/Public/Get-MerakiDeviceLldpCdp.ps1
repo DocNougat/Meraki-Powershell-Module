@@ -36,6 +36,7 @@ function Get-MerakiDeviceLldpCdp {
         return $response
     }
     catch {
-        Write-Host "Error occurred while retrieving LLDP and CDP information for device with serial number '$DeviceSerial': $_"
+        Write-Host $_
+        Throw $_
     }
 }

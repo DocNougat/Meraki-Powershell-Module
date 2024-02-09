@@ -42,6 +42,7 @@ function Get-MerakiNetworkSwitchAccessPolicy {
         $response = Invoke-RestMethod -Method Get -Uri $uri -Header $header -UserAgent "MerakiPowerShellModule/1.0.2 DocNougat" -ErrorAction Stop
         return $response
     } catch {
-        Write-Error $_
+        Write-Host $_
+        Throw $_
     }
 }

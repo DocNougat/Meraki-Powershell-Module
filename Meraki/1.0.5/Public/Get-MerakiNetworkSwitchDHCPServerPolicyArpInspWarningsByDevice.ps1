@@ -46,7 +46,9 @@ function Get-MerakiNetworkSwitchDHCPServerPolicyArpInspWarningsByDevice {
         $URI = [uri]::EscapeUriString($URL)
         $response = Invoke-RestMethod -Method Get -Uri $URI -Header $header -UserAgent "MerakiPowerShellModule/1.0.2 DocNougat"
         return $response
-    } catch {
-        Write-Error "Failed to retrieve ARP inspection warnings by device for network '$networkId'. Error: $_"
+    }
+    catch {
+        Write-Host $_
+        Throw $_
     }
 }

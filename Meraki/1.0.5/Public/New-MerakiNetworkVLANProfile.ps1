@@ -69,5 +69,6 @@ function New-MerakiNetworkVLANProfile {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

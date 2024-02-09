@@ -38,6 +38,7 @@ function Get-MerakiNetworkTrafficAnalysis {
         return $response
     }
     catch {
-        Write-Error "Error retrieving traffic analysis settings for network $NetworkId : $_"
+        Write-Host $_
+        Throw $_
     }
 }

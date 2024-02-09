@@ -65,5 +65,6 @@ function Set-MerakiNetworkSyslogServers {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

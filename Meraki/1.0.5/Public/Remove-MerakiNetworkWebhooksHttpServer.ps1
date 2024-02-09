@@ -48,5 +48,6 @@ function Remove-MerakiNetworkWebhooksHttpServer {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

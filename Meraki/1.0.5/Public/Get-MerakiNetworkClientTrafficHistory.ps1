@@ -68,7 +68,9 @@ function Get-MerakiNetworkClientTrafficHistory {
 
         $response = Invoke-RestMethod -Method Get -Uri $URI -Header $header -UserAgent "MerakiPowerShellModule/1.0.2 DocNougat"
         return $response
-    } catch {
-        Write-Error "An error occurred while retrieving traffic history for client $clientId on network $networkId. Error message: $_"
+    }
+    catch {
+        Write-Host $_
+        Throw $_
     }
 }

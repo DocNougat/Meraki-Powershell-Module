@@ -75,5 +75,6 @@ function Set-MerakiNetworkFloorPlan {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

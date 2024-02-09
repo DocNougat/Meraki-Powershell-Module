@@ -27,6 +27,7 @@ function Get-MerakiDeviceApplianceDHCPSubnets {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve Meraki appliance DHCP subnet information: $_"
+        Write-Host $_
+        Throw $_
     }
 }

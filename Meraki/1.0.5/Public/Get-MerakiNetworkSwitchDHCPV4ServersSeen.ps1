@@ -64,7 +64,9 @@ function Get-MerakiNetworkSwitchDHCPV4ServersSeen {
         $URI = [uri]::EscapeUriString($URL)
         $response = Invoke-RestMethod -Method Get -Uri $URI -Header $header -UserAgent "MerakiPowerShellModule/1.0.2 DocNougat"
         return $response
-    } catch {
-        Write-Error "Failed to retrieve DHCPv4 servers seen for network '$networkId'. Error: $($Error[0])"
+    }
+    catch {
+        Write-Host $_
+        Throw $_
     }
 }

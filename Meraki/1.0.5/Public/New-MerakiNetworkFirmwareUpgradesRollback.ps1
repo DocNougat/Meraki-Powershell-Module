@@ -65,5 +65,6 @@ function New-MerakiNetworkFirmwareUpgradesRollback {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

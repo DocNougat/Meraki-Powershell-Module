@@ -27,6 +27,7 @@ function Get-MerakiNetworkApplianceSettings {
         return $response
     }
     catch {
-        Write-Error "An error occurred while retrieving the appliance settings for network '$NetworkId': $_"
+        Write-Host $_
+        Throw $_
     }
 }

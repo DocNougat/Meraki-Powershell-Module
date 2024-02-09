@@ -28,6 +28,7 @@ function Get-MerakiNetworkApplianceStaticRoutes {
         return $response
     }
     catch {
-        Write-Error "An error occurred while retrieving the static routes for network '$NetworkId': $_"
+        Write-Host $_
+        Throw $_
     }
 }

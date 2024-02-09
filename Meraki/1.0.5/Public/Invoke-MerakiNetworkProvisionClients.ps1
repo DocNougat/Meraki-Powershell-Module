@@ -83,5 +83,6 @@ function Invoke-MerakiNetworkProvisionClients {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

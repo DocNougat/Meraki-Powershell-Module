@@ -31,5 +31,6 @@ function Convert-MerakiImageToBase64 {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

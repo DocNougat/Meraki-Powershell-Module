@@ -83,5 +83,6 @@ function Set-MerakiNetworkTrafficAnalysis {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

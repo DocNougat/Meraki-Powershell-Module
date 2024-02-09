@@ -35,6 +35,7 @@ For more information about the Meraki Dashboard API, visit https://developer.cis
         return $response
     }
     catch {
-        Write-Error "Failed to get connectivity monitoring destinations for network '$NetworkId': $_"
+        Write-Host $_
+        Throw $_
     }
 }

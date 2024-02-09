@@ -37,6 +37,7 @@ function Get-MerakiNetworkSettings {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve network settings. $_"
+        Write-Host $_
+        Throw $_
     }
 }

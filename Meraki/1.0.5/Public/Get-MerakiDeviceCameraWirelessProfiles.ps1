@@ -28,6 +28,7 @@ function Get-MerakiDeviceCameraWirelessProfiles {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve Meraki camera wireless profile information: $_"
+        Write-Host $_
+        Throw $_
     }
 }

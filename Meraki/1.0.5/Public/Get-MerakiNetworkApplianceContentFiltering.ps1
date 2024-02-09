@@ -36,6 +36,7 @@ function Get-MerakiNetworkApplianceContentFiltering {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve content filtering settings for network with ID '$NetworkId'. $($Error[0].Exception.Message)"
+        Write-Host $_
+        Throw $_
     }
 }

@@ -31,6 +31,7 @@ function Get-MerakiNetworkApplianceSsid {
         return $response
     }
     catch {
-        Write-Error "An error occurred while retrieving the SSID configuration for network '$NetworkId' and SSID number '$SSIDNumber': $_"
+        Write-Host $_
+        Throw $_
     }
 }

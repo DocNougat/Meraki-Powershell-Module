@@ -85,6 +85,7 @@ function Set-MerakiNetworkApplianceRFProfile {
         return $response
     }
     catch {
-        Write-Error $_
+        Write-Host $_
+        Throw $_
     }
 }

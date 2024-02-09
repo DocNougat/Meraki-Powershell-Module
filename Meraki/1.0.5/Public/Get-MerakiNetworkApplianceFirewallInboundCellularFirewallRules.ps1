@@ -40,6 +40,7 @@ function Get-MerakiNetworkApplianceFirewallInboundCellularFirewallRules {
         return $response
     }
     catch {
-        Write-Error $_
+        Write-Host $_
+        Throw $_
     }
 }

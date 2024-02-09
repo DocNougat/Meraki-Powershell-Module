@@ -27,6 +27,7 @@ function Get-MerakiDeviceAppliancePrefixesDelegated {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve Meraki appliance delegated prefix information: $_"
+        Write-Host $_
+        Throw $_
     }
 }

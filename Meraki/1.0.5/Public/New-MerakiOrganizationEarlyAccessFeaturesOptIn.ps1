@@ -57,7 +57,8 @@ function New-MerakiOrganizationEarlyAccessFeaturesOptIn {
             return $response
         }
         catch {
-            Write-Host $_
-        }
+        Write-Host $_
+        Throw $_
+    }
     }
 }

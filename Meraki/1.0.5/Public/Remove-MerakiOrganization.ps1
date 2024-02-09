@@ -43,5 +43,6 @@ function Remove-MerakiOrganization {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

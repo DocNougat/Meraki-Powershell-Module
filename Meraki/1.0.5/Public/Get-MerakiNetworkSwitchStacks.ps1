@@ -33,7 +33,9 @@ function Get-MerakiNetworkSwitchStacks {
         }
         $response = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/networks/$networkId/switch/stacks" -Header $header -UserAgent "MerakiPowerShellModule/1.0.2 DocNougat"
         return $response
-    } catch {
-        Write-Error "Failed to retrieve switch stacks. $_"
+    }
+    catch {
+        Write-Host $_
+        Throw $_
     }
 }    

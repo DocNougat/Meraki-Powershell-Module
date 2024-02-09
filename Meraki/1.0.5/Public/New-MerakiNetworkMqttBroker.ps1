@@ -67,5 +67,6 @@ function New-MerakiNetworkMqttBroker {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

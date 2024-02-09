@@ -37,7 +37,9 @@ function Get-MerakiNetworkFloorPlan {
         
         $response = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/networks/$NetworkID/floorPlans/$FloorplanID" -Header $header -UserAgent "MerakiPowerShellModule/1.0.2 DocNougat"
         return $response
-    } catch {
-        Write-Error "An error occurred while retrieving floor plan $FloorplanID for network $NetworkID. Error message: $_"
+    }
+    catch {
+        Write-Host $_
+        Throw $_
     }
 }

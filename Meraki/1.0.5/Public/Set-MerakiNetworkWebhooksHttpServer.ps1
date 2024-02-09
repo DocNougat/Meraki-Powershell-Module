@@ -65,5 +65,6 @@ function Set-MerakiNetworkWebhooksHttpServer {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

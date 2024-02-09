@@ -27,6 +27,7 @@ function Get-MerakiNetworkApplianceTrafficShaping {
         return $response
     }
     catch {
-        Write-Error "An error occurred while retrieving the traffic shaping settings for network '$NetworkId': $_"
+        Write-Host $_
+        Throw $_
     }
 }

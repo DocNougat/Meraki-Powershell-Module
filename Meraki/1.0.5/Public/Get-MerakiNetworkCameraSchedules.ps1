@@ -38,6 +38,7 @@ function Get-MerakiNetworkCameraSchedules {
         return $response
     }
     catch {
-        Write-Error "Error retrieving camera schedules: $_"
+        Write-Host $_
+        Throw $_
     }
 }

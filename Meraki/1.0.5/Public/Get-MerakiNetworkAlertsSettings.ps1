@@ -34,7 +34,7 @@ function Get-MerakiNetworkAlertsSettings {
         return $response
     }
     catch {
-        Write-Error $_
-        return $null
+        Write-Host $_
+        Throw $_
     }
 }

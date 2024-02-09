@@ -27,6 +27,7 @@ function Get-MerakiDeviceCameraVideoSettings {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve Meraki camera video settings: $_"
+        Write-Host $_
+        Throw $_
     }
 }

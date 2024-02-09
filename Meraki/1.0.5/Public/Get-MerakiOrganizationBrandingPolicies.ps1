@@ -42,7 +42,8 @@ function Get-MerakiOrganizationBrandingPolicies {
             return $response
         }
         catch {
-            Write-Error $_
-        }
+        Write-Host $_
+        Throw $_
+    }
     }
 }

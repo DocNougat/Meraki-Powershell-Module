@@ -39,6 +39,7 @@ function Get-MerakiDeviceSwitchRoutingInterfaces {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve layer 3 interfaces of switch with serial number '$DeviceSerial'. Error: $_"
+        Write-Host $_
+        Throw $_
     }
 }

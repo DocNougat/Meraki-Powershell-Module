@@ -36,6 +36,7 @@ function Get-MerakiNetworkTrafficShapingApplicationCategories {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve application categories for network '$NetworkId'. Error: $_"
+        Write-Host $_
+        Throw $_
     }
 }

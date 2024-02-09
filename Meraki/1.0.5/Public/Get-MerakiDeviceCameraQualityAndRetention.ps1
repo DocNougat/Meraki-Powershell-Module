@@ -27,6 +27,7 @@ function Get-MerakiDeviceCameraQualityAndRetention {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve Meraki camera quality and retention settings: $_"
+        Write-Host $_
+        Throw $_
     }
 }

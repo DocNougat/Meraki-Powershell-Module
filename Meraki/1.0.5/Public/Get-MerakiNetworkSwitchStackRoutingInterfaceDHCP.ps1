@@ -48,6 +48,7 @@ function Get-MerakiNetworkSwitchStackRoutingInterfaceDHCP {
         return $response
     }
     catch {
-        Write-Error "An error occurred while attempting to retrieve DHCP settings for routing interface $interfaceId on switch stack $switchStackId : $_"
+        Write-Host $_
+        Throw $_
     }
 }

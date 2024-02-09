@@ -122,5 +122,6 @@ function Set-MerakiDeviceApplianceUplinksSettings {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

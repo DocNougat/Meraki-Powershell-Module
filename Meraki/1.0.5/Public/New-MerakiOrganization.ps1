@@ -59,5 +59,6 @@ function New-MerakiOrganization {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

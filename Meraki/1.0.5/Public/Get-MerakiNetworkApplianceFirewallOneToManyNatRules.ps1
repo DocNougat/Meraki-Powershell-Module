@@ -27,6 +27,7 @@ function Get-MerakiNetworkApplianceFirewallOneToManyNatRules {
         return $response
     }
     catch {
-        Write-Error "An error occurred while retrieving the one-to-many NAT rules for network '$NetworkId': $_"
+        Write-Host $_
+        Throw $_
     }
 }

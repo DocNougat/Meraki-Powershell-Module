@@ -37,7 +37,8 @@ function Get-MerakiOrganizationInsightApplications {
             return $response
         }
         catch {
-            Write-Error $_
-        }
+        Write-Host $_
+        Throw $_
+    }
     }
 }

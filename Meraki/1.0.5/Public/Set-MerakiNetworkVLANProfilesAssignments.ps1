@@ -60,5 +60,6 @@ function Set-MerakiNetworkVLANProfilesAssignments {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

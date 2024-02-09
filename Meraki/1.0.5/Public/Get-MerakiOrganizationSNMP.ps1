@@ -40,7 +40,8 @@ function Get-MerakiOrganizationSNMP {
             return $response
         }
         catch {
-            Write-Error $_
-        }
+        Write-Host $_
+        Throw $_
+    }
     }
 }

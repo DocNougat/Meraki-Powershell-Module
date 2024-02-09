@@ -48,5 +48,6 @@ function Remove-MerakiNetworkWebhooksPayloadTemplate {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

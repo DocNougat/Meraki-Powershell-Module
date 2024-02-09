@@ -70,5 +70,6 @@ function New-MerakiNetworkFloorPlan {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

@@ -35,6 +35,7 @@ function Get-MerakiNetworkApplianceWarmSpare {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve warm spare configuration for network $NetworkId. $_"
+        Write-Host $_
+        Throw $_
     }
 }

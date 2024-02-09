@@ -66,6 +66,7 @@ function Set-MerakiNetworkApplianceTrafficShapingVPNExclusions {
         return $response
     }
     catch {
-        Write-Error $_
+        Write-Host $_
+        Throw $_
     }
 }

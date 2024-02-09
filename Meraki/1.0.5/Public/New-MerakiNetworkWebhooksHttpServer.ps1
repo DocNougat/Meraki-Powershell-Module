@@ -62,5 +62,6 @@ function New-MerakiNetworkWebhooksHttpServer {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

@@ -40,6 +40,7 @@ function Get-MerakiNetworkSmDeviceCellularUsageHistory {
         return $response
     }
     catch {
-        Write-Error "Error retrieving cellular usage history for device '$deviceId' in network '$networkId': $_"
+        Write-Host $_
+        Throw $_
     }
 }

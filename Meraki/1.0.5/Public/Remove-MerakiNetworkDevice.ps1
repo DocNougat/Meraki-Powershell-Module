@@ -52,5 +52,6 @@ function Remove-MerakiNetworkDevice {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

@@ -36,6 +36,7 @@ function Get-MerakiNetworkApplianceVPNBgp {
         return $response
     }
     catch {
-        Write-Error $_
+        Write-Host $_
+        Throw $_
     }
 }

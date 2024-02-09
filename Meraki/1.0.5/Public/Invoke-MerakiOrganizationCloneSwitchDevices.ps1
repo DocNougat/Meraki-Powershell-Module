@@ -62,6 +62,7 @@ function Invoke-MerakiOrganizationCloneSwitchDevices {
             }
             catch {
                 Write-Host $_
+                Throw $_
             }
         }
     }

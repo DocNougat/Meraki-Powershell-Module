@@ -40,6 +40,7 @@ function Get-MerakiNetworkSensorAlertsProfile {
         return $response
     }
     catch {
-        Write-Error "Error retrieving sensor alert profile information: $_"
+        Write-Host $_
+        Throw $_
     }
 }

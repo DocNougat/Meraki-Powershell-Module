@@ -37,6 +37,7 @@ function Get-MerakiNetworkHealthAlerts {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve network health alerts: $_"
+        Write-Host $_
+        Throw $_
     }
 }

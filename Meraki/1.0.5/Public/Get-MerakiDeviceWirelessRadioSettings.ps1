@@ -36,6 +36,7 @@ function Get-MerakiDeviceWirelessRadioSettings {
         return $response
     }
     catch {
-        Write-Host "Error: $($Error[0].Exception.Message)"
+        Write-Host $_
+        Throw $_
     }
 }

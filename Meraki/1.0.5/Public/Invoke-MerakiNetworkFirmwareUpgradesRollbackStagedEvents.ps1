@@ -84,5 +84,6 @@ function Invoke-MerakiNetworkFirmwareUpgradesRollbackStagedEvents {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

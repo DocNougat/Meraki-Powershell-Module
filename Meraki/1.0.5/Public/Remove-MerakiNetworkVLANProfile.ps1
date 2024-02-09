@@ -48,5 +48,6 @@ function Remove-MerakiNetworkVLANProfile {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

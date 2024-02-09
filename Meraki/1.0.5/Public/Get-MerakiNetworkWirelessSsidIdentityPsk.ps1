@@ -37,6 +37,7 @@ function Get-MerakiNetworkWirelessSsidIdentityPsk {
         return $response
     }
     catch {
-        Write-Error $_
+        Write-Host $_
+        Throw $_
     }
 }

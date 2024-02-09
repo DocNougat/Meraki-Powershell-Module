@@ -28,6 +28,7 @@ function Get-MerakiNetworkApplianceSingleLan {
         return $response
     }
     catch {
-        Write-Error "An error occurred while retrieving the single LAN configuration for network '$NetworkId': $_"
+        Write-Host $_
+        Throw $_
     }
 }

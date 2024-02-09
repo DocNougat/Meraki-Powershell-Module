@@ -93,6 +93,7 @@ function Set-MerakiNetworkApplianceTrafficShapingRules {
         return $response
     }
     catch {
-        Write-Error $_
+        Write-Host $_
+        Throw $_
     }
 }

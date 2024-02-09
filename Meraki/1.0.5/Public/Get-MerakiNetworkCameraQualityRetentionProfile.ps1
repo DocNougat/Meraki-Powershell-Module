@@ -40,7 +40,7 @@ function Get-MerakiNetworkCameraQualityRetentionProfile {
         return $response
     }
     catch {
-        Write-Host "An error occurred while retrieving the quality and retention profile: $_"
-        return $null
+        Write-Host $_
+        Throw $_
     }
 }

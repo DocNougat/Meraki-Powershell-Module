@@ -74,7 +74,8 @@ function Get-MerakiOrganizationLicensingCotermLicenses {
             return $response
         }
         catch {
-            Write-Error $_
-        }
+        Write-Host $_
+        Throw $_
+    }
     }
 }

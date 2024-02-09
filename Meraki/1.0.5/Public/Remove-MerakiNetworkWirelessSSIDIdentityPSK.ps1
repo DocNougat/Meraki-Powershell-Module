@@ -50,5 +50,6 @@ function Remove-MerakiNetworkWirelessSSIDIdentityPSK {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

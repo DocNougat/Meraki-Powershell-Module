@@ -35,6 +35,7 @@ function Get-MerakiNetworkCellularGatewayUplink {
         return $response
     }
     catch {
-        Write-Error "Error occurred while retrieving uplink information: $_"
+        Write-Host $_
+        Throw $_
     }
 }

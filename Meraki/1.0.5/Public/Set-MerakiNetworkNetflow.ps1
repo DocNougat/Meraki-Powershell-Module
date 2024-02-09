@@ -61,5 +61,6 @@ function Set-MerakiNetworkNetflow {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

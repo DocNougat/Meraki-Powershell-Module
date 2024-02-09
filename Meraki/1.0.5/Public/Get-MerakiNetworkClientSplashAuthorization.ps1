@@ -42,6 +42,7 @@ function Get-MerakiNetworkClientSplashAuthorization {
         return $response
     }
     catch {
-        Write-Error "Error retrieving client splash authorization status: $_"
+        Write-Host $_
+        Throw $_
     }
 }

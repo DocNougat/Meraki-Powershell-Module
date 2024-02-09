@@ -34,7 +34,9 @@ function Get-MerakiNetworkApplianceFirewallInboundFirewallRules {
         }
         $response = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/networks/$NetworkId/appliance/firewall/inboundFirewallRules" -Header $header -UserAgent "MerakiPowerShellModule/1.0.2 DocNougat"
         return $response
-    } catch {
-        Write-Error "Failed to retrieve inbound firewall rules: $_"
+    }
+    catch {
+        Write-Host $_
+        Throw $_
     }
 }

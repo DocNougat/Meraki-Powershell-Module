@@ -34,7 +34,9 @@ function Get-MerakiNetworkApplianceTrafficShapingRules {
         }
         $response = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/networks/$NetworkId/appliance/trafficShaping/rules" -Header $header -UserAgent "MerakiPowerShellModule/1.0.2 DocNougat"
         return $response
-    } catch {
-        Write-Error "Error retrieving traffic shaping rules: $_"
+    } 
+    catch {
+        Write-Host $_
+        Throw $_
     }
 }

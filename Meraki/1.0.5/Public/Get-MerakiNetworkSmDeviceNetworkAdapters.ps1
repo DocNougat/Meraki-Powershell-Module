@@ -39,6 +39,7 @@ function Get-MerakiNetworkSmDeviceNetworkAdapters {
         return $response
     }
     catch {
-        Write-Error "Error retrieving network adapters for device with ID $deviceId in network with ID $networkId : $_"
+        Write-Host $_
+        Throw $_
     }
 }

@@ -68,5 +68,6 @@ function Set-MerakiNetworkSettings {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

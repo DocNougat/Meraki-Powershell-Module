@@ -33,7 +33,9 @@ function Get-MerakiDeviceWirelessBluetoothSettings {
         }
         $response = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/devices/$DeviceSerial/wireless/bluetooth/settings" -Header $header -UserAgent "MerakiPowerShellModule/1.0.2 DocNougat"
         return $response
-    } catch {
-        Write-Error "An error occurred while retrieving the Bluetooth settings for device $DeviceSerial. Error message: $_"
+    } 
+    catch {
+        Write-Host $_
+        Throw $_
     }
 }

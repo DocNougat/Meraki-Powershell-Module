@@ -64,5 +64,6 @@ function Set-MerakiNetworkFirmwareUpgrades {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

@@ -74,5 +74,6 @@ function Set-MerakiDeviceManagementInterface {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

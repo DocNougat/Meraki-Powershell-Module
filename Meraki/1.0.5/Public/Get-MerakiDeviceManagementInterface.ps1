@@ -37,6 +37,7 @@ function Get-MerakiDeviceManagementInterface {
         return $response
     }
     catch {
-        Write-Error $_.Exception
+        Write-Host $_
+        Throw $_
     }
 }

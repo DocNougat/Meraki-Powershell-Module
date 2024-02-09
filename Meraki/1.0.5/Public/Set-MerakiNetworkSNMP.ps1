@@ -61,5 +61,6 @@ function Set-MerakiNetworkSNMP {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

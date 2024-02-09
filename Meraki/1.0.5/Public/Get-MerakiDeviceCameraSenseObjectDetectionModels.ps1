@@ -27,6 +27,7 @@ function Get-MerakiDeviceCameraSenseObjectDetectionModels {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve object detection models for Cisco Meraki camera: $_"
+        Write-Host $_
+        Throw $_
     }
 }

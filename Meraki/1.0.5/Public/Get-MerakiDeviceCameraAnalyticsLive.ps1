@@ -27,6 +27,7 @@ function Get-MerakiDeviceCameraAnalyticsLive {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve Meraki camera live analytics data: $_"
+        Write-Host $_
+        Throw $_
     }
 }

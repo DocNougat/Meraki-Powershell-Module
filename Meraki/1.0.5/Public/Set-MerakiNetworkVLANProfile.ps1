@@ -73,5 +73,6 @@ function Set-MerakiNetworkVLANProfile {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

@@ -43,5 +43,6 @@ function Invoke-MerakiNetworkFirmwareUpgradesDeferStagedEvents {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

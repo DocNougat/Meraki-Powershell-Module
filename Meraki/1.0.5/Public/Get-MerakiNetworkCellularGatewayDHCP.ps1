@@ -38,6 +38,7 @@ function Get-MerakiNetworkCellularGatewayDHCP {
         return $response
     }
     catch {
-        Write-Error "Error retrieving cellular gateway DHCP configuration: $_"
+        Write-Host $_
+        Throw $_
     }
 }

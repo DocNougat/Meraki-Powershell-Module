@@ -69,5 +69,6 @@ function Set-MerakiNetworkAuthUser {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

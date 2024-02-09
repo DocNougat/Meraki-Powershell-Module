@@ -60,5 +60,6 @@ function New-MerakiNetworkWirelessSSIDIdentityPSK {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

@@ -106,6 +106,7 @@ https://developer.cisco.com/meraki/api-v1/#!get-network-wireless-devices-connect
         $response = Invoke-RestMethod -Method Get -Uri $URI -Header $header -UserAgent "MerakiPowerShellModule/1.0.2 DocNougat"
         return $response
     } catch {
-        Write-Error $_
+        Write-Host $_
+        Throw $_
     }
 }

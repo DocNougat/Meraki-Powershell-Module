@@ -27,6 +27,7 @@ function Get-MerakiDeviceApplianceUplinksSettings {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve Meraki appliance uplink settings: $_"
+        Write-Host $_
+        Throw $_
     }
 }

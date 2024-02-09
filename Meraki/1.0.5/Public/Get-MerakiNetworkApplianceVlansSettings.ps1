@@ -35,6 +35,7 @@ function Get-MerakiNetworkApplianceVlansSettings {
         return $response
     }
     catch {
-        Write-Error "An error occurred while retrieving VLAN settings for network '$NetworkId': $_"
+        Write-Host $_
+        Throw $_
     }
 }

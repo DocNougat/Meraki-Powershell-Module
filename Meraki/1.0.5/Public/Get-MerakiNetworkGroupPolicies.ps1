@@ -31,7 +31,9 @@ function Get-MerakiNetworkGroupPolicies {
         }
         $response = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/networks/$NetworkId/groupPolicies" -Header $header -UserAgent "MerakiPowerShellModule/1.0.2 DocNougat"
         return $response
-    } catch {
-        Write-Error "An error occurred while retrieving group policies for network $NetworkId. Error message: $_"
+    }
+    catch {
+        Write-Host $_
+        Throw $_
     }
 }

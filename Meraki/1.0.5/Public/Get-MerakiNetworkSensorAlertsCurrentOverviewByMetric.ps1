@@ -35,6 +35,7 @@ function Get-MerakiNetworkSensorAlertsCurrentOverviewByMetric {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve sensor alerts for network '$NetworkId'. Error: $_"
+        Write-Host $_
+        Throw $_
     }
 }

@@ -62,6 +62,7 @@ function Set-MerakiDeviceCameraQualityAndRetention {
             return $response
         }
         catch {
-            Write-Host $_
-        }
+        Write-Host $_
+        Throw $_
+    }
     }

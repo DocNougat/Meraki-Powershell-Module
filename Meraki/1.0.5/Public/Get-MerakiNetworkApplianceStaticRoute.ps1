@@ -31,6 +31,7 @@ function Get-MerakiNetworkApplianceStaticRoute {
         return $response
     }
     catch {
-        Write-Error "An error occurred while retrieving the configuration for static route '$StaticRouteId' in network '$NetworkId': $_"
+        Write-Host $_
+        Throw $_
     }
 }

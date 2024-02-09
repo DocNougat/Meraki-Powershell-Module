@@ -48,5 +48,6 @@ function Remove-MerakiNetworkMqttBroker {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

@@ -71,7 +71,8 @@ function New-MerakiOrganizationSAMLRole {
             return $response
         }
         catch {
-            Write-Host $_
-        }
+        Write-Host $_
+        Throw $_
+    }
     }
 }

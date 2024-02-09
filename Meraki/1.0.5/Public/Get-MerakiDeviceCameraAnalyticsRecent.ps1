@@ -43,6 +43,7 @@ function Get-MerakiDeviceCameraAnalyticsRecent {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve Meraki camera analytics data: $_"
+        Write-Host $_
+        Throw $_
     }
 }

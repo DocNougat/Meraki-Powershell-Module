@@ -76,7 +76,8 @@ function Get-MerakiOrganizationClientsOverview {
             return $response
         }
         catch {
-            Write-Error $_
-        }
+        Write-Host $_
+        Throw $_
+    }
     }
 }

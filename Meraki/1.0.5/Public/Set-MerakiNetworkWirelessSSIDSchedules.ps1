@@ -73,6 +73,7 @@ function Set-MerakiNetworkWirelessSSIDSchedules {
         return $response
     }
     catch {
-        Write-Error $_
+        Write-Host $_
+        Throw $_
     }
 }

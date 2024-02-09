@@ -63,5 +63,6 @@ function Set-MerakiDevice {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

@@ -43,7 +43,7 @@ function Get-MerakiDeviceSwitchRoutingInterfaceDHCP {
         return $response
     }
     catch {
-        Write-Error "Error occurred while retrieving the DHCP settings for routing interface $interfaceId on switch device $DeviceSerial. More information: $_"
-        return $null
+        Write-Host $_
+        Throw $_
     }
 }

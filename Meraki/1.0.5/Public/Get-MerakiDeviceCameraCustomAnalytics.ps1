@@ -27,6 +27,7 @@ function Get-MerakiDeviceCameraCustomAnalytics {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve custom analytics information for Meraki camera: $_"
+        Write-Host $_
+        Throw $_
     }
 }

@@ -43,6 +43,7 @@ function Get-MerakiNetworkVlans {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve VLANs for network $NetworkId. $_"
+        Write-Host $_
+        Throw $_
     }
 }

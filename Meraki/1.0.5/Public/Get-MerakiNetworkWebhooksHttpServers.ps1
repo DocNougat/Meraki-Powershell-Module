@@ -42,6 +42,7 @@ function Get-MerakiNetworkWebhooksHttpServers {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve HTTP servers for network '$NetworkId'. $_"
+        Write-Host $_
+        Throw $_
     }
 }    

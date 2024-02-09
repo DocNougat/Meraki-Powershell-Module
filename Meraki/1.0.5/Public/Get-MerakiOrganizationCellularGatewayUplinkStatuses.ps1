@@ -109,7 +109,8 @@ function Get-MerakiOrganizationCellularGatewayUplinkStatuses {
             $response = Invoke-RestMethod -Method Get -Uri $URI -Header $header -UserAgent "MerakiPowerShellModule/1.0.2 DocNougat"
             return $response
         } catch {
-            Write-Error $_
-        }
+        Write-Host $_
+        Throw $_
+    }
     }
 }

@@ -42,7 +42,8 @@ function Get-MerakiOrganizationAdaptivePolicy {
             $response = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/organizations/$OrganizationID/adaptivePolicy/policies/$PolicyID" -Header $header -UserAgent "MerakiPowerShellModule/1.0.2 DocNougat"
             return $response
         } catch {
-            Write-Error $_
-        }
+        Write-Host $_
+        Throw $_
+    }
     }
 }

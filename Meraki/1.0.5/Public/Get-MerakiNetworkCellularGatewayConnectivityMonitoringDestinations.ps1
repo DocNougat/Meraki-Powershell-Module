@@ -37,6 +37,7 @@ function Get-MerakiNetworkCellularGatewayConnectivityMonitoringDestinations {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve connectivity monitoring destinations. $_"
+        Write-Host $_
+        Throw $_
     }
 }

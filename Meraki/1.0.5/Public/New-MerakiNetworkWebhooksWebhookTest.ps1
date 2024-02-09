@@ -60,5 +60,6 @@ function New-MerakiNetworkWebhooksWebhookTest {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

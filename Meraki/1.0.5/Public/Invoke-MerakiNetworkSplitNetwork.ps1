@@ -44,5 +44,6 @@ function Invoke-MerakiNetworkSplitNetwork {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

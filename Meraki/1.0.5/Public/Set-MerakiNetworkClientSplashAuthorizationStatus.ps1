@@ -70,5 +70,6 @@ function Set-MerakiNetworkClientSplashAuthorizationStatus {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

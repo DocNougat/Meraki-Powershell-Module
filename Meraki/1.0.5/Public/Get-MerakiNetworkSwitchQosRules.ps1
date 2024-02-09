@@ -26,7 +26,9 @@ function Get-MerakiNetworkSwitchQosRules {
         }
         $response = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/networks/$networkId/switch/qosRules" -Header $header -UserAgent "MerakiPowerShellModule/1.0.2 DocNougat"
         return $response
-    } catch {
-        Write-Error "Failed to retrieve QoS rules for network '$networkId'. Error: $_"
+    }
+    catch {
+        Write-Host $_
+        Throw $_
     }
 }

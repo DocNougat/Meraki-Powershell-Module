@@ -25,7 +25,9 @@ function Get-MerakiNetworkApplianceFirewallOneToOneNatRules {
         }
         $response = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/networks/$NetworkId/appliance/firewall/oneToOneNatRules" -Header $header -UserAgent "MerakiPowerShellModule/1.0.2 DocNougat" -ErrorAction Stop
         return $response
-    } catch {
-        Write-Error "An error occurred while retrieving the one-to-one NAT rules for network '$NetworkId': $_"
+    }
+    catch {
+        Write-Host $_
+        Throw $_
     }
 }

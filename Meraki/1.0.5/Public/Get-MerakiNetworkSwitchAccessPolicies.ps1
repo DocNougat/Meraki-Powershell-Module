@@ -40,6 +40,7 @@ function Get-MerakiNetworkSwitchAccessPolicies {
         return $response
     }
     catch {
-        Write-Error "An error occurred while retrieving the access policies: $_"
+        Write-Host $_
+        Throw $_
     }
 }

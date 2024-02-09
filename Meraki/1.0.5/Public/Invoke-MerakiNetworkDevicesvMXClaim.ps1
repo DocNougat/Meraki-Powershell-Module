@@ -53,5 +53,6 @@ function Invoke-MerakiNetworkDevicesvMXClaim {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

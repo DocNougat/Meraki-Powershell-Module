@@ -36,6 +36,7 @@ function Get-MerakiNetworkApplianceTrafficShapingUplinkSelection {
         return $response
     }
     catch {
-        Write-Error "An error occurred while attempting to retrieve the uplink selection settings for network '$NetworkId': $_"
+        Write-Host $_
+        Throw $_
     }
 }

@@ -56,6 +56,7 @@ function Invoke-MerakiNetworkRemoveSwitchFromStack {
             return $response
         }
         catch {
-            Write-Host $_
-        }
+        Write-Host $_
+        Throw $_
+    }
     }

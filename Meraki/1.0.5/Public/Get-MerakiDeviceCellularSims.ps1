@@ -35,6 +35,7 @@ function Get-MerakiDeviceCellularSims {
         return $response
     }
     catch {
-        Write-Error "Error retrieving SIMs for device $DeviceSerial. Details: $_"
+        Write-Host $_
+        Throw $_
     }
 }

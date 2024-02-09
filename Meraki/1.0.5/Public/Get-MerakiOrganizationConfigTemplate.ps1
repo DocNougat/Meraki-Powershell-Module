@@ -43,7 +43,8 @@ function Get-MerakiOrganizationConfigTemplate {
             return $response
         }
         catch {
-            Write-Error $_
-        }
+        Write-Host $_
+        Throw $_
+    }
     }
 }

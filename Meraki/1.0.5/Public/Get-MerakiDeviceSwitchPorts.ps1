@@ -34,8 +34,9 @@ https://developer.cisco.com/meraki/api-v1/
         }
         $response = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/devices/$DeviceSerial/switch/ports" -Header $header -UserAgent "MerakiPowerShellModule/1.0.2 DocNougat"
         return $response
-    } catch {
-        Write-Error "Error retrieving switch ports: $_"
-        return $null
+    } 
+    catch {
+        Write-Host $_
+        Throw $_
     }
 }

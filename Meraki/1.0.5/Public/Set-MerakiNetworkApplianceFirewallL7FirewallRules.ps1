@@ -75,6 +75,7 @@ function Set-MerakiNetworkApplianceFirewallL7FirewallRules {
         return $response
     }
     catch {
-        Write-Error $_
+        Write-Host $_
+        Throw $_
     }
 }

@@ -34,7 +34,9 @@ function Get-MerakiNetworkAuthUsers {
         }
         $response = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/networks/$NetworkId/merakiAuthUsers" -Header $header -UserAgent "MerakiPowerShellModule/1.0.2 DocNougat"
         return $response
-    } catch {
-        Write-Error "Failed to retrieve Meraki authentication users: $_"
+    } 
+    catch {
+        Write-Host $_
+        Throw $_
     }
 }

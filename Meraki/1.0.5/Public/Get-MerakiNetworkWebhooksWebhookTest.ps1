@@ -47,6 +47,7 @@ For more information on the Meraki Dashboard API, please visit https://developer
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve webhook test with ID '$webhookTestId' for network '$NetworkId'. $_"
+        Write-Host $_
+        Throw $_
     }
 }    

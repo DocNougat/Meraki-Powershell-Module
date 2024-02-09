@@ -52,5 +52,6 @@ function Copy-MerakiOrganization {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

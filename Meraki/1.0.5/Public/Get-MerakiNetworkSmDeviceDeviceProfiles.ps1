@@ -40,7 +40,9 @@ function Get-MerakiNetworkSmDeviceDeviceProfiles {
     try {
         $response = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/networks/$networkId/sm/devices/$deviceId/deviceProfiles" -Header $header -UserAgent "MerakiPowerShellModule/1.0.2 DocNougat"
         return $response
-    } catch {
-        Write-Error "An error occurred while retrieving device profiles: $_"
+    }
+    catch {
+        Write-Host $_
+        Throw $_
     }
 }

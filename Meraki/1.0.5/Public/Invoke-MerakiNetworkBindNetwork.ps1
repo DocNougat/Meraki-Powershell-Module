@@ -58,5 +58,6 @@ function Invoke-MerakiNetworkBindNetwork {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

@@ -61,5 +61,6 @@ function Set-MerakiNetworkFirmwareUpgradesStagedStages {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

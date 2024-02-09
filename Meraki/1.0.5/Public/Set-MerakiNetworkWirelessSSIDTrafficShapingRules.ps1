@@ -79,6 +79,7 @@ function Set-MerakiNetworkWirelessSSIDTrafficShapingRules {
         return $response
     }
     catch {
-        Write-Error $_
+        Write-Host $_
+        Throw $_
     }
 }

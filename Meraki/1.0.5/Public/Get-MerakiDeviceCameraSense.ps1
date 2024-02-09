@@ -28,6 +28,7 @@ function Get-MerakiDeviceCameraSense {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve Meraki device camera sense configuration: $_"
+        Write-Host $_
+        Throw $_
     }
 }

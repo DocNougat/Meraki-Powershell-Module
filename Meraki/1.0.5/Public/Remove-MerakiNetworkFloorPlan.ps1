@@ -47,5 +47,6 @@ function Remove-MerakiNetworkFloorPlan {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

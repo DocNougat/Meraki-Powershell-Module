@@ -27,6 +27,7 @@ function Get-MerakiDevice {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve Meraki device information: $_"
+        Write-Host $_
+        Throw $_
     }
 }

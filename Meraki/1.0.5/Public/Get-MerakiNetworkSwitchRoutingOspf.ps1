@@ -26,7 +26,9 @@ function Get-MerakiNetworkSwitchRoutingOspf {
         }
         $response = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/networks/$networkId/switch/routing/ospf" -Header $header -UserAgent "MerakiPowerShellModule/1.0.2 DocNougat"
         return $response
-    } catch {
-        Write-Error "Failed to retrieve OSPF settings for network '$networkId'. Error: $_"
+    }
+    catch {
+        Write-Host $_
+        Throw $_
     }
 }

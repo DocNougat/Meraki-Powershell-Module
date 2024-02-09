@@ -34,7 +34,9 @@ function Get-MerakiNetwork {
     try {
         $response = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/networks/$NetworkId" -Header $header -UserAgent "MerakiPowerShellModule/1.0.2 DocNougat"
         return $response
-    } catch {
-        Write-Error "An error occurred while retrieving the Meraki network with ID '$NetworkId': $_"
+    } 
+    catch {
+        Write-Host $_
+        Throw $_
     }
 }

@@ -39,6 +39,7 @@ function Get-MerakiNetworkTrafficShapingDscpTaggingOptions {
         return $response
     }
     catch {
-        Write-Error "Error retrieving DSCP tagging options for network $NetworkId : $_"
+        Write-Host $_
+        Throw $_
     }
 }

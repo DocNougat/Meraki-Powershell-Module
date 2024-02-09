@@ -72,6 +72,7 @@ function Set-MerakiNetworkSwitchMTU {
             return $response
         }
         catch {
-            Write-Host $_
-        }
+        Write-Host $_
+        Throw $_
+    }
     }

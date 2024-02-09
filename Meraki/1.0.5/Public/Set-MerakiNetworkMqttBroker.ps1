@@ -71,5 +71,6 @@ function Set-MerakiNetworkMqttBroker {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

@@ -26,6 +26,7 @@ function Get-MerakiOrganizations {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve list of organizations: $_"
+        Write-Host $_
+        Throw $_
     }
 }

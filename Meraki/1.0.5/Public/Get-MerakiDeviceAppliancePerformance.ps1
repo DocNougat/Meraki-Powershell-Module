@@ -27,6 +27,7 @@ function Get-MerakiDeviceAppliancePerformance {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve Meraki appliance performance information: $_"
+        Write-Host $_
+        Throw $_
     }
 }

@@ -61,5 +61,6 @@ function Set-MerakiNetworkClientPolicy {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

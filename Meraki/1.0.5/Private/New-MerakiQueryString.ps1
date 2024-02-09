@@ -44,6 +44,7 @@ function New-MerakiQueryString {
         return $queryString
     }
     catch {
-        Write-Error $_.Exception.Message
+        Write-Host $_
+        Throw $_
     }
 }

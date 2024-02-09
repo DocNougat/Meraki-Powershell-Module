@@ -40,6 +40,7 @@ function Get-MerakiDeviceSwitchRoutingStaticRoute {
         return $response
     }
     catch {
-        Write-Host "Error retrieving static route information: $_"
+        Write-Host $_
+        Throw $_
     }
 }

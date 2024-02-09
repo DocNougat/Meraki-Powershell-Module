@@ -84,6 +84,7 @@ function Get-MerakiNetworkPoliciesByClient {
         return $response
     }
     catch {
-        Write-Error $_
+        Write-Host $_
+        Throw $_
     }
 }

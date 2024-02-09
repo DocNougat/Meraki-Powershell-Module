@@ -34,7 +34,9 @@ function Get-MerakiNetworkApplianceContentFilteringCategories {
         }
         $response = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/networks/$NetworkId/appliance/contentFiltering/categories" -Header $header -UserAgent "MerakiPowerShellModule/1.0.2 DocNougat"
         return $response
-    } catch {
-        Write-Error "Failed to retrieve content filtering categories for network '$NetworkId': $_"
+    }
+    catch {
+        Write-Host $_
+        Throw $_
     }
 }

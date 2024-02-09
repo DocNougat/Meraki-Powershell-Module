@@ -38,6 +38,7 @@ function Get-MerakiNetworkSmDeviceCerts {
         return $response
     }
     catch {
-        Write-Error "Error retrieving certificates for device with ID $deviceId in network with ID $networkId : $_"
+        Write-Host $_
+        Throw $_
     }
 }

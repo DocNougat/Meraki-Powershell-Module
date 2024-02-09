@@ -80,5 +80,6 @@ function Set-MerakiNetworkApplianceVPNSiteToSiteVPN {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

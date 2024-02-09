@@ -79,6 +79,7 @@ function Set-MerakiNetworkWirelessSSIDFirewallL7FirewallRules {
             return $response
         }
         catch {
-            Write-Host $_
-        }
+        Write-Host $_
+        Throw $_
+    }
     }

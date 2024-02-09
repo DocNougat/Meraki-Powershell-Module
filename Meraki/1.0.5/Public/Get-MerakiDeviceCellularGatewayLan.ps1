@@ -27,6 +27,7 @@ function Get-MerakiDeviceCellularGatewayLan {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve Meraki cellular gateway LAN settings: $_"
+        Write-Host $_
+        Throw $_
     }
 }

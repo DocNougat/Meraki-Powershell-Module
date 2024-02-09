@@ -37,6 +37,7 @@ function Get-MerakiNetworkClient {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve client information. Error message: $_"
+        Write-Host $_
+        Throw $_
     }
 }

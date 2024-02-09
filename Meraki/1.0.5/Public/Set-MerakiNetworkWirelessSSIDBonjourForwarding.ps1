@@ -67,5 +67,6 @@ function Set-MerakiNetworkWirelessSSIDBonjourForwarding {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

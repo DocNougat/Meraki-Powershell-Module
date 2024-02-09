@@ -103,6 +103,7 @@ function Get-MerakiDeviceLossAndLatencyHistory {
         return $response
     }
     catch {
-        Write-Host "Error occurred: $_"
+        Write-Host $_
+        Throw $_
     }
 }

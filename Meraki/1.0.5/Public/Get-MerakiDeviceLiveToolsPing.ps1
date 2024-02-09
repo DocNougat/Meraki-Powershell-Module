@@ -29,6 +29,7 @@ function Get-MerakiDeviceLiveToolsPing {
         return $response
     }
     catch {
-        Write-Error $_
+        Write-Host $_
+        Throw $_
     }
 }

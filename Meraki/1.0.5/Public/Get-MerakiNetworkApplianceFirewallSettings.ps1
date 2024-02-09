@@ -27,6 +27,7 @@ function Get-MerakiNetworkApplianceFirewallSettings {
         return $response
     }
     catch {
-        Write-Error "An error occurred while retrieving the firewall settings for network '$NetworkId': $_"
+        Write-Host $_
+        Throw $_
     }
 }

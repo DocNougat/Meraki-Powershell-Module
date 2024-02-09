@@ -47,5 +47,6 @@ function Remove-MerakiNetworkFirmwareUpgradesStagedGroup {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

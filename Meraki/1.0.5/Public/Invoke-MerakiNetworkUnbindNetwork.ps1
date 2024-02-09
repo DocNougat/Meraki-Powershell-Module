@@ -57,5 +57,6 @@ function Invoke-MerakiNetworkUnbindNetwork {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

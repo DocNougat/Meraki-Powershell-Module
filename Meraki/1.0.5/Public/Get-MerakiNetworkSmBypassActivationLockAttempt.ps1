@@ -37,6 +37,7 @@ function Get-MerakiNetworkSmBypassActivationLockAttempt {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve bypass activation lock attempt details: $_"
+        Write-Host $_
+        Throw $_
     }
 }

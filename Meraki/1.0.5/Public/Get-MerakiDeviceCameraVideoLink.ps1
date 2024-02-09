@@ -44,6 +44,7 @@ function Get-MerakiDeviceCameraVideoLink {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve Cisco Meraki camera video link: $_"
+        Write-Host $_
+        Throw $_
     }
 }

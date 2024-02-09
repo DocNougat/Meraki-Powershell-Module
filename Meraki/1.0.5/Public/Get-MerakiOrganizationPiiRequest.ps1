@@ -37,7 +37,8 @@ function Get-MerakiOrganizationPiiRequest {
             return $response
         }
         catch {
-            Write-Error $_
-        }
+        Write-Host $_
+        Throw $_
+    }
     }
 }

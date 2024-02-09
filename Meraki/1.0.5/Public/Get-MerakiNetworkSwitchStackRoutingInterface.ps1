@@ -52,6 +52,7 @@ function Get-MerakiNetworkSwitchStackRoutingInterface {
         return $response
     }
     catch {
-        Write-Error "Error retrieving switch stack routing interface: $_"
+        Write-Host $_
+        Throw $_
     }
 }

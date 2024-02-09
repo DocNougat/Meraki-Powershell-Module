@@ -69,6 +69,7 @@ function Set-MerakiNetworkWirelessAlternateManagementInterfaceIPv6 {
             return $response
         }
         catch {
-            Write-Host $_
-        }
+        Write-Host $_
+        Throw $_
+    }
     }

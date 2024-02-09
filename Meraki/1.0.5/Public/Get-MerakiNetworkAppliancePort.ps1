@@ -31,6 +31,7 @@ function Get-MerakiNetworkAppliancePort {
         return $response
     }
     catch {
-        Write-Error "An error occurred while retrieving information for port '$PortId' on network '$NetworkId': $_"
+        Write-Host $_
+        Throw $_
     }
 }

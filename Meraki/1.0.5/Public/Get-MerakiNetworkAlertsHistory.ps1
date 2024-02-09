@@ -68,7 +68,7 @@ function Get-MerakiNetworkAlertsHistory {
         return $response
     }
     catch {
-        Write-Error "Error occurred while retrieving network alerts history: $_"
-        return $null
+        Write-Host $_
+        Throw $_
     }
 }

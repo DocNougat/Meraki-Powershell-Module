@@ -67,6 +67,7 @@ For more information on the Meraki Dashboard API, please visit https://developer
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve wireless air marshal information for network '$networkId'. $_"
+        Write-Host $_
+        Throw $_
     }
 }    

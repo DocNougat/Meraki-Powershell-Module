@@ -23,6 +23,7 @@ function Get-MerakiAdministeredIdentitiesMe {
         return $response
     }
     catch {
-        Write-Error "Failed to retrieve Meraki identities: $_"
+        Write-Host $_
+        Throw $_
     }
 }

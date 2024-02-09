@@ -55,6 +55,7 @@ function Invoke-MerakiDeviceLiveToolsPing {
         return $response
     }
     catch {
-        Write-Error $_
+        Write-Host $_
+        Throw $_
     }
 }

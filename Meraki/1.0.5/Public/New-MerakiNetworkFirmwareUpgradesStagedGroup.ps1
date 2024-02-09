@@ -70,5 +70,6 @@ function New-MerakiNetworkFirmwareUpgradesStagedGroup {
     }
     catch {
         Write-Host $_
+        Throw $_
     }
 }

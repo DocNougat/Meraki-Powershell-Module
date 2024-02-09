@@ -43,6 +43,7 @@ https://developer.cisco.com/meraki/api/#!get-device-switch-port
         return $response
     }
     catch {
-        Write-Error $_
+        Write-Host $_
+        Throw $_
     }
 }

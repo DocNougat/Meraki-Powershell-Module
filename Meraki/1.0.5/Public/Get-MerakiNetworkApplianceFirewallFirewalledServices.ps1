@@ -79,6 +79,7 @@ function Get-MerakiNetworkApplianceFirewallFirewalledServices {
         return $response
     }
     catch {
-        Write-Error "Error occurred while retrieving firewalled services: $_"
+        Write-Host $_
+        Throw $_
     }
 }
