@@ -1,3 +1,10 @@
-Copyright (c) 2021, Cisco Systems, Inc. and/or its affiliates
+NOTICE: Meraki PowerShell Module
 
-This project includes software developed at Cisco Systems, Inc. and/or its affiliates.
+Copyright (c) 2024 Alex Heimbuch
+
+The Meraki PowerShell Module is licensed under the GNU General Public License version 3 (GPL-3.0), which is a free, copyleft license for software and other kinds of works. 
+The full text of the GPL-3.0 is included with this distribution in the LICENSE file. The GPL-3.0 is a license that permits users to freely modify and distribute the software, under the condition that all modifications and derived works are also bound by the same GPL-3.0 license.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>.
+For any questions or further information, please contact the maintainer of this project.
+This notice should be included in all copies or substantial portions of the Meraki PowerShell Module.
