@@ -6,6 +6,8 @@ Current Progress: Commands have been written for all endpoints, but I do not hav
 
 **NOTE: This module and its documentation were created and are currently maintained by Alex Heimbuch. This is not an official Cisco product and should be used with caution. This current work in progress and this document is subject to periodic change as the functionality expands.**
 
+[![published](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-published.svg)](https://developer.cisco.com/codeexchange/github/repo/DocNougat/Meraki-Powershell-Module)
+
 ## Prerequisites
 
 Before you can use the Meraki PowerShell module, you need to meet the following prerequisites:
