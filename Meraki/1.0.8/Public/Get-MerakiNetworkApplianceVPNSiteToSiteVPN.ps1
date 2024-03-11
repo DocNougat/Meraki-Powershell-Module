@@ -29,11 +29,11 @@ function Get-MerakiNetworkApplianceVPNSiteToSiteVPN {
     )
 
     try {
-        $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
-        $headers.Add("Accept", "application/json")
-        $headers.Add("X-Cisco-Meraki-API-Key", $AuthToken)
+        $header = @{
+            'X-Cisco-Meraki-API-Key' = $AuthToken
+        }
         
-        $response = Invoke-RestMethod "https://api.meraki.com/api/v1/networks/$NetworkID/appliance/vpn/siteToSiteVpn" -Method 'GET' -Headers $headers -UserAgent "MerakiPowerShellModule/1.0.8 DocNougat"
+        $response = Invoke-RestMethod "https://api.meraki.com/api/v1/networks/$NetworkID/appliance/vpn/siteToSiteVpn" -Method 'GET' -Headers $header -UserAgent "MerakiPowerShellModule/1.0.8 DocNougat"
         return $response
     }
     catch {
