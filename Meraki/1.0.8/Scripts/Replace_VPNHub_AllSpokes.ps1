@@ -12,7 +12,7 @@
     The ID of the new hub network.
 
 .EXAMPLE
-    Replace_VPNHub_AllSpokes.ps1 -AuthToken "c52eb4521568840d65dfdbf6a5" -NewHubNetID "L_725079259"
+    Replace_VPNHub_AllSpokes.ps1 -AuthToken $AuthToken -NewHubNetID "L_725079259"
 
 .NOTES
     Author: Alex Heimbuch

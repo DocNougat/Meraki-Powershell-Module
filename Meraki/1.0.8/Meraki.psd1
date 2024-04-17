@@ -1,7 +1,7 @@
 @{
     # Required module metadata
     RootModule = 'Meraki.psm1'
-    ModuleVersion = '1.0.8'
+    ModuleVersion = '1.0.9'
     GUID = 'a4c78621-53d6-4d07-a3c2-18986038ae94'
     Author = 'Alex Heimbuch'
     CompanyName = ''
@@ -215,6 +215,8 @@
         'Get-MerakiNetworkTrafficShapingApplicationCategories',
         'Get-MerakiNetworkTrafficShapingDscpTaggingOptions',
         'Get-MerakiNetworkVlan',
+        'Get-MerakiNetworkVlanProfile',
+        'Get-MerakiNetworkVlanProfiles',
         'Get-MerakiNetworkVlans',
         'Get-MerakiNetworkWebhooksHttpServer',
         'Get-MerakiNetworkWebhooksHttpServers',

@@ -10,7 +10,7 @@
 .PARAMETER NewHubNetID
     The network ID of the new hub to be added to the VPN configuration.
 .EXAMPLE
-    PS C:\> Append_VPNHub.ps1 -AuthToken "271ba9a2452eb45215cf2fb468840d65dfdbf6a5" -NetID "N_540006725079653222" -NewHubNetID "N_725076564929540006"
+    PS C:\> Append_VPNHub.ps1 -AuthToken $AuthToken -NetID "N_540006725079653222" -NewHubNetID "N_725076564929540006"
 .NOTES
     Author: Alex Heimbuch
     Last Edit: 2023-10-19

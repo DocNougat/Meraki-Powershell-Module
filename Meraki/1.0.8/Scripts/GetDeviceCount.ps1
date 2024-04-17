@@ -6,7 +6,7 @@
 .PARAMETER AuthToken
     The authorization token for the Meraki Dashboard API.
 .EXAMPLE
-    PS C:\> Get-DeviceCount -AuthToken "c521568840d65dfdbf6a5f2fb4271ba9a2452eb4"
+    PS C:\> Get-DeviceCount -AuthToken $AuthToken
     This example retrieves the number of devices in each network associated with the specified organization.
 
 .NOTES

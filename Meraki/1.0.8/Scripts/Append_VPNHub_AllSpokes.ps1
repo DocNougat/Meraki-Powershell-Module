@@ -12,7 +12,7 @@
     The new hub network ID to be added to all spoke VPN configurations.
 
 .EXAMPLE
-    PS C:\> .\Append_VPNHub_AllSpokes.ps1 -AuthToken "2452eb4521568840d65dfdbf6a5cf2fb4271ba9a" -NewHubNetID "N_725079540006656492"
+    PS C:\> .\Append_VPNHub_AllSpokes.ps1 -AuthToken $AuthToken -NewHubNetID "N_725079540006656492"
 
 .NOTES
     Author: Alex Heimbuch
