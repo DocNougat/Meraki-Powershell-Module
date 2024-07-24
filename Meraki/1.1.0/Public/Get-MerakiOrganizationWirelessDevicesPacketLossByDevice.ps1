@@ -112,7 +112,7 @@ function Get-MerakiOrganizationWirelessDevicesPacketLossByDevice {
                 $queryParams['startingAfter'] = $StartingAfter
             }
 
-            if ($EndingBefore)) {
+            if ($EndingBefore) {
                 $queryParams['endingBefore'] = $EndingBefore
             }
 
