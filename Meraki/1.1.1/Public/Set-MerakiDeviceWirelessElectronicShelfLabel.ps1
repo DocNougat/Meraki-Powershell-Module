@@ -47,7 +47,7 @@ function Set-MerakiDeviceWirelessElectronicShelfLabel {
 
         $url = "https://api.meraki.com/api/v1/devices/$Serial/wireless/electronicShelfLabel"
 
-        $response = Invoke-RestMethod -Method Put -Uri $url -Headers $header -Body $body -UserAgent "MerakiPowerShellModule/1.1.0 DocNougat"
+        $response = Invoke-RestMethod -Method Put -Uri $url -Headers $header -Body $body -UserAgent "MerakiPowerShellModule/1.1.1 DocNougat"
         return $response
     }
     catch {

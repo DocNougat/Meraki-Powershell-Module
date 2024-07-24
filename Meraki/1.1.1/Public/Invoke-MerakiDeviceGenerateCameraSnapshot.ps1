@@ -51,7 +51,7 @@ function Invoke-MerakiDeviceGenerateCameraSnapshot {
     
             $url = "https://api.meraki.com/api/v1/devices/$Serial/camera/generateSnapshot"
     
-            $response = Invoke-RestMethod -Method Post -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.0 DocNougat" -Body $SnapshotConfig
+            $response = Invoke-RestMethod -Method Post -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.1 DocNougat" -Body $SnapshotConfig
             return $response
         }
         catch {

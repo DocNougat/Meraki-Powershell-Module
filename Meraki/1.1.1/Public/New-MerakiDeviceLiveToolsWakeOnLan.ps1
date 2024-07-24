@@ -56,7 +56,7 @@ function New-MerakiDeviceLiveToolsWakeOnLan {
 
         $url = "https://api.meraki.com/api/v1/devices/$Serial/liveTools/wakeOnLan"
 
-        $response = Invoke-RestMethod -Method Post -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.0 DocNougat" -Body $WakeOnLanDetails
+        $response = Invoke-RestMethod -Method Post -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.1 DocNougat" -Body $WakeOnLanDetails
         return $response
     }
     catch {

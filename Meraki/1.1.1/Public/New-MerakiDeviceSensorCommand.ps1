@@ -45,7 +45,7 @@ function New-MerakiDeviceSensorCommand {
 
         $url = "https://api.meraki.com/api/v1/devices/$Serial/sensor/commands"
 
-        $response = Invoke-RestMethod -Method Post -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.0 DocNougat" -Body $CommandDetails
+        $response = Invoke-RestMethod -Method Post -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.1 DocNougat" -Body $CommandDetails
         return $response
     }
     catch {

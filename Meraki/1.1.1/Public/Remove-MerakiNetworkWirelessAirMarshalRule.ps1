@@ -37,7 +37,7 @@ function Remove-MerakiNetworkWirelessAirMarshalRule {
 
         $url = "https://api.meraki.com/api/v1/networks/$NetworkId/wireless/airMarshal/rules/$RuleId"
 
-        $response = Invoke-RestMethod -Method Delete -Uri $url -Headers $header -UserAgent "MerakiPowerShellModule/1.1.0 DocNougat"
+        $response = Invoke-RestMethod -Method Delete -Uri $url -Headers $header -UserAgent "MerakiPowerShellModule/1.1.1 DocNougat"
         return $response
     }
     catch {

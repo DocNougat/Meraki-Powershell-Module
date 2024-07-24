@@ -54,7 +54,7 @@ function Set-MerakiDeviceCameraSense {
     
             $url = "https://api.meraki.com/api/v1/devices/$Serial/camera/sense"
     
-            $response = Invoke-RestMethod -Method Put -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.0 DocNougat" -Body $CameraSenseConfig
+            $response = Invoke-RestMethod -Method Put -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.1 DocNougat" -Body $CameraSenseConfig
             return $response
         }
         catch {

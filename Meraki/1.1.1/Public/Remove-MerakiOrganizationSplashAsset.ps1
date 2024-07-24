@@ -43,7 +43,7 @@ function Remove-MerakiOrganizationSplashAsset {
 
             $url = "https://api.meraki.com/api/v1/organizations/$OrganizationId/splash/assets/$AssetId"
 
-            $response = Invoke-RestMethod -Method Delete -Uri $url -Headers $header -UserAgent "MerakiPowerShellModule/1.1.0 DocNougat"
+            $response = Invoke-RestMethod -Method Delete -Uri $url -Headers $header -UserAgent "MerakiPowerShellModule/1.1.1 DocNougat"
             return $response
         }
         catch {

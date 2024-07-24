@@ -43,7 +43,7 @@ function Remove-MerakiNetworkMqttBroker {
 
         $url = "https://api.meraki.com/api/v1/networks/$NetworkId/mqttBrokers/$MqttBrokerId"
 
-        $response = Invoke-RestMethod -Method Delete -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.0 DocNougat"
+        $response = Invoke-RestMethod -Method Delete -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.1 DocNougat"
         return $response
     }
     catch {

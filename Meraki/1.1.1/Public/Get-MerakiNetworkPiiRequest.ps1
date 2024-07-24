@@ -35,7 +35,7 @@ function Get-MerakiNetworkPiiRequest {
         $header = @{
             'X-Cisco-Meraki-API-Key' = $AuthToken
         }
-        $response = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/networks/$NetworkId/pii/requests/$RequestID" -headers $header -UserAgent "MerakiPowerShellModule/1.1.0 DocNougat"
+        $response = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/networks/$NetworkId/pii/requests/$RequestID" -headers $header -UserAgent "MerakiPowerShellModule/1.1.1 DocNougat"
         return $response
     }
     catch {

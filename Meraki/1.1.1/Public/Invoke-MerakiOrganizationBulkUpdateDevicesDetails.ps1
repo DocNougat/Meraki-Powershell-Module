@@ -38,7 +38,7 @@ $BulkUpdate = @{
 Invoke-MerakiOrganizationBulkUpdateDevicesDetails -AuthToken $AuthToken -BulkUpdate $BulkUpdate
 
 .NOTES
-This function requires the Meraki PowerShell module version 1.1.0 or later.
+This function requires the Meraki PowerShell module version 1.1.1 or later.
 #>
 
     [CmdletBinding()]
@@ -62,7 +62,7 @@ This function requires the Meraki PowerShell module version 1.1.0 or later.
 
             $url = "https://api.meraki.com/api/v1/organizations/$OrganizationID/devices/details/bulkUpdate"
 
-            $response = Invoke-RestMethod -Method Post -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.0 DocNougat" -Body $body
+            $response = Invoke-RestMethod -Method Post -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.1 DocNougat" -Body $body
             return $response
         }
         catch {

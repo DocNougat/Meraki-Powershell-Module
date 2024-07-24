@@ -55,7 +55,7 @@ function Set-MerakiNetworkCellularGatewayDHCP {
     
             $url = "https://api.meraki.com/api/v1/networks/$NetworkId/cellularGateway/dhcp"
     
-            $response = Invoke-RestMethod -Method Put -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.0 DocNougat" -Body $DHCPConfig
+            $response = Invoke-RestMethod -Method Put -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.1 DocNougat" -Body $DHCPConfig
             return $response
         }
         catch {

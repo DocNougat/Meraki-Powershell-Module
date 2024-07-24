@@ -50,9 +50,9 @@ function Invoke-MerakiDeviceLiveToolsPingDevice {
 
         $uri = "https://api.meraki.com/api/v1/devices/$Serial/liveTools/pingDevice"
         if ($Count) {
-            $response = Invoke-RestMethod -Method Post -Uri $uri -headers $header -UserAgent "MerakiPowerShellModule/1.1.0 DocNougat" -Body $body
+            $response = Invoke-RestMethod -Method Post -Uri $uri -headers $header -UserAgent "MerakiPowerShellModule/1.1.1 DocNougat" -Body $body
         } else {
-            $response = Invoke-RestMethod -Method Post -Uri $uri -headers $header -UserAgent "MerakiPowerShellModule/1.1.0 DocNougat"
+            $response = Invoke-RestMethod -Method Post -Uri $uri -headers $header -UserAgent "MerakiPowerShellModule/1.1.1 DocNougat"
         }
         return $response
     }

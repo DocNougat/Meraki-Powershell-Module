@@ -54,7 +54,7 @@ function Set-MerakiDeviceCameraWirelessProfile {
     
             $url = "https://api.meraki.com/api/v1/devices/$Serial/camera/wirelessProfiles"
     
-            $response = Invoke-RestMethod -Method Put -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.0 DocNougat" -Body $WirelessProfileConfig
+            $response = Invoke-RestMethod -Method Put -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.1 DocNougat" -Body $WirelessProfileConfig
             return $response
         }
         catch {

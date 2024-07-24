@@ -47,7 +47,7 @@ function Get-MerakiOrganizationCameraBoundariesLinesByDevice {
         $queryString = $queryParams.GetEnumerator() | ForEach-Object { "$($_.Key)=$($_.Value)" } -join "&"
         $url = "https://api.meraki.com/api/v1/organizations/$OrganizationId/camera/boundaries/lines/byDevice?$queryString"
 
-        $response = Invoke-RestMethod -Method Get -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.0 DocNougat"
+        $response = Invoke-RestMethod -Method Get -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.1 DocNougat"
         return $response
     }
     catch {

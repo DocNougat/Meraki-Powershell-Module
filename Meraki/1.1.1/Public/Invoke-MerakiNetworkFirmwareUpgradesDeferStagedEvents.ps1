@@ -38,7 +38,7 @@ function Invoke-MerakiNetworkFirmwareUpgradesDeferStagedEvents {
 
         $url = "https://api.meraki.com/api/v1/networks/$NetworkId/firmwareUpgrades/staged/events/defer"
 
-        $response = Invoke-RestMethod -Method Post -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.0 DocNougat"
+        $response = Invoke-RestMethod -Method Post -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.1 DocNougat"
         return $response
     }
     catch {

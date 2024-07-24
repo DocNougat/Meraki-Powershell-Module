@@ -60,7 +60,7 @@ function New-MerakiOrganizationInventoryDevicesSwapsBulk {
 
         $url = "https://api.meraki.com/api/v1/organizations/$OrganizationId/inventory/devices/swaps/bulk"
 
-        $response = Invoke-RestMethod -Method Post -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.0 DocNougat" -Body $SwapDetails
+        $response = Invoke-RestMethod -Method Post -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.1 DocNougat" -Body $SwapDetails
         return $response
     }
     catch {

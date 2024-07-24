@@ -75,7 +75,7 @@ function Get-MerakiNetworkApplianceUplinksUsageHistory {
 
         $URI = [uri]::EscapeUriString($URL)
 
-        $response = Invoke-RestMethod -Method Get -Uri $URI -headers $header -UserAgent "MerakiPowerShellModule/1.1.0 DocNougat"
+        $response = Invoke-RestMethod -Method Get -Uri $URI -headers $header -UserAgent "MerakiPowerShellModule/1.1.1 DocNougat"
         return $response
     } catch {
         Write-Debug $_

@@ -84,7 +84,7 @@ function Set-MerakiDeviceSwitchPort {
     
             $body = $PortConfig
     
-            $response = Invoke-RestMethod -Method Put -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.0 DocNougat" -Body $body
+            $response = Invoke-RestMethod -Method Put -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.1 DocNougat" -Body $body
             return $response
         }
         catch {

@@ -89,7 +89,7 @@ function Set-MerakiNetworkApplianceTrafficShapingRules {
         $body = $RuleConfig
 
         $uri = "https://api.meraki.com/api/v1/networks/$NetworkId/appliance/trafficShaping/rules"
-        $response = Invoke-RestMethod -Method Put -Uri $uri -headers $header -UserAgent "MerakiPowerShellModule/1.1.0 DocNougat" -Body $body
+        $response = Invoke-RestMethod -Method Put -Uri $uri -headers $header -UserAgent "MerakiPowerShellModule/1.1.1 DocNougat" -Body $body
         return $response
     }
     catch {

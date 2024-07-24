@@ -73,7 +73,7 @@ function New-MerakiOrganizationCameraRole {
     
             $url = "https://api.meraki.com/api/v1/organizations/$OrganizationId/camera/roles"
     
-            $response = Invoke-RestMethod -Method Post -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.0 DocNougat" -Body $CameraRoleConfig
+            $response = Invoke-RestMethod -Method Post -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.1 DocNougat" -Body $CameraRoleConfig
             return $response
         }
         catch {

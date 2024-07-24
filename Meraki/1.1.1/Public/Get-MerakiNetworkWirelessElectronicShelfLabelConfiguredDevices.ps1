@@ -35,7 +35,7 @@ function Get-MerakiNetworkWirelessElectronicShelfLabelConfiguredDevices {
 
         $url = "https://api.meraki.com/api/v1/networks/$NetworkId/wireless/electronicShelfLabel/configuredDevices"
 
-        $response = Invoke-RestMethod -Method Get -Uri $url -Headers $header -UserAgent "MerakiPowerShellModule/1.1.0 DocNougat"
+        $response = Invoke-RestMethod -Method Get -Uri $url -Headers $header -UserAgent "MerakiPowerShellModule/1.1.1 DocNougat"
         return $response
     }
     catch {

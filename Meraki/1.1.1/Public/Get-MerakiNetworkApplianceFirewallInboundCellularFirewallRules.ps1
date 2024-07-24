@@ -36,7 +36,7 @@ function Get-MerakiNetworkApplianceFirewallInboundCellularFirewallRules {
     $uri = "https://api.meraki.com/api/v1/networks/$NetworkId/appliance/firewall/inboundCellularFirewallRules"
     
     try {
-        $response = Invoke-RestMethod -Method Get -Uri $uri -headers $header -UserAgent "MerakiPowerShellModule/1.1.0 DocNougat"
+        $response = Invoke-RestMethod -Method Get -Uri $uri -headers $header -UserAgent "MerakiPowerShellModule/1.1.1 DocNougat"
         return $response
     }
     catch {

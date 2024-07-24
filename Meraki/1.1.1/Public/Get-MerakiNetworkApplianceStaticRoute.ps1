@@ -27,7 +27,7 @@ function Get-MerakiNetworkApplianceStaticRoute {
         $header = @{
             'X-Cisco-Meraki-API-Key' = $AuthToken
         }
-        $response = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/networks/$NetworkId/appliance/staticRoutes/$StaticRouteId" -headers $header -UserAgent "MerakiPowerShellModule/1.1.0 DocNougat" -ErrorAction Stop
+        $response = Invoke-RestMethod -Method Get -Uri "https://api.meraki.com/api/v1/networks/$NetworkId/appliance/staticRoutes/$StaticRouteId" -headers $header -UserAgent "MerakiPowerShellModule/1.1.1 DocNougat" -ErrorAction Stop
         return $response
     }
     catch {

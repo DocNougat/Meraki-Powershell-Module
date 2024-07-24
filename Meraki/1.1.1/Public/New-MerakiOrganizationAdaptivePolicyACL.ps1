@@ -64,7 +64,7 @@ function New-MerakiOrganizationAdaptivePolicyACL {
 
             $url = "https://api.meraki.com/api/v1/organizations/$OrganizationId/adaptivePolicy/ACLs"
             
-            $response = Invoke-RestMethod -Method Post -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.0 DocNougat" -Body $body
+            $response = Invoke-RestMethod -Method Post -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.1 DocNougat" -Body $body
             return $response
         }
         catch {

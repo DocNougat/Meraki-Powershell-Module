@@ -44,7 +44,7 @@ function Remove-MerakiNetworkSwitchStack {
     
             $url = "https://api.meraki.com/api/v1/networks/$NetworkId/switch/stacks/$SwitchStackId"
     
-            $response = Invoke-RestMethod -Method Delete -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.0 DocNougat"
+            $response = Invoke-RestMethod -Method Delete -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.1 DocNougat"
             return $response
         }
         catch {

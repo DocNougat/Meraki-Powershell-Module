@@ -39,7 +39,7 @@ https://developer.cisco.com/meraki/api/#!get-device-switch-port
             "X-Cisco-Meraki-API-Key" = $AuthToken
         }
         $uri = "https://api.meraki.com/api/v1/devices/$DeviceSerial/switch/ports/$portID"
-        $response = Invoke-RestMethod -Method Get -Uri $uri -headers $header -UserAgent "MerakiPowerShellModule/1.1.0 DocNougat"
+        $response = Invoke-RestMethod -Method Get -Uri $uri -headers $header -UserAgent "MerakiPowerShellModule/1.1.1 DocNougat"
         return $response
     }
     catch {

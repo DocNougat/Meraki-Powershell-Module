@@ -61,7 +61,7 @@ function Get-MerakiNetworkSmDevicePerformanceHistory {
     $uri = [uri]::EscapeUriString($url)
 
     try {
-        $response = Invoke-RestMethod -Method Get -Uri $uri -headers $header -UserAgent "MerakiPowerShellModule/1.1.0 DocNougat" -ErrorAction Stop
+        $response = Invoke-RestMethod -Method Get -Uri $uri -headers $header -UserAgent "MerakiPowerShellModule/1.1.1 DocNougat" -ErrorAction Stop
         return $response
     }
     catch {

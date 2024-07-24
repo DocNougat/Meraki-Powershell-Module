@@ -66,7 +66,7 @@ function Invoke-MerakiOrganizationMoveLicensingCotermLicenses {
         
                 $url = "https://api.meraki.com/api/v1/organizations/$OrganizationId/licensing/coterm/licenses/move"
         
-                $response = Invoke-RestMethod -Method Post -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.0 DocNougat" -Body $LicenseMoveConfig
+                $response = Invoke-RestMethod -Method Post -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.1 DocNougat" -Body $LicenseMoveConfig
                 return $response
             }
             catch {

@@ -43,7 +43,7 @@ function Remove-MerakiNetworkApplianceTrafficShapingCPC {
         }
 
         $uri = "https://api.meraki.com/api/v1/networks/$NetworkId/appliance/trafficShaping/customPerformanceClasses/$CustomPerformanceClassId"
-        $response = Invoke-RestMethod -Method Delete -Uri $uri -headers $header -UserAgent "MerakiPowerShellModule/1.1.0 DocNougat"
+        $response = Invoke-RestMethod -Method Delete -Uri $uri -headers $header -UserAgent "MerakiPowerShellModule/1.1.1 DocNougat"
         return $response
     }
     catch {

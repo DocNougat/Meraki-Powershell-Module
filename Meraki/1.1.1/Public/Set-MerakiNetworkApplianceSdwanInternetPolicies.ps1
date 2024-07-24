@@ -70,7 +70,7 @@ function Set-MerakiNetworkApplianceSdwanInternetPolicies {
 
         $url = "https://api.meraki.com/api/v1/networks/$NetworkId/appliance/sdwan/internetPolicies"
 
-        $response = Invoke-RestMethod -Method Put -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.0 DocNougat" -Body $SdwanInternetPolicies
+        $response = Invoke-RestMethod -Method Put -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.1 DocNougat" -Body $SdwanInternetPolicies
         return $response
     }
     catch {

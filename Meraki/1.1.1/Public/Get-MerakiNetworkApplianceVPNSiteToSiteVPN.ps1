@@ -33,7 +33,7 @@ function Get-MerakiNetworkApplianceVPNSiteToSiteVPN {
             'X-Cisco-Meraki-API-Key' = $AuthToken
         }
         
-        $response = Invoke-RestMethod "https://api.meraki.com/api/v1/networks/$NetworkID/appliance/vpn/siteToSiteVpn" -Method 'GET' -Headers $header -UserAgent "MerakiPowerShellModule/1.1.0 DocNougat"
+        $response = Invoke-RestMethod "https://api.meraki.com/api/v1/networks/$NetworkID/appliance/vpn/siteToSiteVpn" -Method 'GET' -Headers $header -UserAgent "MerakiPowerShellModule/1.1.1 DocNougat"
         return $response
     }
     catch {
