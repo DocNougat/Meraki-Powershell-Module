@@ -23,7 +23,7 @@
         'Get-MerakiAdministeredIdentitiesMeApiKeys',
         'Get-MerakiAdministeredLicensingSubscriptionEntitlements',
         'Get-MerakiAdministeredLicensingSubscriptions',
-        'Get-MerakiAdministeredLicensingSubscriptionsComplianceStatuses'
+        'Get-MerakiAdministeredLicensingSubscriptionsComplianceStatuses',
         'Get-MerakiDevice',
         'Get-MerakiDeviceApplianceDHCPSubnets',
         'Get-MerakiDeviceAppliancePerformance',
@@ -508,7 +508,7 @@
         'Invoke-MerakiDeviceReboot',
         'Invoke-MerakiLockNetworkSmDevices',
         'Invoke-MerakiModifyNetworkSmDevicesTags',
-        'Invoke-MerakiMoveNetworkSmDevices'
+        'Invoke-MerakiMoveNetworkSmDevices',
         'Invoke-MerakiNetworkAddSwitchToStack',
         'Invoke-MerakiNetworkApplianceSwapWarmSpare',
         'Invoke-MerakiNetworkBindNetwork',
@@ -540,7 +540,7 @@
         'Invoke-MerakiOrganizationInventoryRelease',
         'Invoke-MerakiOrganizationMoveLicenses',
         'Invoke-MerakiOrganizationMoveLicensesSeats',
-        'Invoke-MerakiOrganizationMoveLicensingCotermLicenses'
+        'Invoke-MerakiOrganizationMoveLicensingCotermLicenses',
         'Invoke-MerakiOrganizationRenewLicensesSeats',
         'Invoke-MerakiRebootNetworkSmDevices',
         'Invoke-MerakiRefreshNetworkSmDevices',
@@ -722,7 +722,7 @@
         'Set-MerakiDeviceCameraVideoSettings',
         'Set-MerakiDeviceCameraWirelessProfile',
         'Set-MerakiDeviceCellularGatewayLAN',
-        'Set-MerakiDeviceCellularGatewayPortForwardingRules'
+        'Set-MerakiDeviceCellularGatewayPortForwardingRules',
         'Set-MerakiDeviceCellularSims',
         'Set-MerakiDeviceManagementInterface',
         'Set-MerakiDeviceSensorRelationships',
