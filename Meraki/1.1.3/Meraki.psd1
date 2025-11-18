@@ -248,7 +248,6 @@
         'Get-MerakiNetworkVlanProfiles',
         'Get-MerakiNetworkVlans',
         'Get-MerakiNetworkVlanProfilesAssignmentsByDevice',
-        'Get-MerakiNetworkVlansEnabledStatus',
         'Get-MerakiNetworkWebhooksHttpServer',
         'Get-MerakiNetworkWebhooksHttpServers',
         'Get-MerakiNetworkWebhooksPayloadTemplate',
