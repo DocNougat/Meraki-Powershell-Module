@@ -69,7 +69,7 @@ function Set-MerakiOrganizationWirelessSsidsFirewallIsolationAllowlistEntry {
 
             $url = "https://api.meraki.com/api/v1/organizations/$OrganizationId/wireless/ssids/firewall/isolation/allowlist/entries/$EntryID"
 
-            $response = Invoke-RestMethod -Method Post -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.3 DocNougat" -Body $AllowlistEntryConfig
+            $response = Invoke-RestMethod -Method Put -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.3 DocNougat" -Body $AllowlistEntryConfig
             return $response
         }
         catch {

@@ -87,7 +87,7 @@ function Get-MerakiOrganizationWirelessDevicesWirelessControllersByDevice {
                     
             $queryString = New-MerakiQueryString -queryParams $queryParams
         
-            $URL = "https://api.meraki.com/api/v1/organizations/$OrganizationID/wireless/devices/system/cpu/load/history?$queryString"
+            $URL = "https://api.meraki.com/api/v1/organizations/$OrganizationID/wireless/devices/wirelessControllers/byDevice?$queryString"
         
             $URI = [uri]::EscapeUriString($URL)
         

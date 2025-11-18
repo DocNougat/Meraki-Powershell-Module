@@ -47,7 +47,7 @@ https://developer.cisco.com/meraki/api-v1/ (Meraki Dashboard API documentation)
     
             $body = $ZigbeeConfig
     
-            $response = Invoke-RestMethod -Method Post -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.3 DocNougat" -Body $body
+            $response = Invoke-RestMethod -Method Put -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.3 DocNougat" -Body $body
             return $response
         }
         catch {

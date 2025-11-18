@@ -105,7 +105,7 @@ function Get-MerakiNetworkClientsApplicationUsage {
     
         $queryString = New-MerakiQueryString -queryParams $queryParams
     
-        $URL = "https://api.meraki.com/api/v1/networks/$networkId/clients?$queryString"
+        $URL = "https://api.meraki.com/api/v1/networks/$networkId/clients/applicationUsage?$queryString"
     
         $URI = [uri]::EscapeUriString($URL)
     

@@ -65,7 +65,7 @@ function Set-MerakiOrganizationWirelessZigbeeDevice {
 
             $url = "https://api.meraki.com/api/v1/organizations/$OrganizationId/wireless/zigbee/devices/$ZigbeeDeviceID"
 
-            $response = Invoke-RestMethod -Method Post -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.3 DocNougat" -Body $ZigbeeConfig
+            $response = Invoke-RestMethod -Method Put -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.3 DocNougat" -Body $ZigbeeConfig
             return $response
         }
         catch {

@@ -109,7 +109,7 @@ function Set-MerakiNetworkWirelessRFProfile {
     
             $body = $RFProfile
     
-            $response = Invoke-RestMethod -Method Post -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.3 DocNougat" -Body $body
+            $response = Invoke-RestMethod -Method Put -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.3 DocNougat" -Body $body
             return $response
         }
         catch {

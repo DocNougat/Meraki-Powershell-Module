@@ -33,7 +33,6 @@ function Set-MerakiNetworkWirelessLocationScanning {
     
     The function returns the response from the API if the update is successful, otherwise, it displays an error message.
     #>
-    
         [CmdletBinding()]
         param (
             [parameter(Mandatory=$true)]
@@ -54,7 +53,7 @@ function Set-MerakiNetworkWirelessLocationScanning {
     
             $body = $LocationScanningConfig
     
-            $response = Invoke-RestMethod -Method Post -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.3 DocNougat" -Body $body
+            $response = Invoke-RestMethod -Method Put -Uri $url -headers $header -UserAgent "MerakiPowerShellModule/1.1.3 DocNougat" -Body $body
             return $response
         }
         catch {
