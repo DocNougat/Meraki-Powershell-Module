@@ -36,7 +36,7 @@ Import-Module Meraki
    * Create = New
    * Delete = Remove
    * Update = Set
-   * Other Actions = Invoke, Copy, or Find
+   * Other Actions = Invoke, Copy, Confirm, Disable, Enable, Install, Uninstall, Publish, Restore, Stop, Update
 * Every command requires an API key provided to the -AuthToken parameter. You can find instructions for generating an API key in the [Meraki documentation](https://documentation.meraki.com/zGeneral_Administration/Other_Topics/The_Cisco_Meraki_Dashboard_API).
 * Get-,Copy-, & Find-, Commands are fully parameterized. Check the documentation to see what is required and what is optional
    * Example: The command to call the Get Network Policies By Client endpoint is Get-MerakiNetworkPoliciesByClient. It has two required parameters, AuthToken & NetworkID, and several optional parameters that the command can use to build out a query to narrow the results:  perPage, startingAfter, endingBefore, t0, & timespan.
